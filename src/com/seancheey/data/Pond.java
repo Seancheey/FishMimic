@@ -75,7 +75,7 @@ public class Pond implements Serializable{
 	public void nextMove() {
 		Iterator<Fish> i = fishes.iterator();
 		while (i.hasNext()) {
-			i.next().move();
+			i.next().perform();
 		}
 	}
 }

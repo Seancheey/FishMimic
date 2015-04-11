@@ -1,29 +1,56 @@
 package com.seancheey;
 
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
+import com.seancheey.data.Fish;
 import com.seancheey.data.Pond;
 import com.seancheey.data.RectFish;
+import com.seancheey.data.RoundFish;
 import com.seancheey.gui.ControlFrame;
 import com.seancheey.gui.PondPanel;
 
 public class Main {
 	public static final String NAME = "Moving fishes";
-	public static final int WIDTH = 500, HEIGHT = 500;
+	public static final int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width,
+			HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
 
 	public static void main(String[] args) {
-		// init the pond
+		// initiate the pond
 		Pond p = new Pond(WIDTH, HEIGHT);
-		for (int i = 0; i < 20; i++)
-			p.getFishes().add(
-					new RectFish(20, 10, 250, 250, Math.random() * 5 - 2.5,
-							Math.random() * 5 - 2.5, p));
-		// add it to a pond panel
+		// generate some fish
+		for (int i = 0; i < 300; i++)
+			p.getFishes().add(FishGenerator.generate(p));
+		// add pond to a panel
 		PondPanel pondP = new PondPanel(p);
 		// create a new JFrame and add the panel
 		JFrame f = new ControlFrame();
 		f.setVisible(true);
 		f.getContentPane().add(pondP);
+	}
+}
+
+class FishGenerator {
+	public static final Fish generate(Pond p) {
+		double seed = Math.random();
+		if (seed < 0.01)
+			return new RectFish(30, 10, randWidth(), randHeight(), randV(5),
+					randV(5), p);
+		else
+			return new RoundFish(20, 10, randWidth(), randHeight(),
+					randV(5), randV(5), p);
+	}
+
+	private static final int randWidth() {
+		return (int) (Math.random() * Main.WIDTH);
+	}
+
+	private static final int randHeight() {
+		return (int) (Math.random() * Main.HEIGHT);
+	}
+
+	private static final double randV(double range) {
+		return Math.random() * range * 2 - range;
 	}
 }
