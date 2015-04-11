@@ -1,8 +1,9 @@
 package com.seancheey.data;
 
-
 import java.awt.Graphics;
 import java.io.Serializable;
+
+import com.seancheey.Main;
 
 public abstract class Fish implements Serializable {
 	/**
@@ -66,7 +67,7 @@ public abstract class Fish implements Serializable {
 	}
 
 	protected int width, height;
-	protected double x,y,vx, vy;
+	protected double x, y, vx, vy;
 	protected final Pond pond;
 
 	public Fish(int width, int height, double x, double y, double vx,
@@ -113,7 +114,34 @@ public abstract class Fish implements Serializable {
 		return pond;
 	}
 
-	protected abstract void move();
+	protected void move() {
+		// have a move
+		x += vx;
+		y += vy;
+		// Touch the wall to reflect
+		if (x > getPond().getWidth() || x < 0) {
+			vx *= -0.92;
+		}
+		if (y > getPond().getHeight() || y < 0) {
+			vy *= -0.92;
+		}
+		// to prevent the ball from sticking into wall
+		if (x > getPond().getWidth()) {
+			x = Main.WIDTH - width;
+		}
+		if (y > getPond().getHeight()) {
+			y = Main.HEIGHT - height;
+		}
+		if (x < 0) {
+			x = width;
+		}
+		if (y < 0) {
+			y = height;
+		}
+
+	}
+
+	protected abstract void perform();
 
 	protected abstract void paint(Graphics g);
 }
