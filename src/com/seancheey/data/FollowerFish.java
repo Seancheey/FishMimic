@@ -9,7 +9,7 @@ public class FollowerFish extends GroupingFish {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private GuideFish guider;
+	private GuideFish guider;//the guider fish that the fish is going to follow
 
 	public FollowerFish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond) {

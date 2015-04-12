@@ -11,9 +11,10 @@ public class Pond implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final int width, height;
-	private final ArrayList<Fish> fishes;
-
+	private final int width, height;//width and height of the pond
+	private final ArrayList<Fish> fishes;//fish container
+	
+	//List of constructor
 	public Pond(int width, int height, ArrayList<Fish> fishes) {
 		super();
 		this.width = width;
@@ -48,7 +49,7 @@ public class Pond implements Serializable{
 			return false;
 		return true;
 	}
-
+	//list of getter
 	public int getWidth() {
 		return width;
 	}
@@ -64,14 +65,14 @@ public class Pond implements Serializable{
 	public Iterator<Fish> getIterator() {
 		return fishes.iterator();
 	}
-
+	//paint self
 	public void paint(Graphics g) {
 		Iterator<Fish> i = fishes.iterator();
 		while (i.hasNext()) {
 			i.next().paint(g);
 		}
 	}
-
+	//invoke next perform
 	public void nextMove() {
 		Iterator<Fish> i = fishes.iterator();
 		while (i.hasNext()) {

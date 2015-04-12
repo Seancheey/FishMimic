@@ -9,8 +9,10 @@ public abstract class GroupingFish extends Fish {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int edgeX = width / 4, edgeY = height / 4;
-
+	private int edgeX = width / 4, edgeY = height / 4;// the size of the edge of
+														// the round rectangle
+														// painted
+	//Constructor
 	public GroupingFish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond) {
 		super(width, height, x, y, vx, vy, pond);

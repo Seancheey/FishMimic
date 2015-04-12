@@ -11,7 +11,7 @@ public abstract class Fish implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	//List of constructor
 	public Fish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond, Color color) {
 		super();
@@ -38,10 +38,10 @@ public abstract class Fish implements Serializable {
 		this.color = Main.randColor();
 	}
 
-	protected int width, height;
-	protected double x, y, vx, vy;
-	protected final Pond pond;
-	protected Color color;
+	protected int width, height;//the size of fish
+	protected double x, y, vx, vy;//the location and velocity of fish
+	protected final Pond pond;//the container of fish
+	protected Color color;//color displayed of the fish
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -101,7 +101,7 @@ public abstract class Fish implements Serializable {
 			return false;
 		return true;
 	}
-
+	//List of getter
 	public int getWidth() {
 		return width;
 	}
