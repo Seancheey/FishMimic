@@ -18,6 +18,7 @@ public abstract class GroupingFish extends Fish {
 
 	@Override
 	protected void paint(Graphics g) {
+		super.paint(g);
 		Graphics2D g2 = (Graphics2D) g;
 		int xcenter, ycenter;
 		xcenter = (int) (x - width / 2);

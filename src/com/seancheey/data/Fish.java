@@ -11,6 +11,7 @@ public abstract class Fish implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	public Fish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond, Color color) {
 		super();
@@ -23,6 +24,7 @@ public abstract class Fish implements Serializable {
 		this.pond = pond;
 		this.color = color;
 	}
+
 	public Fish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond) {
 		super();
@@ -40,7 +42,6 @@ public abstract class Fish implements Serializable {
 	protected double x, y, vx, vy;
 	protected final Pond pond;
 	protected Color color;
-	
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -52,6 +53,7 @@ public abstract class Fish implements Serializable {
 				+ ", y=" + y + ", vx=" + vx + ", vy=" + vy + ", color=" + color
 				+ "]";
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -70,6 +72,7 @@ public abstract class Fish implements Serializable {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -98,6 +101,7 @@ public abstract class Fish implements Serializable {
 			return false;
 		return true;
 	}
+
 	public int getWidth() {
 		return width;
 	}
@@ -125,13 +129,14 @@ public abstract class Fish implements Serializable {
 	public Pond getPond() {
 		return pond;
 	}
+
 	// ***Main Algorithm is here!!!***
 	protected void move() {
 		// have a move
 		x += vx;
 		y += vy;
 		// Touch the wall to reflect
-		
+
 		if (x > getPond().getWidth() || x < 0) {
 			vx *= -0.92;
 		}
@@ -157,5 +162,7 @@ public abstract class Fish implements Serializable {
 
 	protected abstract void perform();
 
-	protected abstract void paint(Graphics g);
+	protected void paint(Graphics g) {
+		g.setColor(color);
+	}
 }
