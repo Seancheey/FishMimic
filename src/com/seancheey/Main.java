@@ -1,5 +1,6 @@
 package com.seancheey;
 
+import java.awt.Color;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
@@ -15,6 +16,7 @@ public class Main {
 	public static final String NAME = "Moving fishes";
 	public static final int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width,
 			HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
+	public static int DELAY;
 
 	public static void main(String[] args) {
 		// initiate the pond
@@ -29,6 +31,14 @@ public class Main {
 		f.setVisible(true);
 		f.getContentPane().add(pondP);
 	}
+
+	// Library Functions
+	public static Color randColor() {
+		int r = (int) (Math.random() * 256);
+		int g = (int) (Math.random() * 256);
+		int b = (int) (Math.random() * 256);
+		return new Color(r, g, b);
+	}
 }
 
 class FishGenerator {
@@ -38,8 +48,8 @@ class FishGenerator {
 			return new RectFish(30, 10, randWidth(), randHeight(), randV(5),
 					randV(5), p);
 		else
-			return new RoundFish(20, 10, randWidth(), randHeight(),
-					randV(5), randV(5), p);
+			return new RoundFish(20, 10, randWidth(), randHeight(), randV(5),
+					randV(5), p);
 	}
 
 	private static final int randWidth() {
@@ -53,4 +63,5 @@ class FishGenerator {
 	private static final double randV(double range) {
 		return Math.random() * range * 2 - range;
 	}
+
 }

@@ -18,6 +18,7 @@ public class RectFish extends Fish {
 	@Override
 	protected void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
+		g2.setColor(color);
 		int xcenter, ycenter;
 		xcenter = (int) (x - width / 2);
 		ycenter = (int) (y - height / 2);
