@@ -17,6 +17,6 @@ public class ControlFrame extends JFrame{
 		setSize(Main.WIDTH,Main.HEIGHT);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setUndecorated(true);
+		setUndecorated(false);
 	}
 }
