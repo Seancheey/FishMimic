@@ -10,12 +10,13 @@ import com.seancheey.data.Pond;
 import com.seancheey.data.RectFish;
 import com.seancheey.data.RoundFish;
 import com.seancheey.gui.ControlFrame;
+import com.seancheey.gui.FishSelectPanel;
 import com.seancheey.gui.PondPanel;
 
 public class Main {
 	public static final String NAME = "Moving fishes";
-	public static final int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width,
-			HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
+	public static final int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width/2,
+			HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height/2;
 	public static int DELAY;
 
 	public static void main(String[] args) {
@@ -44,7 +45,7 @@ public class Main {
 class FishGenerator {
 	public static final Fish generate(Pond p) {
 		double seed = Math.random();
-		if (seed < 0.1)
+		if (seed < 0.02)
 			return new RectFish(30, 10, randWidth(), randHeight(), randV(5),
 					randV(5), p);
 		else
