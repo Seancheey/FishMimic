@@ -14,7 +14,7 @@ public class GuideFish extends GroupingFish {
 
 	@Override
 	protected void perform() {
-		move();
+		super.perform();
 		// change v randomly
 		if (Math.random() < 0.005) {
 			vx *= Math.random() * 2 - 1;

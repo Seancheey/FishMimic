@@ -35,7 +35,7 @@ public abstract class Fish implements Serializable {
 		this.vx = vx;
 		this.vy = vy;
 		this.pond = pond;
-		this.color = Main.randColor();
+		this.color = FishGenerator.randColor();
 	}
 
 	protected int width, height;//the size of fish
@@ -129,9 +129,9 @@ public abstract class Fish implements Serializable {
 	public Pond getPond() {
 		return pond;
 	}
-
+	
 	// ***Main Algorithm is here!!!***
-	protected void move() {
+	protected void perform(){
 		// have a move
 		x += vx;
 		y += vy;
@@ -157,10 +157,7 @@ public abstract class Fish implements Serializable {
 		if (y < 0) {
 			y = height;
 		}
-
 	}
-
-	protected abstract void perform();
 
 	protected void paint(Graphics g) {
 		g.setColor(color);

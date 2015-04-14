@@ -18,7 +18,7 @@ public class FollowerFish extends GroupingFish {
 
 	@Override
 	protected void perform() {
-		move();
+		super.perform();
 		// if not following, choose a guide fish
 		if (guider == null) {
 			Iterator<Fish> i = getPond().getIterator();

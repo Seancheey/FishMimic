@@ -29,7 +29,7 @@ public class RoundFish extends Fish {
 
 	@Override
 	protected void perform() {
-		move();
+		super.perform();
 		// pick the next fish
 		Fish randFish;
 		int i;

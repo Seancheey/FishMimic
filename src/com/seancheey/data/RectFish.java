@@ -29,7 +29,7 @@ public class RectFish extends Fish {
 
 	@Override
 	protected void perform() {
-		move();
+		super.perform();
 		// pick a random fish
 		Fish randFish = pond.getFishes().get(
 				Math.abs((int) x % pond.getFishes().size()));
