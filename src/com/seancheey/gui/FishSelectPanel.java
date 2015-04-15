@@ -2,6 +2,7 @@ package com.seancheey.gui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -57,25 +58,35 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 			this.add(labels.get(i));
 			this.add(fields.get(i));
 		}
+		// set default editable to some fields as false
+		fields.get(2).setEditable(false);
+		fields.get(3).setEditable(false);
+		fields.get(4).setEditable(false);
+		fields.get(5).setEditable(false);
+		fields.get(6).setEditable(false);
+		fields.get(7).setEditable(false);
 		// default value for width and height
-		fields.get(0).setText("20");
-		fields.get(1).setText("10");
-		fields.get(9).setText("1");
+		fields.get(0).setText("40");
+		fields.get(1).setText("20");
+		fields.get(9).setText("100");
 		// the check box of fast creation
 		checks.add(new JCheckBox("random position"));
 		checks.add(new JCheckBox("random speed"));
 		checks.add(new JCheckBox("random color"));
-		// unify and add all to the panel
-		for (int i = 0; i < checks.size(); i++) {
-			checks.get(i).setFont(UNIFIED_FONT);
-			checks.get(i).addActionListener(this);
-			this.add(checks.get(i));
+		// unify and add all to the panel and set default as true
+		for (JCheckBox o : checks) {
+			o.setFont(UNIFIED_FONT);
+			o.addActionListener(this);
+			o.setSelected(true);
+			this.add(o);
 		}
+
 		// the radio buttons of the type available for selection
 		radios.add(new JRadioButton("Rectangular Fish"));
 		radios.add(new JRadioButton("Round Fish"));
 		radios.add(new JRadioButton("Follower Fish"));
 		radios.add(new JRadioButton("Guider Fish"));
+		radios.add(new JRadioButton("Cat Fish"));
 		// unify and add all to the panel and a single button group
 		for (int i = 0; i < radios.size(); i++) {
 			radios.get(i).setFont(UNIFIED_FONT);
@@ -94,6 +105,8 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 			buttons.get(i).addActionListener(this);
 			this.add(buttons.get(i));
 		}
+		// set the layout to grid layout
+		setLayout(new GridLayout(8, 2));
 	}
 
 	@Override
@@ -101,7 +114,6 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 		if (a.getSource() instanceof JButton) {
 			switch (((JButton) a.getSource()).getText()) {
 			case "Add":
-
 				// find the selected type of fish
 				JRadioButton selected = null;
 				for (int i = 0; i < radios.size(); i++) {
@@ -124,6 +136,9 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 					break;
 				case "Guider Fish":
 					type = "GuideFish";
+					break;
+				case "Cat Fish":
+					type = "MaoFish";
 					break;
 				default:
 					type = "Not a fish";
@@ -156,7 +171,7 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 									randC ? FishGenerator.randColor()
 											: new Color(cr, cg, cb)));
 				}
-				//switch to Pond panel
+				// switch to Pond panel
 				Main.controlFrame.switchPanel(this, new PondPanel(p));
 				break;
 			case "Back":

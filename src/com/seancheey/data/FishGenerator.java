@@ -32,8 +32,10 @@ public class FishGenerator implements Serializable{
 			return new FollowerFish(width, height, x, y, vx, vy, pond);
 		case "GuideFish":
 			return new GuideFish(width, height, x, y, vx, vy, pond);
+		case "MaoFish":
+			return new MaoFish(width, height, x, y, vx, vy, pond);
 		default:
-			throw new IllegalArgumentException("Fish type mismatch!");
+			throw new IllegalArgumentException("Fish type mismatch! :"+type);
 		}
 	}
 

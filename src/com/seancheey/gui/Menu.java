@@ -55,7 +55,7 @@ public class Menu extends JPanel implements ActionListener {
 				// unimplemented
 				break;
 			case "Credit":
-				// unimplemented
+				Main.controlFrame.switchPanel(this, new CreditPanel());
 				break;
 			}
 		}
