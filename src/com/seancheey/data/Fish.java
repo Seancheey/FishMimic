@@ -25,6 +25,38 @@ public abstract class Fish implements Serializable {
 		this.color = color;
 	}
 
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public void setY(double y) {
+		this.y = y;
+	}
+
+	public void setVx(double vx) {
+		this.vx = vx;
+	}
+
+	public void setVy(double vy) {
+		this.vy = vy;
+	}
+
 	public Fish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond) {
 		super();

@@ -26,20 +26,20 @@ public class Menu extends JPanel implements ActionListener {
 	public Menu() {
 		setSize(Main.WIDTH, Main.HEIGHT);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		//add all needed components to the container
 		components.add(new JLabel(Main.NAME));
 		components.add(new JButton("New"));
 		components.add(new JButton("Read"));
 		components.add(new JButton("Credit"));
-		for (int i = 0; i < components.size(); i++) {
-			if (components.get(i) instanceof JButton) {
-				((JButton) components.get(i)).setFont(UNIFIED_FONT);
-			} else if (components.get(i) instanceof JLabel) {
-				((JLabel) components.get(i)).setFont(UNIFIED_FONT);
+		//unify the font of components and add to this panel
+		for (JComponent c : components) {
+			if (c instanceof JButton) {
+				((JButton) c).setFont(UNIFIED_FONT);
+				((JButton) c).addActionListener(this);
+			} else if (c instanceof JLabel) {
+				((JLabel) c).setFont(UNIFIED_FONT);
 			}
-			this.add(components.get(i));
-			if (components.get(i) instanceof JButton) {
-				((JButton) components.get(i)).addActionListener(this);
-			}
+			add(c);
 		}
 	}
 
@@ -49,7 +49,7 @@ public class Menu extends JPanel implements ActionListener {
 			JButton b = (JButton) a.getSource();
 			switch (b.getText()) {
 			case "New":
-				Main.controlFrame.switchPanel(this, new FishSelectPanel());
+				Main.controlFrame.switchPanel(this, new FishSelectPanel(Main.WIDTH,Main.HEIGHT,null));
 				break;
 			case "Read":
 				// unimplemented

@@ -34,10 +34,13 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 	private ArrayList<JRadioButton> radios = new ArrayList<JRadioButton>();
 	private ButtonGroup typeGroup = new ButtonGroup();
 	private ArrayList<JButton> buttons = new ArrayList<JButton>();
+	// the pond that created fish will be added to
+	private Pond pond;
 
 	// constructor
-	public FishSelectPanel() {
-		setSize(Main.WIDTH, Main.HEIGHT);
+	public FishSelectPanel(int width, int height, Pond pond) {
+		setSize(width, height);
+		this.pond = pond;
 		setLocation(0, 0);
 		// the tags of all parameters received
 		labels.add(new JLabel("width"));
@@ -88,10 +91,10 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 		radios.add(new JRadioButton("Guider Fish"));
 		radios.add(new JRadioButton("Cat Fish"));
 		// unify and add all to the panel and a single button group
-		for (int i = 0; i < radios.size(); i++) {
-			radios.get(i).setFont(UNIFIED_FONT);
-			typeGroup.add(radios.get(i));
-			this.add(radios.get(i));
+		for (JRadioButton radio : radios) {
+			radio.setFont(UNIFIED_FONT);
+			typeGroup.add(radio);
+			this.add(radio);
 		}
 		// set a default value
 		radios.get(0).setSelected(true);
@@ -99,11 +102,11 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 		buttons.add(new JButton("Add"));
 		buttons.add(new JButton("Back"));
 		// unify and add all the buttons
-		for (int i = 0; i < buttons.size(); i++) {
-			buttons.get(i).setFont(UNIFIED_FONT);
-			buttons.get(i).setBackground(Color.WHITE);
-			buttons.get(i).addActionListener(this);
-			this.add(buttons.get(i));
+		for (JButton button : buttons) {
+			button.setFont(UNIFIED_FONT);
+			button.setBackground(Color.WHITE);
+			button.addActionListener(this);
+			this.add(button);
 		}
 		// set the layout to grid layout
 		setLayout(new GridLayout(8, 2));
@@ -122,7 +125,7 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 						break;
 					}
 				}
-				// convert the selected type to fit type in Fish Generatord
+				// convert the selected type to fit type in Fish Generator
 				String type;
 				switch (selected.getText()) {
 				case "Rectangular Fish":
@@ -143,7 +146,7 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 				default:
 					type = "Not a fish";
 				}
-				// options of randomization
+				// create variables representing options of randomization
 				boolean randP = checks.get(0).isSelected(),
 				randV = checks.get(1).isSelected(),
 				randC = checks.get(2).isSelected();
@@ -158,21 +161,22 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 				cg = Integer.valueOf(fields.get(7).getText()),
 				cb = Integer.valueOf(fields.get(8).getText()),
 				createNum = Integer.valueOf(fields.get(9).getText());
-				// initialize a new pond
-				Pond p = new Pond(Main.WIDTH, Main.HEIGHT);
+				// initialize a new pond if don't have one
+				if (pond == null)
+					pond = new Pond(Main.WIDTH, Main.HEIGHT);
 				// add the number of fish equal to the inputed
 				for (int i = 0; i < createNum; i++) {
-					p.getFishes().add(
+					pond.getFishes().add(
 							FishGenerator.generate(type, width, height,
 									randP ? FishGenerator.randX() : x,
 									randP ? FishGenerator.randY() : y,
 									randV ? FishGenerator.randV(5) : vx,
-									randV ? FishGenerator.randV(5) : vy, p,
+									randV ? FishGenerator.randV(5) : vy, pond,
 									randC ? FishGenerator.randColor()
 											: new Color(cr, cg, cb)));
 				}
 				// switch to Pond panel
-				Main.controlFrame.switchPanel(this, new PondPanel(p));
+				Main.controlFrame.switchPanel(this, new PondPanel(pond));
 				break;
 			case "Back":
 				Main.controlFrame.switchPanel(this, new Menu());
@@ -203,7 +207,7 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 				}
 				break;
 			case "random color":
-				// enable or disable the color tet fields
+				// enable or disable the color text fields
 				if (c.isSelected()) {
 					fields.get(6).setEditable(false);
 					fields.get(7).setEditable(false);
