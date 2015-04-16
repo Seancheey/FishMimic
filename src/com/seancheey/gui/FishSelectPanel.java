@@ -2,7 +2,8 @@ package com.seancheey.gui;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -26,14 +27,15 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	// unified font for all components
-	private static final Font UNIFIED_FONT = new Font("serif", Font.PLAIN, 20);
+	private static final Font UNIFIED_FONT = new Font("serif", Font.PLAIN, 30);
 	// all of the components contained in the panel
-	private ArrayList<JTextField> fields = new ArrayList<JTextField>();
 	private ArrayList<JLabel> labels = new ArrayList<JLabel>();
+	private ArrayList<JTextField> fields = new ArrayList<JTextField>();
 	private ArrayList<JCheckBox> checks = new ArrayList<JCheckBox>();
 	private ArrayList<JRadioButton> radios = new ArrayList<JRadioButton>();
-	private ButtonGroup typeGroup = new ButtonGroup();
 	private ArrayList<JButton> buttons = new ArrayList<JButton>();
+	// button group to bind radio buttons
+	private ButtonGroup typeGroup = new ButtonGroup();
 	// the pond that created fish will be added to
 	private Pond pond;
 
@@ -77,13 +79,12 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 		checks.add(new JCheckBox("random speed"));
 		checks.add(new JCheckBox("random color"));
 		// unify and add all to the panel and set default as true
-		for (JCheckBox o : checks) {
-			o.setFont(UNIFIED_FONT);
-			o.addActionListener(this);
-			o.setSelected(true);
-			this.add(o);
+		for (JCheckBox checkBox : checks) {
+			checkBox.setFont(UNIFIED_FONT);
+			checkBox.addActionListener(this);
+			checkBox.setSelected(true);
+			this.add(checkBox);
 		}
-
 		// the radio buttons of the type available for selection
 		radios.add(new JRadioButton("Rectangular Fish"));
 		radios.add(new JRadioButton("Round Fish"));
@@ -103,13 +104,55 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 		buttons.add(new JButton("Back"));
 		// unify and add all the buttons
 		for (JButton button : buttons) {
-			button.setFont(UNIFIED_FONT);
+			button.setFont(new Font("serif", Font.BOLD, 40));
 			button.setBackground(Color.WHITE);
 			button.addActionListener(this);
 			this.add(button);
 		}
-		// set the layout to grid layout
-		setLayout(new GridLayout(8, 2));
+		setGridBagLayout();
+	}
+
+	private void setGridBagLayout() {
+		// create grid bag layout
+		GridBagLayout layout = new GridBagLayout();
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridheight = 1;
+		c.weightx = 1;
+		c.weighty = 1;
+		setLayout(layout);
+		// set layout for labels and fields
+		for (int i = 0; i < labels.size(); i++) {
+			if (i % 2 == 0) {
+				c.gridwidth = 1;
+				layout.setConstraints(labels.get(i), c);
+				layout.setConstraints(fields.get(i), c);
+			} else {
+				c.gridwidth = 1;
+				layout.setConstraints(labels.get(i), c);
+				c.gridwidth = 0;
+				layout.setConstraints(fields.get(i), c);
+			}
+		}
+		// set layout for check boxes
+		for (int i = 0; i < checks.size(); i++) {
+			c.gridwidth = 1;
+			if (i % 4 == 3 || i == checks.size() - 1)
+				c.gridwidth = 0;
+			layout.setConstraints(checks.get(i), c);
+		}
+		// set layout for radio buttons
+		for (int i = 0; i < radios.size(); i++) {
+			c.gridwidth = 1;
+			if (i % 4 == 3 || i == radios.size() - 1)
+				c.gridwidth = 0;
+			layout.setConstraints(radios.get(i), c);
+		}
+		// set layout for buttons
+		for (int i = 0; i < buttons.size(); i++) {
+			c.gridwidth = 1;
+			layout.setConstraints(buttons.get(i), c);
+		}
 	}
 
 	@Override
