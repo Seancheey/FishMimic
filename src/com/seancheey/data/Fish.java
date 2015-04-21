@@ -153,6 +153,14 @@ public abstract class Fish implements Serializable {
 		return vy;
 	}
 
+	public double getXCenter() {
+		return x + width / 2;
+	}
+
+	public double getYCener() {
+		return y + height / 2;
+	}
+
 	public Pond getPond() {
 		return pond;
 	}

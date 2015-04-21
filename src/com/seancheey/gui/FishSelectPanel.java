@@ -92,7 +92,7 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 		radios.add(new JRadioButton("Follower Fish"));
 		radios.add(new JRadioButton("Guider Fish"));
 		radios.add(new JRadioButton("Cat Fish"));
-		radios.add(new JRadioButton("Eater Fish"));
+		radios.add(new JRadioButton("Rainbow Fish"));
 		// unify and add all to the panel and a single button group
 		for (JRadioButton radio : radios) {
 			radio.setFont(UNIFIED_FONT);
@@ -188,8 +188,8 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 				case "Cat Fish":
 					type = "MaoFish";
 					break;
-				case "Eater Fish":
-					type = "EaterFish";
+				case "Rainbow Fish":
+					type = "RainbowFish";
 					break;
 				default:
 					type = "Not a fish";

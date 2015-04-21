@@ -60,30 +60,30 @@ public class Pond implements Serializable {
 	}
 
 	// list of setter
-	public void resize(Dimension dimension) {
+	public synchronized void resize(Dimension dimension) {
 		width = dimension.width;
 		height = dimension.height;
 	}
 
-	public ArrayList<Fish> getFishes() {
+	public synchronized ArrayList<Fish> getFishes() {
 		return fishes;
 	}
 
-	public Iterator<Fish> getIterator() {
+	public synchronized Iterator<Fish> getIterator() {
 		return fishes.iterator();
 	}
 
 	// paint self
-	public void paint(Graphics g) {
-		Iterator<Fish> i = fishes.iterator();
+	public synchronized void paint(Graphics g) {
+		Iterator<Fish> i = getFishes().iterator();
 		while (i.hasNext()) {
 			i.next().paint(g);
 		}
 	}
 
 	// invoke next perform
-	public void nextMove() {
-		Iterator<Fish> i = fishes.iterator();
+	public synchronized void nextMove() {
+		Iterator<Fish> i = getFishes().iterator();
 		while (i.hasNext()) {
 			i.next().perform();
 		}

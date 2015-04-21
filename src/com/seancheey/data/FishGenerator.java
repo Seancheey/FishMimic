@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.io.Serializable;
 
 import com.seancheey.Main;
-import com.seancheey.data.fish.EaterFish;
+import com.seancheey.data.fish.RainbowFish;
 import com.seancheey.data.fish.FollowerFish;
 import com.seancheey.data.fish.GuideFish;
 import com.seancheey.data.fish.MaoFish;
@@ -39,8 +39,8 @@ public class FishGenerator implements Serializable {
 			return new GuideFish(width, height, x, y, vx, vy, pond, color);
 		case "MaoFish":
 			return new MaoFish(width, height, x, y, vx, vy, pond, color);
-		case "EaterFish":
-			return new EaterFish(width, height, x, y, vx, vy, pond, color);
+		case "RainbowFish":
+			return new RainbowFish(width, height, x, y, vx, vy, pond, color);
 		default:
 			throw new IllegalArgumentException("Fish type mismatch! :" + type);
 		}
