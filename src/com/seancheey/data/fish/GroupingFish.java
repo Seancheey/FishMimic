@@ -1,5 +1,6 @@
 package com.seancheey.data.fish;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -20,6 +21,11 @@ public abstract class GroupingFish extends Fish {
 	public GroupingFish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond) {
 		super(width, height, x, y, vx, vy, pond);
+	}
+
+	public GroupingFish(int width, int height, double x, double y, double vx,
+			double vy, Pond pond, Color color) {
+		super(width, height, x, y, vx, vy, pond, color);
 	}
 
 	@Override

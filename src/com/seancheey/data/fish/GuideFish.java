@@ -1,5 +1,7 @@
 package com.seancheey.data.fish;
 
+import java.awt.Color;
+
 import com.seancheey.data.Pond;
 
 public class GuideFish extends GroupingFish {
@@ -12,6 +14,11 @@ public class GuideFish extends GroupingFish {
 	public GuideFish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond) {
 		super(width, height, x, y, vx, vy, pond);
+	}
+
+	public GuideFish(int width, int height, double x, double y, double vx,
+			double vy, Pond pond, Color color) {
+		super(width, height, x, y, vx, vy, pond, color);
 	}
 
 	@Override

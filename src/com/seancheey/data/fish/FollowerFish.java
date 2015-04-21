@@ -1,5 +1,6 @@
 package com.seancheey.data.fish;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -17,6 +18,11 @@ public class FollowerFish extends GroupingFish {
 	public FollowerFish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond) {
 		super(width, height, x, y, vx, vy, pond);
+	}
+
+	public FollowerFish(int width, int height, double x, double y, double vx,
+			double vy, Pond pond, Color color) {
+		super(width, height, x, y, vx, vy, pond, color);
 	}
 
 	@Override
