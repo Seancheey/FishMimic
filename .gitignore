@@ -37,4 +37,4 @@ local.properties
 
 *.class
 
-Thumbs.db
+*.db
