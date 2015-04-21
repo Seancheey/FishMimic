@@ -44,11 +44,11 @@ public class FishGenerator implements Serializable {
 	}
 
 	public static final int randX() {
-		return (int) (Math.random() * Main.WIDTH);
+		return (int) (Math.random() * Main.controlFrame.getWidth());
 	}
 
 	public static final int randY() {
-		return (int) (Math.random() * Main.HEIGHT);
+		return (int) (Math.random() * Main.controlFrame.getHeight());
 	}
 
 	public static final double randV(double range) {

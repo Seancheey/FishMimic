@@ -27,7 +27,6 @@ public class Menu extends JPanel implements ActionListener {
 	private static final Font UNIFIED_FONT = new Font("serif", Font.BOLD, 35);
 
 	public Menu() {
-		setSize(Main.WIDTH, Main.HEIGHT);
 		// add all needed components to the container
 		components.add(new JLabel(Main.NAME));
 		components.add(new JButton("New"));
@@ -64,8 +63,7 @@ public class Menu extends JPanel implements ActionListener {
 			JButton b = (JButton) a.getSource();
 			switch (b.getText()) {
 			case "New":
-				Main.controlFrame.switchPanel(this, new FishSelectPanel(
-						Main.WIDTH, Main.HEIGHT, null));
+				Main.controlFrame.switchPanel(this, new FishSelectPanel(null));
 				break;
 			case "Read":
 				// unimplemented

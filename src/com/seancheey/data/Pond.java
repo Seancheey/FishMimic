@@ -1,5 +1,6 @@
 package com.seancheey.data;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ public class Pond implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final int width, height;// width and height of the pond
+	private int width, height;// width and height of the pond
 	private final ArrayList<Fish> fishes;// fish container
 
 	// List of constructor
@@ -56,6 +57,12 @@ public class Pond implements Serializable {
 
 	public int getHeight() {
 		return height;
+	}
+
+	// list of setter
+	public void resize(Dimension dimension) {
+		width = dimension.width;
+		height = dimension.height;
 	}
 
 	public ArrayList<Fish> getFishes() {

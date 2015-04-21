@@ -48,7 +48,6 @@ public class PondPanel extends JPanel implements ActionListener {
 	public PondPanel(Pond pond) {
 		super();
 		this.pond = pond;
-		setSize(Main.WIDTH, Main.HEIGHT);
 		setBackground(Color.CYAN);
 		// set the menus
 		menus.add(new JMenu("Edit"));
@@ -97,6 +96,8 @@ public class PondPanel extends JPanel implements ActionListener {
 		super.paintComponent(g);
 		// paint the background
 		g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
+		// resize the pond to match the size of panel
+		pond.resize(getSize());
 		// Keep updating
 		pond.nextMove();
 		pond.paint(g);
@@ -117,8 +118,7 @@ public class PondPanel extends JPanel implements ActionListener {
 				// disable the menu bar
 				Main.controlFrame.setJMenuBar(null);
 				// switch the the fish selection panel
-				Main.controlFrame.switchPanel(this, new FishSelectPanel(
-						Main.WIDTH, Main.HEIGHT, pond));
+				Main.controlFrame.switchPanel(this, new FishSelectPanel(pond));
 				break;
 			case "reset all v and p":
 				for (Fish fish : pond.getFishes()) {

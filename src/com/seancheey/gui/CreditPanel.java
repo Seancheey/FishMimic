@@ -27,7 +27,6 @@ public class CreditPanel extends JPanel implements ActionListener {
 	private JButton back = new JButton("back");
 
 	CreditPanel() {
-		setSize(Main.WIDTH, Main.HEIGHT);
 		setBackground(Color.WHITE);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 

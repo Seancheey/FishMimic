@@ -4,13 +4,15 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.io.Serializable;
 
-import com.seancheey.Main;
-
 public abstract class Fish implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	protected int width, height;// the size of fish
+	protected double x, y, vx, vy;// the location and velocity of fish1`
+	protected final Pond pond;// the container of fish
+	protected Color color;// color displayed of the fish
 
 	// List of constructor
 	public Fish(int width, int height, double x, double y, double vx,
@@ -24,6 +26,19 @@ public abstract class Fish implements Serializable {
 		this.vy = vy;
 		this.pond = pond;
 		this.color = color;
+	}
+
+	public Fish(int width, int height, double x, double y, double vx,
+			double vy, Pond pond) {
+		super();
+		this.width = width;
+		this.height = height;
+		this.x = x;
+		this.y = y;
+		this.vx = vx;
+		this.vy = vy;
+		this.pond = pond;
+		this.color = FishGenerator.randColor();
 	}
 
 	public Color getColor() {
@@ -56,28 +71,6 @@ public abstract class Fish implements Serializable {
 
 	public void setVy(double vy) {
 		this.vy = vy;
-	}
-
-	public Fish(int width, int height, double x, double y, double vx,
-			double vy, Pond pond) {
-		super();
-		this.width = width;
-		this.height = height;
-		this.x = x;
-		this.y = y;
-		this.vx = vx;
-		this.vy = vy;
-		this.pond = pond;
-		this.color = FishGenerator.randColor();
-	}
-
-	protected int width, height;// the size of fish
-	protected double x, y, vx, vy;// the location and velocity of fish1`
-	protected final Pond pond;// the container of fish
-	protected Color color;// color displayed of the fish
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 	@Override
@@ -179,10 +172,10 @@ public abstract class Fish implements Serializable {
 		// Haha, asean!
 		// to prevent the ball from sticking into wall
 		if (x > getPond().getWidth()) {
-			x = Main.WIDTH - width;
+			x = getPond().getWidth() - width;
 		}
 		if (y > getPond().getHeight()) {
-			y = Main.HEIGHT - height;
+			y = getPond().getHeight() - height;
 		}
 		if (x < 0) {
 			x = width;

@@ -40,8 +40,8 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 	private Pond pond;
 
 	// constructor
-	public FishSelectPanel(int width, int height, Pond pond) {
-		setSize(width, height);
+	public FishSelectPanel(Pond pond) {
+		// setSize(width, height);
 		this.pond = pond;
 		setLocation(0, 0);
 		// the tags of all parameters received
@@ -207,7 +207,7 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 				createNum = Integer.valueOf(fields.get(9).getText());
 				// initialize a new pond if don't have one
 				if (pond == null)
-					pond = new Pond(Main.WIDTH, Main.HEIGHT);
+					pond = new Pond(getWidth(), getHeight());
 				// add the number of fish equal to the inputed
 				for (int i = 0; i < createNum; i++) {
 					pond.getFishes().add(

@@ -38,8 +38,8 @@ public class MaoFish extends Fish {
 				waitTime = (int) (Math.random() * 30);
 			} else {
 				jumpTime = (int) (Math.random() * 30);
-				vx += (Math.random()*2-1)*2;
-				vx = (Math.random()*2-1)*2;
+				vx += (Math.random() * 2 - 1) * 2;
+				vx = (Math.random() * 2 - 1) * 2;
 			}
 		}
 		if (waitTime > 0) {

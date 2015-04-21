@@ -1,6 +1,7 @@
 package com.seancheey;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,7 +16,7 @@ public class Gui extends JFrame {
 
 	public Gui() {
 		super(Main.NAME);
-		setSize(Main.WIDTH, Main.HEIGHT);
+		setSize(Toolkit.getDefaultToolkit().getScreenSize());
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(500, 300));
