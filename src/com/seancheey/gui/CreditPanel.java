@@ -28,7 +28,6 @@ public class CreditPanel extends JPanel implements ActionListener {
 
 	CreditPanel() {
 		setBackground(Color.WHITE);
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		labels.add(new JLabel("Credit"));
 		labels.add(new JLabel("Creators:"));
@@ -41,6 +40,7 @@ public class CreditPanel extends JPanel implements ActionListener {
 		labels.add(new JLabel("maomihz.com"));
 		labels.add(new JLabel("amao.ninja"));
 		for (JLabel label : labels) {
+			label.setAlignmentX(CENTER_ALIGNMENT);
 			label.setFont(UNIFIED_FONT);
 			add(label);
 		}
@@ -48,7 +48,11 @@ public class CreditPanel extends JPanel implements ActionListener {
 		labels.get(0).setFont(new Font("serif", Font.BOLD, 40));
 		// add back button
 		back.addActionListener(this);
+		back.setAlignmentX(CENTER_ALIGNMENT);
+		back.setBackground(Color.WHITE);
 		add(back);
+
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	}
 
 	@Override
