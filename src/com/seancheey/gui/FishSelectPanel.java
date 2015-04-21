@@ -210,7 +210,7 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 					pond = new Pond(getWidth(), getHeight());
 				// add the number of fish equal to the inputed
 				for (int i = 0; i < createNum; i++) {
-					//insert at random place
+					// insert at random place
 					pond.getFishes().add(
 							(int) (pond.getFishes().size() * Math.random()),
 							FishGenerator.generate(type, width, height,

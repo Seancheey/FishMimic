@@ -27,6 +27,7 @@ public class Menu extends JPanel implements ActionListener {
 	private static final Font UNIFIED_FONT = new Font("serif", Font.BOLD, 35);
 
 	public Menu() {
+		setFocusable(false);
 		// add all needed components to the container
 		components.add(new JLabel(Main.NAME));
 		components.add(new JButton("New"));
@@ -41,6 +42,7 @@ public class Menu extends JPanel implements ActionListener {
 			} else if (c instanceof JLabel) {
 				((JLabel) c).setFont(UNIFIED_FONT);
 			}
+			c.setFocusable(false);
 			add(c);
 		}
 		// create grid bag layout
