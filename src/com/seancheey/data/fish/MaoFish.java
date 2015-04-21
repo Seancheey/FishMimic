@@ -7,7 +7,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 import com.seancheey.data.Fish;
-import com.seancheey.data.FishGenerator;
 import com.seancheey.data.Pond;
 
 public class MaoFish extends Fish {
@@ -36,11 +35,11 @@ public class MaoFish extends Fish {
 		// set new action after finish all action
 		if (waitTime <= 0 && jumpTime <= 0) {
 			if (Math.random() < 0.5) {
-				waitTime = (int) (Math.random() * 10);
+				waitTime = (int) (Math.random() * 30);
 			} else {
-				jumpTime = (int) (Math.random() * 10);
-				vx = FishGenerator.randV(5);
-				vx = FishGenerator.randV(5);
+				jumpTime = (int) (Math.random() * 30);
+				vx += (Math.random()*2-1)*2;
+				vx = (Math.random()*2-1)*2;
 			}
 		}
 		if (waitTime > 0) {
