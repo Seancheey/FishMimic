@@ -2,6 +2,8 @@ package com.seancheey.data.fish;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Polygon;
 
 import com.seancheey.data.Fish;
 import com.seancheey.data.Pond;
@@ -41,8 +43,15 @@ public class EaterFish extends Fish {
 	@Override
 	protected void paint(Graphics g) {
 		super.paint(g);
-		g.fillArc((int) x, (int) y, width, height,
-				(int) Math.toDegrees(Math.atan2(vy, vx)) + 90, 45);
+		Graphics2D g2 = (Graphics2D) g;
+		int xcenter, ycenter;
+		xcenter = (int) (x - width / 2);
+		ycenter = (int) (y - height / 2);
+		g2.rotate(Math.atan2(vy, vx), xcenter, ycenter);
+		g2.fillPolygon(new Polygon(new int[] { xcenter + 2 * width, xcenter,
+				xcenter }, new int[] { ycenter, ycenter + height,
+				ycenter - height }, 3));
+		g2.rotate(-Math.atan2(vy, vx), xcenter, ycenter);
 	}
 
 }

@@ -40,8 +40,7 @@ public class FishGenerator implements Serializable {
 		case "MaoFish":
 			return new MaoFish(width, height, x, y, vx, vy, pond, color);
 		case "EaterFish":
-			return new EaterFish(width > height ? width : height,
-					width > height ? width : height, x, y, vx, vy, pond, color);
+			return new EaterFish(width, height, x, y, vx, vy, pond, color);
 		default:
 			throw new IllegalArgumentException("Fish type mismatch! :" + type);
 		}
