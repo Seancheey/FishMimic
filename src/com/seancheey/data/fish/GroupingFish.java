@@ -1,16 +1,23 @@
-package com.seancheey.data;
+package com.seancheey.data.fish;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-public class RectFish extends Fish {
+import com.seancheey.data.Fish;
+import com.seancheey.data.Pond;
+
+public abstract class GroupingFish extends Fish {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private int edgeX = width / 4, edgeY = height / 4;// the size of the edge of
+														// the round rectangle
+														// painted
 
-	public RectFish(int width, int height, double x, double y, double vx,
+	// Constructor
+	public GroupingFish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond) {
 		super(width, height, x, y, vx, vy, pond);
 	}
@@ -23,18 +30,8 @@ public class RectFish extends Fish {
 		xcenter = (int) (x - width / 2);
 		ycenter = (int) (y - height / 2);
 		g2.rotate(Math.atan2(vy, vx), xcenter, ycenter);
-		g2.fillRect(xcenter, ycenter, width, height);
+		g2.fillRoundRect(xcenter, ycenter, width, height, edgeX, edgeY);
 		g2.rotate(-Math.atan2(vy, vx), xcenter, ycenter);
 	}
 
-	@Override
-	protected void perform() {
-		super.perform();
-		// pick a random fish
-		Fish randFish = pond.getFishes().get(
-				Math.abs((int) x % pond.getFishes().size()));
-		// close to it
-		vx += (randFish.getX() - x) / 1000;
-		vy += (randFish.getY() - y) / 1000;
-	}
 }

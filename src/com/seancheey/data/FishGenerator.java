@@ -4,8 +4,13 @@ import java.awt.Color;
 import java.io.Serializable;
 
 import com.seancheey.Main;
+import com.seancheey.data.fish.FollowerFish;
+import com.seancheey.data.fish.GuideFish;
+import com.seancheey.data.fish.MaoFish;
+import com.seancheey.data.fish.RectFish;
+import com.seancheey.data.fish.RoundFish;
 
-public class FishGenerator implements Serializable{
+public class FishGenerator implements Serializable {
 	/**
 	 * 
 	 */
@@ -14,11 +19,10 @@ public class FishGenerator implements Serializable{
 	public static final Fish generate(Pond p) {
 		double seed = Math.random();
 		if (seed < 0.0)
-			return new RectFish(20, 10, randX(), randY(), randV(5),
-					randV(5), p);
+			return new RectFish(20, 10, randX(), randY(), randV(5), randV(5), p);
 		else
-			return new RoundFish(20, 10, randX(), randY(), randV(5),
-					randV(5), p);
+			return new RoundFish(20, 10, randX(), randY(), randV(5), randV(5),
+					p);
 	}
 
 	public static final Fish generate(String type, int width, int height,
@@ -35,7 +39,7 @@ public class FishGenerator implements Serializable{
 		case "MaoFish":
 			return new MaoFish(width, height, x, y, vx, vy, pond);
 		default:
-			throw new IllegalArgumentException("Fish type mismatch! :"+type);
+			throw new IllegalArgumentException("Fish type mismatch! :" + type);
 		}
 	}
 

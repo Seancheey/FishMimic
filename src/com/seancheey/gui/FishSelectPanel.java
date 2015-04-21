@@ -70,6 +70,7 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 		fields.get(5).setEditable(false);
 		fields.get(6).setEditable(false);
 		fields.get(7).setEditable(false);
+		fields.get(8).setEditable(false);
 		// default value for width and height
 		fields.get(0).setText("40");
 		fields.get(1).setText("20");

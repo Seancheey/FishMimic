@@ -1,10 +1,14 @@
-package com.seancheey.data;
+package com.seancheey.data.fish;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
+
+import com.seancheey.data.Fish;
+import com.seancheey.data.FishGenerator;
+import com.seancheey.data.Pond;
 
 public class MaoFish extends Fish {
 
@@ -35,8 +39,8 @@ public class MaoFish extends Fish {
 				waitTime = (int) (Math.random() * 10);
 			} else {
 				jumpTime = (int) (Math.random() * 10);
-				vx=FishGenerator.randV(5);
-				vx=FishGenerator.randV(5);
+				vx = FishGenerator.randV(5);
+				vx = FishGenerator.randV(5);
 			}
 		}
 		if (waitTime > 0) {

@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 import com.seancheey.Main;
 
-public class CreditPanel extends JPanel implements ActionListener{
+public class CreditPanel extends JPanel implements ActionListener {
 
 	/**
 	 * 
@@ -24,13 +24,13 @@ public class CreditPanel extends JPanel implements ActionListener{
 	// labels to be displayed
 	private ArrayList<JLabel> labels = new ArrayList<JLabel>();
 	// back button
-	private JButton back=new JButton("back");
-	
+	private JButton back = new JButton("back");
+
 	CreditPanel() {
 		setSize(Main.WIDTH, Main.HEIGHT);
 		setBackground(Color.WHITE);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
+
 		labels.add(new JLabel("Credit"));
 		labels.add(new JLabel("Creators:"));
 		labels.add(new JLabel("Seancheey"));
@@ -41,19 +41,19 @@ public class CreditPanel extends JPanel implements ActionListener{
 		labels.add(new JLabel("github.com/MaomiHz"));
 		labels.add(new JLabel("maomihz.com"));
 		labels.add(new JLabel("amao.ninja"));
-		for(JLabel label:labels){
+		for (JLabel label : labels) {
 			label.setFont(UNIFIED_FONT);
 			add(label);
 		}
-		//set the title of labels to be bigger
-		labels.get(0).setFont(new Font("serif",Font.BOLD,40));
-		//add back button
+		// set the title of labels to be bigger
+		labels.get(0).setFont(new Font("serif", Font.BOLD, 40));
+		// add back button
 		back.addActionListener(this);
 		add(back);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		Main.controlFrame.switchPanel(this, new Menu());	
+		Main.controlFrame.switchPanel(this, new Menu());
 	}
 }

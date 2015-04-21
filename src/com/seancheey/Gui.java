@@ -1,4 +1,4 @@
-package com.seancheey.gui;
+package com.seancheey;
 
 import java.awt.Dimension;
 
@@ -6,16 +6,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import com.seancheey.Main;
-
-public class ControlFrame extends JFrame {
+public class Gui extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ControlFrame() {
+	public Gui() {
 		super(Main.NAME);
 		setSize(Main.WIDTH, Main.HEIGHT);
 		setLocationRelativeTo(null);

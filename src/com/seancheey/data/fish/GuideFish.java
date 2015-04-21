@@ -1,4 +1,6 @@
-package com.seancheey.data;
+package com.seancheey.data.fish;
+
+import com.seancheey.data.Pond;
 
 public class GuideFish extends GroupingFish {
 

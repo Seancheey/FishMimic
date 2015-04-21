@@ -1,7 +1,10 @@
-package com.seancheey.data;
+package com.seancheey.data.fish;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+
+import com.seancheey.data.Fish;
+import com.seancheey.data.Pond;
 
 public class RoundFish extends Fish {
 
@@ -42,8 +45,9 @@ public class RoundFish extends Fish {
 		// close to it
 		double v = Math.pow(vx * vx + vy * vy, 0.5), direction = Math.atan2(
 				(randFish.getY() - y), (randFish.getX() - x));
-		double randV = Math.pow(randFish.vx * randFish.vx + randFish.vy
-				* randFish.vy, 0.5);
+		double randV = Math.pow(
+				randFish.getVx() * randFish.getVx() + randFish.getVy()
+						* randFish.getVy(), 0.5);
 		v = (randV + v) / 2;
 		vx = v * Math.cos(direction);
 		vy = v * Math.sin(direction);

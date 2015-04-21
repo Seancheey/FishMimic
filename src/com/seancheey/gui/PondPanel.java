@@ -1,6 +1,7 @@
 package com.seancheey.gui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +21,7 @@ import com.seancheey.data.Fish;
 import com.seancheey.data.FishGenerator;
 import com.seancheey.data.Pond;
 
-public class PondPanel extends JPanel implements ActionListener{
+public class PondPanel extends JPanel implements ActionListener {
 	/**
 	 * 
 	 */
@@ -35,7 +36,9 @@ public class PondPanel extends JPanel implements ActionListener{
 	private JMenuBar menuBar = new JMenuBar();
 	private ArrayList<JMenu> menus = new ArrayList<JMenu>();
 	private ArrayList<JMenuItem> items = new ArrayList<JMenuItem>();
-	
+	// unified font for all components
+	private static final Font UNIFIED_FONT = new Font("serif", Font.PLAIN, 25);
+
 	// constructor
 	public PondPanel(Pond pond) {
 		super();
@@ -47,6 +50,7 @@ public class PondPanel extends JPanel implements ActionListener{
 		menus.add(new JMenu("Window"));
 		menus.add(new JMenu("Help"));
 		for (JMenu menu : menus) {
+			menu.setFont(UNIFIED_FONT);
 			menu.setBackground(Color.WHITE);
 		}
 		// set the menu items
@@ -57,6 +61,7 @@ public class PondPanel extends JPanel implements ActionListener{
 		items.add(new JMenuItem("credit"));
 		for (JMenuItem item : items) {
 			item.addActionListener(this);
+			item.setFont(UNIFIED_FONT);
 		}
 		// add items to menus
 		menus.get(0).add(items.get(0));

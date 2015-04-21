@@ -1,7 +1,10 @@
-package com.seancheey.data;
+package com.seancheey.data.fish;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import com.seancheey.data.Fish;
+import com.seancheey.data.Pond;
 
 public class FollowerFish extends GroupingFish {
 
@@ -9,7 +12,7 @@ public class FollowerFish extends GroupingFish {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private GuideFish guider;//the guider fish that the fish is going to follow
+	private GuideFish guider;// the guider fish that the fish is going to follow
 
 	public FollowerFish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond) {
@@ -28,7 +31,9 @@ public class FollowerFish extends GroupingFish {
 				if (x instanceof GuideFish)
 					candidates.add((GuideFish) x);
 			}
-			guider = candidates.get((int) (Math.random() * candidates.size()));
+			if (candidates.size() > 0)
+				guider = candidates.get((int) (Math.random() * candidates
+						.size()));
 		}
 		if (guider == null) {
 			// change v randomly
@@ -38,8 +43,9 @@ public class FollowerFish extends GroupingFish {
 			// change v to approach the guider
 			double v = Math.pow(vx * vx + vy * vy, 0.5), direction = Math
 					.atan2((guider.getY() - y), (guider.getX() - x));
-			double randV = Math.pow(guider.vx * guider.vx + guider.vy
-					* guider.vy, 0.5);
+			double randV = Math.pow(
+					guider.getVx() * guider.getVx() + guider.getVy()
+							* guider.getVy(), 0.5);
 			v = (randV + v) / 2;
 			vx = v * Math.cos(direction);
 			vy = v * Math.sin(direction);

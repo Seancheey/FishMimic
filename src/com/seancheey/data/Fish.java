@@ -11,7 +11,8 @@ public abstract class Fish implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//List of constructor
+
+	// List of constructor
 	public Fish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond, Color color) {
 		super();
@@ -70,10 +71,10 @@ public abstract class Fish implements Serializable {
 		this.color = FishGenerator.randColor();
 	}
 
-	protected int width, height;//the size of fish
-	protected double x, y, vx, vy;//the location and velocity of fish
-	protected final Pond pond;//the container of fish
-	protected Color color;//color displayed of the fish
+	protected int width, height;// the size of fish
+	protected double x, y, vx, vy;// the location and velocity of fish1`
+	protected final Pond pond;// the container of fish
+	protected Color color;// color displayed of the fish
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -133,7 +134,8 @@ public abstract class Fish implements Serializable {
 			return false;
 		return true;
 	}
-	//List of getter
+
+	// List of getter
 	public int getWidth() {
 		return width;
 	}
@@ -161,14 +163,13 @@ public abstract class Fish implements Serializable {
 	public Pond getPond() {
 		return pond;
 	}
-	
+
 	// ***Main Algorithm is here!!!***
-	protected void perform(){
+	protected void perform() {
 		// have a move
 		x += vx;
 		y += vy;
 		// Touch the wall to reflect
-
 		if (x > getPond().getWidth() || x < 0) {
 			vx *= -0.92;
 		}
