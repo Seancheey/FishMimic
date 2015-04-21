@@ -26,7 +26,7 @@ public class Pond implements Serializable {
 		super();
 		this.width = width;
 		this.height = height;
-		fishes = new ArrayList<Fish>(10);
+		fishes = new ArrayList<Fish>();
 	}
 
 	@Override
