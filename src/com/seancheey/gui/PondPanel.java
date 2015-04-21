@@ -3,6 +3,8 @@ package com.seancheey.gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -36,6 +38,9 @@ public class PondPanel extends JPanel implements ActionListener {
 	private JMenuBar menuBar = new JMenuBar();
 	private ArrayList<JMenu> menus = new ArrayList<JMenu>();
 	private ArrayList<JMenuItem> items = new ArrayList<JMenuItem>();
+	// the background image
+	private Image background = Toolkit.getDefaultToolkit().getImage(
+			"res/sea.jpg");
 	// unified font for all components
 	private static final Font UNIFIED_FONT = new Font("serif", Font.PLAIN, 25);
 
@@ -90,6 +95,8 @@ public class PondPanel extends JPanel implements ActionListener {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		// paint the background
+		g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
 		// Keep updating
 		pond.nextMove();
 		pond.paint(g);
