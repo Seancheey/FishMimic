@@ -2,7 +2,6 @@ package com.seancheey.data.fish;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Polygon;
 
 import com.seancheey.data.Fish;
@@ -49,7 +48,8 @@ public class RainbowFish extends Fish {
 		vy = v * Math.sin(direction);
 		// change color if close enough
 		if ((Math.abs(aim.getXCenter() - getXCenter()) <= (aim.getWidth() + getWidth()) / 2.0)
-				&& (Math.abs(aim.getYCener() - getYCener()) <= (aim.getHeight() + getHeight()) / 2.0)) {
+				&& (Math.abs(aim.getYCenter() - getYCenter()) <= (aim
+						.getHeight() + getHeight()) / 2.0)) {
 			color = new Color((color.getRed() + aim.getColor().getRed()) / 2,
 					(color.getGreen() + aim.getColor().getGreen()) / 2,
 					(color.getBlue() + aim.getColor().getBlue()) / 2);
@@ -64,17 +64,9 @@ public class RainbowFish extends Fish {
 	 * @see com.seancheey.data.Fish#paint(java.awt.Graphics)
 	 */
 	@Override
-	protected void paint(Graphics g) {
-		super.paint(g);
-		Graphics2D g2 = (Graphics2D) g;
-		int xcenter, ycenter;
-		xcenter = (int) (x - width / 2);
-		ycenter = (int) (y - height / 2);
-		g2.rotate(Math.atan2(vy, vx), xcenter, ycenter);
-		g2.fillPolygon(new Polygon(new int[] { xcenter + 2 * width, xcenter,
-				xcenter }, new int[] { ycenter, ycenter + height,
-				ycenter - height }, 3));
-		g2.rotate(-Math.atan2(vy, vx), xcenter, ycenter);
+	protected void drawShape(Graphics g) {
+		g.fillPolygon(new Polygon(new int[] { 2 * width, 0, 0 }, new int[] { 0,
+				height, -height }, 3));
 	}
 
 }

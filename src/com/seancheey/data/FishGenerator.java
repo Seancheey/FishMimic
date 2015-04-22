@@ -4,10 +4,10 @@ import java.awt.Color;
 import java.io.Serializable;
 
 import com.seancheey.Main;
-import com.seancheey.data.fish.RainbowFish;
 import com.seancheey.data.fish.FollowerFish;
 import com.seancheey.data.fish.GuideFish;
 import com.seancheey.data.fish.MaoFish;
+import com.seancheey.data.fish.RainbowFish;
 import com.seancheey.data.fish.RectFish;
 import com.seancheey.data.fish.RoundFish;
 

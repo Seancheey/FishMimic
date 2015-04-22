@@ -2,7 +2,6 @@ package com.seancheey.data.fish;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 
@@ -51,15 +50,8 @@ public class MaoFish extends Fish {
 	}
 
 	@Override
-	protected void paint(Graphics g) {
-		super.paint(g);
-		Graphics2D g2 = (Graphics2D) g;
-		int xcenter, ycenter;
-		xcenter = (int) (x - width / 2);
-		ycenter = (int) (y - height / 2);
-		g2.rotate(Math.atan2(vy, vx), xcenter, ycenter);
-		g.drawImage(picture, xcenter, ycenter, width, height, null);
-		g2.rotate(-Math.atan2(vy, vx), xcenter, ycenter);
+	protected void drawShape(Graphics g) {
+		g.drawImage(picture, -width / 2, -height / 2, width, height, null);
 	}
 
 }

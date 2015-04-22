@@ -2,6 +2,7 @@ package com.seancheey.data;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.io.Serializable;
 
 public abstract class Fish implements Serializable {
@@ -157,7 +158,7 @@ public abstract class Fish implements Serializable {
 		return x + width / 2;
 	}
 
-	public double getYCener() {
+	public double getYCenter() {
 		return y + height / 2;
 	}
 
@@ -193,7 +194,18 @@ public abstract class Fish implements Serializable {
 		}
 	}
 
-	protected void paint(Graphics g) {
+	public void paint(Graphics g) {
 		g.setColor(color);
+		int xcenter = (int) getXCenter();
+		int ycenter = (int) getYCenter();
+		g.translate(xcenter, ycenter);
+		Graphics2D g2 = (Graphics2D) g;
+		double angle = Math.atan2(vy, vx);
+		g2.rotate(angle);
+		drawShape(g);
+		g2.rotate(-angle);
+		g.translate(-xcenter, -ycenter);
 	}
+
+	protected abstract void drawShape(Graphics g);
 }

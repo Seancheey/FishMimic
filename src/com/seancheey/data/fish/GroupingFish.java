@@ -2,7 +2,6 @@ package com.seancheey.data.fish;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 
 import com.seancheey.data.Fish;
 import com.seancheey.data.Pond;
@@ -28,16 +27,14 @@ public abstract class GroupingFish extends Fish {
 		super(width, height, x, y, vx, vy, pond, color);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.seancheey.data.Fish#drawShape(java.awt.Graphics)
+	 */
 	@Override
-	protected void paint(Graphics g) {
-		super.paint(g);
-		Graphics2D g2 = (Graphics2D) g;
-		int xcenter, ycenter;
-		xcenter = (int) (x - width / 2);
-		ycenter = (int) (y - height / 2);
-		g2.rotate(Math.atan2(vy, vx), xcenter, ycenter);
-		g2.fillRoundRect(xcenter, ycenter, width, height, edgeX, edgeY);
-		g2.rotate(-Math.atan2(vy, vx), xcenter, ycenter);
+	protected void drawShape(Graphics g) {
+		g.fillRoundRect(-width / 2, -height / 2, width, height, edgeX, edgeY);
 	}
 
 }
