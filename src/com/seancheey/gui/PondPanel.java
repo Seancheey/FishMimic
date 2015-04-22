@@ -58,11 +58,11 @@ public class PondPanel extends JPanel implements ActionListener {
 			menu.setBackground(Color.WHITE);
 		}
 		// set the menu items
-		items.add(new JMenuItem("add new fish"));
-		items.add(new JMenuItem("reset all v and p"));
-		items.add(new JMenuItem("remove all"));
-		items.add(new JMenuItem("reset window size"));
-		items.add(new JMenuItem("credit"));
+		items.add(new JMenuItem("Add new fish"));
+		items.add(new JMenuItem("Reset all v and p"));
+		items.add(new JMenuItem("Remove all"));
+		items.add(new JMenuItem("Reset window size"));
+		items.add(new JMenuItem("Credit"));
 		for (JMenuItem item : items) {
 			item.addActionListener(this);
 			item.setFont(UNIFIED_FONT);
@@ -114,13 +114,13 @@ public class PondPanel extends JPanel implements ActionListener {
 		if (a.getSource() instanceof JMenuItem) {
 			JMenuItem item = (JMenuItem) a.getSource();
 			switch (item.getText()) {
-			case "add new fish":
+			case "Add new fish":
 				// disable the menu bar
 				Main.controlFrame.setJMenuBar(null);
 				// switch the the fish selection panel
 				Main.controlFrame.switchPanel(this, new FishSelectPanel(pond));
 				break;
-			case "reset all v and p":
+			case "Reset all v and p":
 				for (Fish fish : pond.getFishes()) {
 					fish.setX(FishGenerator.randX());
 					fish.setY(FishGenerator.randY());
@@ -128,13 +128,13 @@ public class PondPanel extends JPanel implements ActionListener {
 					fish.setVy(FishGenerator.randV(5));
 				}
 				break;
-			case "remove all":
+			case "Remove all":
 				pond.getFishes().clear();
 				break;
-			case "reset window size":
+			case "Reset window size":
 				// unimplemented
 				break;
-			case "credit":
+			case "Credit":
 				// unimplemented
 				break;
 			default:
