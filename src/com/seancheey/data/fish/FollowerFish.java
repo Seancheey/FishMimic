@@ -25,6 +25,21 @@ public class FollowerFish extends GroupingFish {
 		super(width, height, x, y, vx, vy, pond, color);
 	}
 
+	/**
+	 * @return the guider
+	 */
+	public GuideFish getGuider() {
+		return guider;
+	}
+
+	/**
+	 * @param guider
+	 *            the guider to set
+	 */
+	public void setGuider(GuideFish guider) {
+		this.guider = guider;
+	}
+
 	@Override
 	protected void perform() {
 		super.perform();
@@ -46,15 +61,7 @@ public class FollowerFish extends GroupingFish {
 			vx += Math.random() - 0.5;
 			vy += Math.random() - 0.5;
 		} else {
-			// change v to approach the guider
-			double v = Math.pow(vx * vx + vy * vy, 0.5), direction = Math
-					.atan2((guider.getY() - y), (guider.getX() - x));
-			double randV = Math.pow(
-					guider.getVx() * guider.getVx() + guider.getVy()
-							* guider.getVy(), 0.5);
-			v = (randV + v) / 2;
-			vx = v * Math.cos(direction);
-			vy = v * Math.sin(direction);
+			trackOnce(guider);
 		}
 	}
 

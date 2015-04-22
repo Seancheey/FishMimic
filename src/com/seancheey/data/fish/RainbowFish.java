@@ -38,24 +38,19 @@ public class RainbowFish extends Fish {
 			aim = getPond().getFishes().get(
 					(int) (getPond().getFishes().size() * Math.random()));
 		}
-		// close to it
-		double v = Math.pow(vx * vx + vy * vy, 0.5), direction = Math.atan2(
-				(aim.getY() - y), (aim.getX() - x));
-		double randV = Math.pow(
-				aim.getVx() * aim.getVx() + aim.getVy() * aim.getVy(), 0.5);
-		v = (randV + v) / 1.95;
-		vx = v * Math.cos(direction);
-		vy = v * Math.sin(direction);
+		trackOnce(aim);
+		x += vx / 5;
+		y += vy / 5;
 		// change color if close enough
-		if ((Math.abs(aim.getXCenter() - getXCenter()) <= (aim.getWidth() + getWidth()) / 2.0)
-				&& (Math.abs(aim.getYCenter() - getYCenter()) <= (aim
-						.getHeight() + getHeight()) / 2.0)) {
-			color = new Color((color.getRed() + aim.getColor().getRed()) / 2,
-					(color.getGreen() + aim.getColor().getGreen()) / 2,
-					(color.getBlue() + aim.getColor().getBlue()) / 2);
-			aim.setColor(color);
+		if (isCollidedBy(aim)) {
+			aim.setColor(new Color(
+					(color.getRed() + aim.getColor().getRed()) / 2, (color
+							.getGreen() + aim.getColor().getGreen()) / 2,
+					(color.getBlue() + aim.getColor().getBlue()) / 2));
 			aim = null;
 		}
+		x -= vx / 5;
+		y -= vy / 5;
 	}
 
 	/*
@@ -65,8 +60,8 @@ public class RainbowFish extends Fish {
 	 */
 	@Override
 	protected void drawShape(Graphics g) {
-		g.fillPolygon(new Polygon(new int[] { 2 * width, 0, 0 }, new int[] { 0,
-				height, -height }, 3));
+		g.fillPolygon(new Polygon(new int[] { width, 0, 0 }, new int[] { 0,
+				height / 2, -height / 2 }, 3));
 	}
 
 }

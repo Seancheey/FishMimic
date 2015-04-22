@@ -154,6 +154,10 @@ public abstract class Fish implements Serializable {
 		return vy;
 	}
 
+	public double getVelocity() {
+		return Math.sqrt(vx * vx + vy * vy);
+	}
+
 	public double getXCenter() {
 		return x + width / 2;
 	}
@@ -168,30 +172,69 @@ public abstract class Fish implements Serializable {
 
 	// ***Main Algorithm is here!!!***
 	protected void perform() {
-		// have a move
-		x += vx;
-		y += vy;
-		// Touch the wall to reflect
-		if (x > getPond().getWidth() || x < 0) {
-			vx *= -0.92;
-		}
-		if (y > getPond().getHeight() || y < 0) {
-			vy *= -0.92;
-		}
-		// Haha, asean!
+		// // detect collision with other fish
+		// for (Fish fish : getPond().getFishes()) {
+		// if (isCollidedBy(fish)) {
+		// if (fish != this) {
+		// // run operation
+		// // change the velocity of two fish
+		// double tempVx, tempVy;
+		// tempVx = fish.getVx();
+		// tempVy = fish.getVy();
+		// fish.setVx(vx);
+		// fish.setVy(vy);
+		// vx = tempVx;
+		// vy = tempVy;
+		// }
+		// }
+		// }
 		// to prevent the ball from sticking into wall
 		if (x > getPond().getWidth()) {
 			x = getPond().getWidth() - width;
+			vx = -vx;
 		}
 		if (y > getPond().getHeight()) {
 			y = getPond().getHeight() - height;
+			vy = -vy;
 		}
 		if (x < 0) {
 			x = width;
+			vx = -vx;
 		}
 		if (y < 0) {
 			y = height;
+			vy = -vy;
 		}
+		// have a move
+		x += vx;
+		y += vy;
+	}
+
+	public void trackOnce(Fish fish) {
+		// ues mean angle
+		double diffx = fish.getX() - x, diffy = fish.getY() - y;
+		double vangle = Math.atan2(vy, vx), aimangle = Math.atan2(diffy, diffx);
+		double diffangle = Math.abs(vangle - aimangle);
+		if (diffangle > Math.PI) {
+			vangle = (vangle + aimangle) / 2 + Math.PI;
+		} else {
+			vangle = (vangle + aimangle) / 2;
+		}
+		// use mean velocity
+		double v = getVelocity(), diffv = fish.getVelocity();
+		v = (v + diffv) / 2;
+		// set vx and vy
+		vx = Math.cos(vangle) * v;
+		vy = Math.sin(vangle) * v;
+	}
+
+	public boolean isCollidedBy(Fish fish) {
+		if ((Math.abs(fish.getXCenter() - getXCenter()) <= (fish.getWidth() + width) / 2.0)
+				&& (Math.abs(fish.getYCenter() - getYCenter()) <= (fish
+						.getHeight() + height) / 2.0))
+			return true;
+		else
+			return false;
 	}
 
 	public void paint(Graphics g) {

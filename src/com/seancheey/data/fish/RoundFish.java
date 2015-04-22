@@ -32,23 +32,16 @@ public class RoundFish extends Fish {
 	protected void perform() {
 		super.perform();
 		// pick the next fish
-		Fish randFish;
-		int i;
-		for (i = 0; i < getPond().getFishes().size(); i++) {
-			if (getPond().getFishes().get(i).equals(this))
+		Fish nextFish;
+		int i = 0;
+		for (Fish fish : getPond().getFishes()) {
+			if (fish.equals(this))
 				break;
+			i++;
 		}
-		randFish = getPond().getFishes().get(
+		nextFish = getPond().getFishes().get(
 				i + 1 >= getPond().getFishes().size() ? 0 : i + 1);
 		// close to it
-		double v = Math.pow(vx * vx + vy * vy, 0.5), direction = Math.atan2(
-				(randFish.getY() - y), (randFish.getX() - x));
-		double randV = Math.pow(
-				randFish.getVx() * randFish.getVx() + randFish.getVy()
-						* randFish.getVy(), 0.5);
-		v = (randV + v) / 2;
-		vx = v * Math.cos(direction);
-		vy = v * Math.sin(direction);
-
+		trackOnce(nextFish);
 	}
 }
