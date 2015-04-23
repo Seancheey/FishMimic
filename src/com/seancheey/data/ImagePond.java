@@ -10,6 +10,7 @@ public class ImagePond {
 
 	static {
 		put("background - sea", "res/background/sea.jpg");
+		put("fish - cat", "res/fish/github.png");
 	}
 
 	public static boolean init() {

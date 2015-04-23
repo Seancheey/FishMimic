@@ -3,9 +3,9 @@ package com.seancheey.data.fish;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Toolkit;
 
 import com.seancheey.data.Fish;
+import com.seancheey.data.ImagePond;
 import com.seancheey.data.Pond;
 
 public class MaoFish extends Fish {
@@ -14,10 +14,9 @@ public class MaoFish extends Fish {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Image picture = Toolkit.getDefaultToolkit().getImage(
-			"res/github.png");
-	// the standing and jump time left for the cat
-	private int waitTime = 0, jumpTime = 0;
+	private static Image picture = ImagePond.get("fish - cat");
+	private int timeLeft = 20;
+	private Fish aim;
 
 	public MaoFish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond, Color color) {
@@ -31,27 +30,19 @@ public class MaoFish extends Fish {
 
 	@Override
 	protected void perform() {
+		super.perform();
 		// set new action after finish all action
-		if (waitTime <= 0 && jumpTime <= 0) {
-			if (Math.random() < 0.5) {
-				waitTime = (int) (Math.random() * 30);
-			} else {
-				jumpTime = (int) (Math.random() * 30);
-				vx += (Math.random() * 2 - 1) * 2;
-				vx = (Math.random() * 2 - 1) * 2;
-			}
+		if (timeLeft <= 0 || aim == null) {
+			timeLeft = (int) (Math.random() * 30);
+			aim = getPond().getFishes().get(
+					(int) (Math.random() * getPond().getFishes().size()));
 		}
-		if (waitTime > 0) {
-			waitTime -= 1;
-		} else {
-			super.perform();
-			jumpTime -= 1;
-		}
+		trackOnce(aim);
+		timeLeft--;
 	}
 
 	@Override
 	protected void drawShape(Graphics g) {
 		g.drawImage(picture, -width / 2, -height / 2, width, height, null);
 	}
-
 }
