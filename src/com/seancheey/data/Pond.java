@@ -59,6 +59,16 @@ public class Pond implements Serializable {
 		return height;
 	}
 
+	public Fish getFishAt(int x, int y) {
+		int allowDiff = 20;
+		for (Fish fish : fishes) {
+			if (Math.abs(x - fish.getXCenter()) < allowDiff
+					&& Math.abs(y - fish.getYCenter()) < allowDiff)
+				return fish;
+		}
+		return null;
+	}
+
 	// list of setter
 	public synchronized void resize(Dimension dimension) {
 		width = dimension.width;

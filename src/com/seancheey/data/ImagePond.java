@@ -12,6 +12,10 @@ public class ImagePond {
 		put("background - sea", "res/background/sea.jpg");
 	}
 
+	public static boolean init() {
+		return true;
+	}
+
 	public static boolean has(Image resource) {
 		for (Image i : INT_TO_IMAGE.values()) {
 			if (i == resource)

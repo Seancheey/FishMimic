@@ -16,18 +16,44 @@ public class FishGenerator implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final int DEFAULT_WIDTH = 40, DEFAULT_HEIGHT = 20;
+	private Pond pond;
 
-	public static final Fish generate(Pond p) {
-		double seed = Math.random();
-		if (seed < 0.0)
-			return new RectFish(20, 10, randX(), randY(), randV(5), randV(5), p);
-		else
-			return new RoundFish(20, 10, randX(), randY(), randV(5), randV(5),
-					p);
+	public FishGenerator(Pond pond) {
+		this.pond = pond;
 	}
 
-	public static final Fish generate(String type, int width, int height,
-			double x, double y, double vx, double vy, Pond pond, Color color) {
+	public Fish generateRandom(int x, int y) {
+		int fishTypeNum = 6;
+		switch (new java.util.Random().nextInt(fishTypeNum)) {
+		case 0:
+			return new RectFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x, y, randV(5),
+					randV(5), pond, randColor());
+		case 1:
+			return new RoundFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x, y, randV(5),
+					randV(5), pond, randColor());
+		case 2:
+			return new RainbowFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x, y,
+					randV(5), randV(5), pond, randColor());
+		case 3:
+			return new MaoFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x, y, randV(5),
+					randV(5), pond, randColor());
+		case 4:
+			return new GuideFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x, y, randV(5),
+					randV(5), pond, randColor());
+		case 5:
+			return new FollowerFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x, y,
+					randV(5), randV(5), pond, randColor());
+		}
+		return null;
+	}
+
+	public Fish generateRandom() {
+		return generateRandom(randX(), randY());
+	}
+
+	public Fish generate(String type, int width, int height, double x,
+			double y, double vx, double vy, Color color) {
 		switch (type) {
 		case "RectFish":
 			return new RectFish(width, height, x, y, vx, vy, pond, color);

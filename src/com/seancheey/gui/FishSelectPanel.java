@@ -212,15 +212,16 @@ public abstract class FishSelectPanel extends JPanel implements ActionListener,
 				if (pond == null)
 					pond = new Pond(getWidth(), getHeight());
 				// add the number of fish equal to the inputed
+				FishGenerator gen = new FishGenerator(pond);
 				for (int i = 0; i < createNum; i++) {
 					// insert at random place
 					pond.getFishes().add(
 							(int) (pond.getFishes().size() * Math.random()),
-							FishGenerator.generate(type, width, height,
+							gen.generate(type, width, height,
 									randP ? FishGenerator.randX() : x,
 									randP ? FishGenerator.randY() : y,
 									randV ? FishGenerator.randV(5) : vx,
-									randV ? FishGenerator.randV(5) : vy, pond,
+									randV ? FishGenerator.randV(5) : vy,
 									randC ? FishGenerator.randColor()
 											: new Color(cr, cg, cb)));
 				}
