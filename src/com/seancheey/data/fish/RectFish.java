@@ -2,8 +2,10 @@ package com.seancheey.data.fish;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 
 import com.seancheey.data.Fish;
+import com.seancheey.data.ImagePond;
 import com.seancheey.data.Pond;
 
 public class RectFish extends Fish {
@@ -12,6 +14,8 @@ public class RectFish extends Fish {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private transient static final Image image = ImagePond
+			.get("fish - yellowfish");
 
 	public RectFish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond) {
@@ -25,7 +29,7 @@ public class RectFish extends Fish {
 
 	@Override
 	protected void drawShape(Graphics g) {
-		g.fillRect(-width / 2, -height / 2, width, height);
+		g.drawImage(image, -width / 2, -height / 2, width, height, null);
 	}
 
 	@Override
