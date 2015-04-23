@@ -60,10 +60,9 @@ public class Pond implements Serializable {
 	}
 
 	public Fish getFishAt(int x, int y) {
-		int allowDiff = 20;
 		for (Fish fish : fishes) {
-			if (Math.abs(x - fish.getXCenter()) < allowDiff
-					&& Math.abs(y - fish.getYCenter()) < allowDiff)
+			if (Math.abs(x - fish.getXCenter()) < fish.getWidth() / 2
+					&& Math.abs(y - fish.getYCenter()) < fish.getHeight() / 2)
 				return fish;
 		}
 		return null;
