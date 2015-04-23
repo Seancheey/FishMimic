@@ -39,8 +39,6 @@ public class RainbowFish extends Fish {
 					(int) (getPond().getFishes().size() * Math.random()));
 		}
 		trackOnce(aim);
-		x += vx / 5;
-		y += vy / 5;
 		// change color if close enough
 		if (isCollidedBy(aim)) {
 			aim.setColor(new Color(
@@ -49,8 +47,6 @@ public class RainbowFish extends Fish {
 					(color.getBlue() + aim.getColor().getBlue()) / 2));
 			aim = null;
 		}
-		x -= vx / 5;
-		y -= vy / 5;
 	}
 
 	/*
