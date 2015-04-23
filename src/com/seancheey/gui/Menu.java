@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.seancheey.Main;
+import com.seancheey.data.ImagePond;
 
 public class Menu extends JPanel implements ActionListener {
 
@@ -58,6 +59,12 @@ public class Menu extends JPanel implements ActionListener {
 		}
 		setLayout(layout);
 	}
+
+	@Override
+	protected void paintComponent(java.awt.Graphics g) {
+		g.drawImage(ImagePond.get("background - sea"), 0, 0, getWidth(),
+				getHeight(), this);
+	};
 
 	@Override
 	public void actionPerformed(ActionEvent a) {

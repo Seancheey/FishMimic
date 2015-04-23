@@ -3,10 +3,9 @@ package com.seancheey.gui.gamePanel;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Toolkit;
-
 import javax.swing.JPanel;
 
+import com.seancheey.data.ImagePond;
 import com.seancheey.data.Pond;
 
 public class PondGraph extends JPanel {
@@ -19,8 +18,7 @@ public class PondGraph extends JPanel {
 	// pond that contain all fishes
 	private final Pond pond;
 	// the background image
-	private Image background = Toolkit.getDefaultToolkit().getImage(
-			"res/sea.jpg");
+	private transient Image background = ImagePond.get("background - sea");
 
 	// constructor
 	public PondGraph(Pond pond) {
