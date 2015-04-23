@@ -16,11 +16,12 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import com.seancheey.Main;
 import com.seancheey.data.FishGenerator;
 import com.seancheey.data.Pond;
+import com.seancheey.gui.fishSelectPanel.PondGetter;
 
-public class FishSelectPanel extends JPanel implements ActionListener {
+public abstract class FishSelectPanel extends JPanel implements ActionListener,
+		PondGetter {
 
 	/**
 	 * 
@@ -41,9 +42,7 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 
 	// constructor
 	public FishSelectPanel(Pond pond) {
-		// setSize(width, height);
 		this.pond = pond;
-		setLocation(0, 0);
 		// the tags of all parameters received
 		labels.add(new JLabel("width"));
 		labels.add(new JLabel("height"));
@@ -226,10 +225,10 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 											: new Color(cr, cg, cb)));
 				}
 				// switch to Pond panel
-				Main.controlFrame.switchPanel(this, new PondPanel(pond));
+				addAction();
 				break;
 			case "Back":
-				Main.controlFrame.switchPanel(this, new Menu());
+				backAction();
 				break;
 			}
 		} else if (a.getSource() instanceof JCheckBox) {
@@ -270,5 +269,14 @@ public class FishSelectPanel extends JPanel implements ActionListener {
 				break;
 			}
 		}
+	}
+
+	public abstract void addAction();
+
+	public abstract void backAction();
+
+	@Override
+	public Pond getPond() {
+		return pond;
 	}
 }

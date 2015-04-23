@@ -1,10 +1,7 @@
-package com.seancheey.gui;
+package com.seancheey.gui.gamePanel;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -13,42 +10,33 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.SwingConstants;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import com.seancheey.Main;
 import com.seancheey.data.Fish;
 import com.seancheey.data.FishGenerator;
 import com.seancheey.data.Pond;
+import com.seancheey.gui.CreditPanel;
+import com.seancheey.gui.FishSelectPanel;
+import com.seancheey.gui.GamePanel;
 
-public class PondPanel extends JPanel implements ActionListener {
+public class GameMenuBar extends JMenuBar implements ActionListener {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	// delay between every two refreshing event
-	private static int delay;
-	// pond that contain all fishes
-	private final Pond pond;
-	// slider to adjust the time elapsing speed
-	private JSlider vslider;
-	// all components in the menu bar
-	private JMenuBar menuBar = new JMenuBar();
 	private ArrayList<JMenu> menus = new ArrayList<JMenu>();
 	private ArrayList<JMenuItem> items = new ArrayList<JMenuItem>();
-	// the background image
-	private Image background = Toolkit.getDefaultToolkit().getImage(
-			"res/sea.jpg");
 	// unified font for all components
 	private static final Font UNIFIED_FONT = new Font("serif", Font.PLAIN, 25);
+	private Pond pond;
+	private JPanel gamePanel;
 
-	// constructor
-	public PondPanel(Pond pond) {
-		super();
+	public GameMenuBar(JPanel gamePanel, Pond pond) {
+		// initialize
 		this.pond = pond;
-		setBackground(Color.CYAN);
+		this.gamePanel = gamePanel;
+		setBackground(Color.WHITE);
 		// set the menus
 		menus.add(new JMenu("Edit"));
 		menus.add(new JMenu("Window"));
@@ -73,40 +61,11 @@ public class PondPanel extends JPanel implements ActionListener {
 		menus.get(0).add(items.get(2));
 		menus.get(1).add(items.get(3));
 		menus.get(2).add(items.get(4));
+
 		// add menus to the bar
 		for (JMenu menu : menus) {
-			menuBar.add(menu);
+			add(menu);
 		}
-		// add bar to the frame
-		menuBar.setBackground(Color.WHITE);
-		Main.controlFrame.setJMenuBar(menuBar);
-
-		// slider that adjusts the time elapsing speed
-		vslider = new JSlider(SwingConstants.HORIZONTAL, 0, 49, 40);
-		vslider.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent event) {
-				PondPanel.delay = 50 - vslider.getValue();
-			}
-		});
-		add(vslider);
-	}
-
-	@Override
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		// paint the background
-		g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
-		// resize the pond to match the size of panel
-		pond.resize(getSize());
-		// Keep updating
-		pond.nextMove();
-		pond.paint(g);
-		try {
-			Thread.sleep(PondPanel.delay);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		this.repaint();
 	}
 
 	@Override
@@ -118,7 +77,27 @@ public class PondPanel extends JPanel implements ActionListener {
 				// disable the menu bar
 				Main.controlFrame.setJMenuBar(null);
 				// switch the the fish selection panel
-				Main.controlFrame.switchPanel(this, new FishSelectPanel(pond));
+				Main.controlFrame.switchPanel(gamePanel, new FishSelectPanel(
+						pond) {
+
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					@Override
+					public void addAction() {
+						Main.controlFrame.switchPanel(this, new GamePanel(
+								getPond()));
+					}
+
+					@Override
+					public void backAction() {
+						Main.controlFrame.switchPanel(this, new GamePanel(
+								getPond()));
+					}
+
+				});
 				break;
 			case "Reset all v and p":
 				for (Fish fish : pond.getFishes()) {
@@ -135,7 +114,7 @@ public class PondPanel extends JPanel implements ActionListener {
 				// unimplemented
 				break;
 			case "Credit":
-				// unimplemented
+				Main.controlFrame.switchPanel(gamePanel, new CreditPanel());
 				break;
 			default:
 				System.out.println("Unknown menu item");

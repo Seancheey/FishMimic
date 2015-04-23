@@ -26,7 +26,7 @@ public class CreditPanel extends JPanel implements ActionListener {
 	// back button
 	private JButton back = new JButton("back");
 
-	CreditPanel() {
+	public CreditPanel() {
 		setBackground(Color.WHITE);
 
 		labels.add(new JLabel("Credit"));
@@ -48,7 +48,7 @@ public class CreditPanel extends JPanel implements ActionListener {
 		labels.get(0).setFont(new Font("serif", Font.BOLD, 40));
 		// add back button
 		back.addActionListener(this);
-		back.setAlignmentX(CENTER_ALIGNMENT);
+		back.setAlignmentX(0.5f);
 		back.setBackground(Color.WHITE);
 		add(back);
 

@@ -65,7 +65,25 @@ public class Menu extends JPanel implements ActionListener {
 			JButton b = (JButton) a.getSource();
 			switch (b.getText()) {
 			case "New":
-				Main.controlFrame.switchPanel(this, new FishSelectPanel(null));
+				Main.controlFrame.switchPanel(this, new FishSelectPanel(null) {
+
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					@Override
+					public void addAction() {
+						Main.controlFrame.switchPanel(this, new GamePanel(
+								getPond()));
+					}
+
+					@Override
+					public void backAction() {
+						Main.controlFrame.switchPanel(this, new Menu());
+					}
+
+				});
 				break;
 			case "Read":
 				// unimplemented
