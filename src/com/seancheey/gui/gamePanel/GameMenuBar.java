@@ -89,6 +89,7 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 					public void addAction() {
 						Main.controlFrame.switchPanel(this, new GamePanel(
 								getPond()));
+
 					}
 
 					@Override
@@ -96,7 +97,6 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 						Main.controlFrame.switchPanel(this, new GamePanel(
 								getPond()));
 					}
-
 				});
 				break;
 			case "Reset all v and p":
@@ -114,7 +114,9 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 				// unimplemented
 				break;
 			case "Credit":
+				Main.controlFrame.setJMenuBar(null);
 				Main.controlFrame.switchPanel(gamePanel, new CreditPanel());
+
 				break;
 			default:
 				System.out.println("Unknown menu item");

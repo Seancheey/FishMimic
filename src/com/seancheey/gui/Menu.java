@@ -89,7 +89,6 @@ public class Menu extends JPanel implements ActionListener {
 					public void backAction() {
 						Main.controlFrame.switchPanel(this, new Menu());
 					}
-
 				});
 				break;
 			case "Read":
