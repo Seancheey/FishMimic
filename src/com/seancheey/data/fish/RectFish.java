@@ -31,7 +31,11 @@ public class RectFish extends Fish {
 		Fish randFish = pond.getFishes().get(
 				Math.abs((int) x % pond.getFishes().size()));
 		// close to it
-		vx += (randFish.getX() - x) / 1000;
-		vy += (randFish.getY() - y) / 1000;
+		if (immobilized == false) {
+			vx += (randFish.getX() - x) / 1000;
+			vy += (randFish.getY() - y) / 1000;
+		} else {
+			trackOnce(randFish);
+		}
 	}
 }
