@@ -16,6 +16,8 @@ public class GamePanel extends JPanel {
 	private PondPanel pondPanel = new PondPanel(null);
 
 	public GamePanel(Pond pond) {
+		if (pond == null)
+			pond = new Pond(getWidth(), getHeight());
 		// add menu bar
 		Main.controlFrame.setJMenuBar(new GameMenuBar(this, pond));
 		this.pondPanel = new PondPanel(pond);

@@ -32,9 +32,9 @@ public class Menu extends JPanel implements ActionListener {
 		setFocusable(false);
 		// add all needed components to the container
 		components.add(new JLabel(Main.NAME));
-		components.add(new JButton("New"));
-		components.add(new JButton("Read"));
-		components.add(new JButton("Credit"));
+		components.add(new JButton("New Game"));
+		components.add(new JButton("Read Progress"));
+		components.add(new JButton("About us"));
 		// unify the font of components and add to this panel
 		for (JComponent c : components) {
 			if (c instanceof JButton) {
@@ -72,27 +72,10 @@ public class Menu extends JPanel implements ActionListener {
 		if (a.getSource() instanceof JButton) {
 			JButton b = (JButton) a.getSource();
 			switch (b.getText()) {
-			case "New":
-				Main.controlFrame.switchPanel(this, new FishSelectPanel(null) {
-
-					/**
-					 * 
-					 */
-					private static final long serialVersionUID = 1L;
-
-					@Override
-					public void addAction() {
-						Main.controlFrame.switchPanel(this, new GamePanel(
-								getPond()));
-					}
-
-					@Override
-					public void backAction() {
-						Main.controlFrame.switchPanel(this, new Menu());
-					}
-				});
+			case "New Game":
+				Main.controlFrame.switchPanel(this, new GamePanel(null));
 				break;
-			case "Read":
+			case "Read Progress":
 				// unimplemented
 				JOptionPane
 						.showMessageDialog(
@@ -100,7 +83,7 @@ public class Menu extends JPanel implements ActionListener {
 								"Sorry, this function is not implemented yet. Follow the developer to get updates. ",
 								"Error", JOptionPane.INFORMATION_MESSAGE);
 				break;
-			case "Credit":
+			case "About us":
 				Main.controlFrame.switchPanel(this, new CreditPanel());
 				break;
 			}
