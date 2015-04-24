@@ -45,10 +45,7 @@ public class RainbowFish extends Fish {
 		trackOnce(aim);
 		// change color if close enough
 		if (isCollidedBy(aim)) {
-			aim.setColor(new Color(
-					(color.getRed() + aim.getColor().getRed()) / 2, (color
-							.getGreen() + aim.getColor().getGreen()) / 2,
-					(color.getBlue() + aim.getColor().getBlue()) / 2));
+			//collision becomes meaningless
 			aim = null;
 		}
 	}

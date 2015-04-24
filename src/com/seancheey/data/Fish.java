@@ -13,7 +13,6 @@ public abstract class Fish implements Serializable {
 	protected int width, height;// the size of fish
 	protected double x, y, vx, vy;// the location and velocity of fish1`
 	protected final Pond pond;// the container of fish
-	protected Color color;// color displayed of the fish
 
 	// List of constructor
 	public Fish(int width, int height, double x, double y, double vx,
@@ -26,7 +25,6 @@ public abstract class Fish implements Serializable {
 		this.vx = vx;
 		this.vy = vy;
 		this.pond = pond;
-		this.color = color;
 	}
 
 	public Fish(int width, int height, double x, double y, double vx,
@@ -39,17 +37,8 @@ public abstract class Fish implements Serializable {
 		this.vx = vx;
 		this.vy = vy;
 		this.pond = pond;
-		this.color = FishGenerator.randColor();
 	}
-
-	public Color getColor() {
-		return color;
-	}
-
-	public void setColor(Color color) {
-		this.color = color;
-	}
-
+	
 	public void setWidth(int width) {
 		this.width = width;
 	}
@@ -77,15 +66,13 @@ public abstract class Fish implements Serializable {
 	@Override
 	public String toString() {
 		return "Fish [width=" + width + ", height=" + height + ", x=" + x
-				+ ", y=" + y + ", vx=" + vx + ", vy=" + vy + ", color=" + color
-				+ "]";
+				+ ", y=" + y + ", vx=" + vx + ", vy=" + vy + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((color == null) ? 0 : color.hashCode());
 		result = prime * result + height;
 		long temp;
 		temp = Double.doubleToLongBits(vx);
@@ -109,11 +96,6 @@ public abstract class Fish implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Fish other = (Fish) obj;
-		if (color == null) {
-			if (other.color != null)
-				return false;
-		} else if (!color.equals(other.color))
-			return false;
 		if (height != other.height)
 			return false;
 		if (Double.doubleToLongBits(vx) != Double.doubleToLongBits(other.vx))
@@ -238,7 +220,6 @@ public abstract class Fish implements Serializable {
 	}
 
 	public void paint(Graphics g) {
-		g.setColor(color);
 		int xcenter = (int) getXCenter();
 		int ycenter = (int) getYCenter();
 		g.translate(xcenter, ycenter);
