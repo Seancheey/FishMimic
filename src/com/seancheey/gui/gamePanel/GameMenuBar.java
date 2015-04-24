@@ -113,7 +113,11 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 				break;
 			case "Reset window size":
 				// unimplemented
-				JOptionPane.showMessageDialog(this, "Sorry, this function is not implemented yet. Follow the developer to get updates. ", "Error", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane
+						.showMessageDialog(
+								this,
+								"Sorry, this function is not implemented yet. Follow the developer to get updates. ",
+								"Error", JOptionPane.INFORMATION_MESSAGE);
 				break;
 			case "About":
 				Main.controlFrame.setJMenuBar(null);

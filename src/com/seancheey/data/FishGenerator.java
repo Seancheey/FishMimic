@@ -1,6 +1,5 @@
 package com.seancheey.data;
 
-import java.awt.Color;
 import java.io.Serializable;
 
 import com.seancheey.Main;
@@ -28,22 +27,22 @@ public class FishGenerator implements Serializable {
 		switch (new java.util.Random().nextInt(fishTypeNum)) {
 		case 0:
 			return new RectFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x, y, randV(5),
-					randV(5), pond, randColor());
+					randV(5), pond);
 		case 1:
 			return new RoundFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x, y, randV(5),
-					randV(5), pond, randColor());
+					randV(5), pond);
 		case 2:
 			return new RainbowFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x, y,
-					randV(5), randV(5), pond, randColor());
+					randV(5), randV(5), pond);
 		case 3:
 			return new MaoFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x, y, randV(5),
-					randV(5), pond, randColor());
+					randV(5), pond);
 		case 4:
 			return new GuideFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x, y, randV(5),
-					randV(5), pond, randColor());
+					randV(5), pond);
 		case 5:
 			return new FollowerFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x, y,
-					randV(5), randV(5), pond, randColor());
+					randV(5), randV(5), pond);
 		}
 		return null;
 	}
@@ -53,20 +52,20 @@ public class FishGenerator implements Serializable {
 	}
 
 	public Fish generate(String type, int width, int height, double x,
-			double y, double vx, double vy, Color color) {
+			double y, double vx, double vy) {
 		switch (type) {
 		case "RectFish":
-			return new RectFish(width, height, x, y, vx, vy, pond, color);
+			return new RectFish(width, height, x, y, vx, vy, pond);
 		case "RoundFish":
-			return new RoundFish(width, height, x, y, vx, vy, pond, color);
+			return new RoundFish(width, height, x, y, vx, vy, pond);
 		case "FollowerFish":
-			return new FollowerFish(width, height, x, y, vx, vy, pond, color);
+			return new FollowerFish(width, height, x, y, vx, vy, pond);
 		case "GuideFish":
-			return new GuideFish(width, height, x, y, vx, vy, pond, color);
+			return new GuideFish(width, height, x, y, vx, vy, pond);
 		case "MaoFish":
-			return new MaoFish(width, height, x, y, vx, vy, pond, color);
+			return new MaoFish(width, height, x, y, vx, vy, pond);
 		case "RainbowFish":
-			return new RainbowFish(width, height, x, y, vx, vy, pond, color);
+			return new RainbowFish(width, height, x, y, vx, vy, pond);
 		default:
 			throw new IllegalArgumentException("Fish type mismatch! :" + type);
 		}
@@ -82,12 +81,5 @@ public class FishGenerator implements Serializable {
 
 	public static final double randV(double range) {
 		return Math.random() * range * 2 - range;
-	}
-
-	public static final Color randColor() {
-		int r = (int) (Math.random() * 256);
-		int g = (int) (Math.random() * 256);
-		int b = (int) (Math.random() * 256);
-		return new Color(r, g, b);
 	}
 }

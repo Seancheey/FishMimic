@@ -55,7 +55,7 @@ public abstract class FishSelectPanel extends JPanel implements ActionListener,
 				super(arg);
 				setHorizontalAlignment(SwingConstants.RIGHT);
 			}
-			
+
 		}
 		labels.add(new RightLabel("width   "));
 		labels.add(new RightLabel("height   "));
@@ -63,9 +63,6 @@ public abstract class FishSelectPanel extends JPanel implements ActionListener,
 		labels.add(new RightLabel("position-y   "));
 		labels.add(new RightLabel("speed-x   "));
 		labels.add(new RightLabel("speed-y   "));
-		labels.add(new RightLabel("color-r   "));
-		labels.add(new RightLabel("color-g   "));
-		labels.add(new RightLabel("color-b   "));
 		labels.add(new RightLabel("number   "));
 		// unify and add all to the panel
 		for (int i = 0; i < labels.size(); i++) {
@@ -80,17 +77,13 @@ public abstract class FishSelectPanel extends JPanel implements ActionListener,
 		fields.get(3).setEditable(false);
 		fields.get(4).setEditable(false);
 		fields.get(5).setEditable(false);
-		fields.get(6).setEditable(false);
-		fields.get(7).setEditable(false);
-		fields.get(8).setEditable(false);
 		// default value for width and height
 		fields.get(0).setText("80");
 		fields.get(1).setText("40");
-		fields.get(9).setText("50");
+		fields.get(6).setText("50");
 		// the check box of fast creation
 		checks.add(new JCheckBox("random position"));
 		checks.add(new JCheckBox("random speed"));
-		checks.add(new JCheckBox("random color"));
 		// unify and add all to the panel and set default as true
 		for (JCheckBox checkBox : checks) {
 			checkBox.setFont(UNIFIED_FONT);
@@ -208,8 +201,7 @@ public abstract class FishSelectPanel extends JPanel implements ActionListener,
 				}
 				// create variables representing options of randomization
 				boolean randP = checks.get(0).isSelected(),
-				randV = checks.get(1).isSelected(),
-				randC = checks.get(2).isSelected();
+				randV = checks.get(1).isSelected();
 				// parameters of fish
 				int width = Integer.valueOf(fields.get(0).getText()),
 				height = Integer.valueOf(fields.get(1).getText()),
@@ -217,10 +209,7 @@ public abstract class FishSelectPanel extends JPanel implements ActionListener,
 				y = Integer.valueOf(fields.get(3).getText()),
 				vx = Integer.valueOf(fields.get(4).getText()),
 				vy = Integer.valueOf(fields.get(5).getText()),
-				cr = Integer.valueOf(fields.get(6).getText()),
-				cg = Integer.valueOf(fields.get(7).getText()),
-				cb = Integer.valueOf(fields.get(8).getText()),
-				createNum = Integer.valueOf(fields.get(9).getText());
+				createNum = Integer.valueOf(fields.get(6).getText());
 				// initialize a new pond if don't have one
 				if (pond == null)
 					pond = new Pond(getWidth(), getHeight());
@@ -234,9 +223,7 @@ public abstract class FishSelectPanel extends JPanel implements ActionListener,
 									randP ? FishGenerator.randX() : x,
 									randP ? FishGenerator.randY() : y,
 									randV ? FishGenerator.randV(5) : vx,
-									randV ? FishGenerator.randV(5) : vy,
-									randC ? FishGenerator.randColor()
-											: new Color(cr, cg, cb)));
+									randV ? FishGenerator.randV(5) : vy));
 				}
 				// switch to Pond panel
 				addAction();

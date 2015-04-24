@@ -94,7 +94,11 @@ public class Menu extends JPanel implements ActionListener {
 				break;
 			case "Read":
 				// unimplemented
-				JOptionPane.showMessageDialog(this, "Sorry, this function is not implemented yet. Follow the developer to get updates. ", "Error", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane
+						.showMessageDialog(
+								this,
+								"Sorry, this function is not implemented yet. Follow the developer to get updates. ",
+								"Error", JOptionPane.INFORMATION_MESSAGE);
 				break;
 			case "Credit":
 				Main.controlFrame.switchPanel(this, new CreditPanel());

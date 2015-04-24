@@ -1,6 +1,5 @@
 package com.seancheey.data;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.Serializable;
@@ -14,19 +13,7 @@ public abstract class Fish implements Serializable {
 	protected double x, y, vx, vy;// the location and velocity of fish1`
 	protected final Pond pond;// the container of fish
 
-	// List of constructor
-	public Fish(int width, int height, double x, double y, double vx,
-			double vy, Pond pond, Color color) {
-		super();
-		this.width = width;
-		this.height = height;
-		this.x = x;
-		this.y = y;
-		this.vx = vx;
-		this.vy = vy;
-		this.pond = pond;
-	}
-
+	// constructor
 	public Fish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond) {
 		super();
@@ -38,7 +25,7 @@ public abstract class Fish implements Serializable {
 		this.vy = vy;
 		this.pond = pond;
 	}
-	
+
 	public void setWidth(int width) {
 		this.width = width;
 	}

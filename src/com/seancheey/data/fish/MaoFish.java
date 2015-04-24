@@ -1,6 +1,5 @@
 package com.seancheey.data.fish;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -17,11 +16,6 @@ public class MaoFish extends Fish {
 	private static Image picture = ImagePond.get("fish - cat");
 	private int timeLeft = 20;
 	private Fish aim;
-
-	public MaoFish(int width, int height, double x, double y, double vx,
-			double vy, Pond pond, Color color) {
-		super(width, height, x, y, vx, vy, pond, color);
-	}
 
 	public MaoFish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond) {

@@ -1,6 +1,5 @@
 package com.seancheey.data.fish;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -20,11 +19,6 @@ public class RectFish extends Fish {
 	public RectFish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond) {
 		super(width, height, x, y, vx, vy, pond);
-	}
-
-	public RectFish(int width, int height, double x, double y, double vx,
-			double vy, Pond pond, Color color) {
-		super(width, height, x, y, vx, vy, pond, color);
 	}
 
 	@Override
