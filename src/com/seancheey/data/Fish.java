@@ -144,22 +144,6 @@ public abstract class Fish implements Serializable {
 
 	// ***Main Algorithm is here!!!***
 	protected void perform() {
-		// // detect collision with other fish
-		// for (Fish fish : getPond().getFishes()) {
-		// if (isCollidedBy(fish)) {
-		// if (fish != this) {
-		// // run operation
-		// // change the velocity of two fish
-		// double tempVx, tempVy;
-		// tempVx = fish.getVx();
-		// tempVy = fish.getVy();
-		// fish.setVx(vx);
-		// fish.setVy(vy);
-		// vx = tempVx;
-		// vy = tempVy;
-		// }
-		// }
-		// }
 		// to prevent the ball from sticking into wall
 		if (x > getPond().getWidth()) {
 			x = getPond().getWidth() - width;
