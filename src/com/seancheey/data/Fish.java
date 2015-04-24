@@ -14,6 +14,7 @@ public abstract class Fish implements Serializable {
 	protected double x, y, vx, vy;// the location and velocity of fish1`
 	protected final Pond pond;// the container of fish
 	protected transient Image image;// the image of the fish
+	protected boolean immobilized = false;// if the fish is fixed
 
 	// constructor
 	public Fish(int width, int height, double x, double y, double vx,
@@ -51,6 +52,10 @@ public abstract class Fish implements Serializable {
 
 	public void setVy(double vy) {
 		this.vy = vy;
+	}
+
+	public void setFixed(boolean value) {
+		immobilized = value;
 	}
 
 	@Override
@@ -162,8 +167,10 @@ public abstract class Fish implements Serializable {
 			vy = -vy;
 		}
 		// have a move
-		x += vx;
-		y += vy;
+		if (!immobilized) {
+			x += vx;
+			y += vy;
+		}
 	}
 
 	public void trackOnce(Fish fish) {
@@ -176,9 +183,12 @@ public abstract class Fish implements Serializable {
 		} else {
 			vangle = (vangle + aimangle) / 2;
 		}
-		// use mean velocity
-		double v = getVelocity(), diffv = fish.getVelocity();
-		v = (v + diffv) / 2;
+		// use mean velocity is not fixed
+		double v = getVelocity();
+		if (immobilized == false) {
+			double diffv = fish.getVelocity();
+			v = (v + diffv) / 2;
+		}
 		// set vx and vy
 		vx = Math.cos(vangle) * v;
 		vy = Math.sin(vangle) * v;

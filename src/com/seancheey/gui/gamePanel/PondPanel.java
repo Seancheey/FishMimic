@@ -80,18 +80,21 @@ public class PondPanel extends JPanel implements MouseListener,
 	@Override
 	public void mousePressed(MouseEvent e) {
 		draggedFish = pond.getFishAt(e.getX(), e.getY());
+		if (draggedFish != null)
+			draggedFish.setFixed(true);
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		draggedFish = null;
+		if (draggedFish != null) {
+			draggedFish.setFixed(false);
+			draggedFish = null;
+		}
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if (draggedFish != null) {
-			draggedFish.setVx(0);
-			draggedFish.setVy(0);
 			draggedFish.setX(e.getX() - draggedFish.getWidth() / 2);
 			draggedFish.setY(e.getY() - draggedFish.getHeight() / 2);
 		}
