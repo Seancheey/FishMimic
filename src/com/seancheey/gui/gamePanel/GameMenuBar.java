@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.seancheey.Main;
@@ -39,19 +38,23 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 		this.gamePanel = gamePanel;
 		setBackground(Color.WHITE);
 		// set the menus
+		menus.add(new JMenu("File"));
 		menus.add(new JMenu("Edit"));
-		menus.add(new JMenu("Window"));
 		menus.add(new JMenu("Help"));
 		for (JMenu menu : menus) {
 			menu.setFont(UNIFIED_FONT);
 			menu.setBackground(Color.WHITE);
 		}
 		// set the menu items
+		items.add(new JMenuItem("Save process"));
+		items.add(new JMenuItem("Read process"));
+
 		items.add(new JMenuItem("Add new fish"));
 		items.add(new JMenuItem("Reset all fishes"));
 		items.add(new JMenuItem("Remove all fishes"));
-		items.add(new JMenuItem("Reset window size"));
+
 		items.add(new JMenuItem("About"));
+
 		for (JMenuItem item : items) {
 			item.addActionListener(this);
 			item.setFont(UNIFIED_FONT);
@@ -59,9 +62,10 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 		// add items to menus
 		menus.get(0).add(items.get(0));
 		menus.get(0).add(items.get(1));
-		menus.get(0).add(items.get(2));
+		menus.get(1).add(items.get(2));
 		menus.get(1).add(items.get(3));
-		menus.get(2).add(items.get(4));
+		menus.get(1).add(items.get(4));
+		menus.get(2).add(items.get(5));
 
 		// add menus to the bar
 		for (JMenu menu : menus) {
@@ -110,14 +114,6 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 				break;
 			case "Remove all fishes":
 				pond.getFishes().clear();
-				break;
-			case "Reset window size":
-				// unimplemented
-				JOptionPane
-						.showMessageDialog(
-								this,
-								"Sorry, this function is not implemented yet. Follow the developer to get updates. ",
-								"Error", JOptionPane.INFORMATION_MESSAGE);
 				break;
 			case "About":
 				Main.controlFrame.setJMenuBar(null);
