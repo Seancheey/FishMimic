@@ -13,6 +13,10 @@ public class ImagePond {
 		put("fish - cat", "res/fish/github.png");
 		put("fish - redfish", "res/fish/red fish.png");
 		put("fish - yellowfish", "res/fish/yellow fish.png");
+		put("fish - greenfish", "res/fish/green fish.png");
+		put("fish - bluefish", "res/fish/blue fish.png");
+		put("fish - brownfish1", "res/fish/brown fish 1.png");
+		put("fish - brownfish2", "res/fish/brown fish 2.png");
 	}
 
 	public static boolean init() {

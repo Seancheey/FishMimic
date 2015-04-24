@@ -2,9 +2,11 @@ package com.seancheey.data.fish;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Polygon;
 
 import com.seancheey.data.Fish;
+import com.seancheey.data.ImagePond;
 import com.seancheey.data.Pond;
 
 public class RainbowFish extends Fish {
@@ -14,6 +16,8 @@ public class RainbowFish extends Fish {
 	 */
 	private static final long serialVersionUID = 1L;
 	private transient Fish aim;
+	private transient static final Image picture = ImagePond
+			.get("fish - brownfish1");
 
 	public RainbowFish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond, Color color) {
@@ -56,8 +60,6 @@ public class RainbowFish extends Fish {
 	 */
 	@Override
 	protected void drawShape(Graphics g) {
-		g.fillPolygon(new Polygon(new int[] { width, 0, 0 }, new int[] { 0,
-				height / 2, -height / 2 }, 3));
+		g.drawImage(picture,-width/2,-height/2,width,height,null);
 	}
-
 }
