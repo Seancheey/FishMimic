@@ -46,6 +46,11 @@ public abstract class FishSelectPanel extends JPanel implements ActionListener,
 		this.pond = pond;
 		// the tags of all parameters received
 		class RightLabel extends JLabel {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 7786963310578431159L;
+
 			public RightLabel(String arg) {
 				super(arg);
 				setHorizontalAlignment(SwingConstants.RIGHT);
