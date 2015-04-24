@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import com.seancheey.data.FishGenerator;
 import com.seancheey.data.Pond;
@@ -44,16 +45,23 @@ public abstract class FishSelectPanel extends JPanel implements ActionListener,
 	public FishSelectPanel(Pond pond) {
 		this.pond = pond;
 		// the tags of all parameters received
-		labels.add(new JLabel("width"));
-		labels.add(new JLabel("height"));
-		labels.add(new JLabel("position-x"));
-		labels.add(new JLabel("position-y"));
-		labels.add(new JLabel("speed-x"));
-		labels.add(new JLabel("speed-y"));
-		labels.add(new JLabel("color-r"));
-		labels.add(new JLabel("color-g"));
-		labels.add(new JLabel("color-b"));
-		labels.add(new JLabel("number"));
+		class RightLabel extends JLabel {
+			public RightLabel(String arg) {
+				super(arg);
+				setHorizontalAlignment(SwingConstants.RIGHT);
+			}
+			
+		}
+		labels.add(new RightLabel("width   "));
+		labels.add(new RightLabel("height   "));
+		labels.add(new RightLabel("position-x   "));
+		labels.add(new RightLabel("position-y   "));
+		labels.add(new RightLabel("speed-x   "));
+		labels.add(new RightLabel("speed-y   "));
+		labels.add(new RightLabel("color-r   "));
+		labels.add(new RightLabel("color-g   "));
+		labels.add(new RightLabel("color-b   "));
+		labels.add(new RightLabel("number   "));
 		// unify and add all to the panel
 		for (int i = 0; i < labels.size(); i++) {
 			fields.add(new JTextField("0", 3));
