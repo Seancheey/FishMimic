@@ -19,10 +19,8 @@ import javax.swing.SwingConstants;
 
 import com.seancheey.data.FishGenerator;
 import com.seancheey.data.Pond;
-import com.seancheey.gui.fishSelectPanel.PondGetter;
 
-public abstract class FishSelectPanel extends JPanel implements ActionListener,
-		PondGetter {
+public abstract class FishSelectPanel extends JPanel implements ActionListener {
 
 	/**
 	 * 
@@ -276,7 +274,6 @@ public abstract class FishSelectPanel extends JPanel implements ActionListener,
 
 	public abstract void backAction();
 
-	@Override
 	public Pond getPond() {
 		return pond;
 	}
