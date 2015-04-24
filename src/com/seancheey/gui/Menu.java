@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.seancheey.Main;
@@ -93,6 +94,7 @@ public class Menu extends JPanel implements ActionListener {
 				break;
 			case "Read":
 				// unimplemented
+				JOptionPane.showMessageDialog(this, "Sorry, this function is not implemented yet. Follow the developer to get updates. ", "Error", JOptionPane.INFORMATION_MESSAGE);
 				break;
 			case "Credit":
 				Main.controlFrame.switchPanel(this, new CreditPanel());
