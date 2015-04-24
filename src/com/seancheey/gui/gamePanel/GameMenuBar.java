@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.seancheey.Main;
@@ -47,10 +48,10 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 		}
 		// set the menu items
 		items.add(new JMenuItem("Add new fish"));
-		items.add(new JMenuItem("Reset all v and p"));
-		items.add(new JMenuItem("Remove all"));
+		items.add(new JMenuItem("Reset all fishes"));
+		items.add(new JMenuItem("Remove all fishes"));
 		items.add(new JMenuItem("Reset window size"));
-		items.add(new JMenuItem("Credit"));
+		items.add(new JMenuItem("About"));
 		for (JMenuItem item : items) {
 			item.addActionListener(this);
 			item.setFont(UNIFIED_FONT);
@@ -99,7 +100,7 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 					}
 				});
 				break;
-			case "Reset all v and p":
+			case "Reset all fishes":
 				for (Fish fish : pond.getFishes()) {
 					fish.setX(FishGenerator.randX());
 					fish.setY(FishGenerator.randY());
@@ -107,13 +108,14 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 					fish.setVy(FishGenerator.randV(5));
 				}
 				break;
-			case "Remove all":
+			case "Remove all fishes":
 				pond.getFishes().clear();
 				break;
 			case "Reset window size":
 				// unimplemented
+				JOptionPane.showMessageDialog(this, "Sorry, this function is not implemented yet. Follow the developer to get updates. ", "Error", JOptionPane.INFORMATION_MESSAGE);
 				break;
-			case "Credit":
+			case "About":
 				Main.controlFrame.setJMenuBar(null);
 				Main.controlFrame.switchPanel(gamePanel, new CreditPanel());
 
