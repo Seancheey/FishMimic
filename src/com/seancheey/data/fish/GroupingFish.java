@@ -18,7 +18,7 @@ public abstract class GroupingFish extends Fish {
 	// Constructor
 	public GroupingFish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond) {
-		super(width, height, x, y, vx, vy, pond);
+		super(width, height, x, y, vx, vy, pond, null);
 	}
 
 	/*

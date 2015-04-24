@@ -1,7 +1,6 @@
 package com.seancheey.data.fish;
 
 import java.awt.Graphics;
-import java.awt.Image;
 
 import com.seancheey.data.Fish;
 import com.seancheey.data.ImagePond;
@@ -13,12 +12,11 @@ public class RectFish extends Fish {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private transient static final Image image = ImagePond
-			.get("fish - yellowfish");
 
 	public RectFish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond) {
-		super(width, height, x, y, vx, vy, pond);
+		super(width, height, x, y, vx, vy, pond, ImagePond
+				.get("fish - yellowfish"));
 	}
 
 	@Override

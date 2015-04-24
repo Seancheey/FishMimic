@@ -2,6 +2,7 @@ package com.seancheey.data;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.io.Serializable;
 
 public abstract class Fish implements Serializable {
@@ -12,10 +13,11 @@ public abstract class Fish implements Serializable {
 	protected int width, height;// the size of fish
 	protected double x, y, vx, vy;// the location and velocity of fish1`
 	protected final Pond pond;// the container of fish
+	protected transient Image image;// the image of the fish
 
 	// constructor
 	public Fish(int width, int height, double x, double y, double vx,
-			double vy, Pond pond) {
+			double vy, Pond pond, Image image) {
 		super();
 		this.width = width;
 		this.height = height;
@@ -24,6 +26,7 @@ public abstract class Fish implements Serializable {
 		this.vx = vx;
 		this.vy = vy;
 		this.pond = pond;
+		this.image = image;
 	}
 
 	public void setWidth(int width) {
