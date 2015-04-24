@@ -35,10 +35,10 @@ public class CreditPanel extends JPanel implements ActionListener {
 		labels.add(new JLabel("MaomiHz"));
 		labels.add(new JLabel("Contact:"));
 		labels.add(new JLabel("adls371@163.com"));
-		labels.add(new JLabel("github.com/Seancheey"));
-		labels.add(new JLabel("github.com/MaomiHz"));
-		labels.add(new JLabel("maomihz.com"));
-		labels.add(new JLabel("amao.ninja"));
+		labels.add(new JLabel("https://github.com/Seancheey"));
+		labels.add(new JLabel("https://github.com/MaomiHz"));
+		labels.add(new JLabel("http://maomihz.com"));
+		labels.add(new JLabel("http://amao.ninja"));
 		for (JLabel label : labels) {
 			label.setAlignmentX(CENTER_ALIGNMENT);
 			label.setFont(UNIFIED_FONT);
