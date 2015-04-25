@@ -1,5 +1,6 @@
 package com.seancheey.data.fish;
 
+import com.seancheey.data.FishGenerator;
 import com.seancheey.data.Pond;
 
 public class GuideFish extends GroupingFish {
@@ -8,6 +9,8 @@ public class GuideFish extends GroupingFish {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private int timeLeft = (int) (Math.random() * 20);
+	private int aimX = FishGenerator.randX(), aimY = FishGenerator.randY();
 
 	public GuideFish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond) {
@@ -17,14 +20,12 @@ public class GuideFish extends GroupingFish {
 	@Override
 	protected void perform() {
 		super.perform();
-		// change v randomly
-		if (Math.random() < 0.005) {
-			vx *= Math.random() * 2 - 1;
+		if (timeLeft < 0) {
+			aimX = FishGenerator.randX();
+			aimY = FishGenerator.randY();
+			timeLeft = (int) (Math.random() * 20);
 		}
-		if (Math.random() < 0.005) {
-			vy *= Math.random() * 2 - 1;
-		}
-		vx += Math.random() - 0.5;
-		vy += Math.random() - 0.5;
+		trackOnce(aimX, aimY);
+		timeLeft--;
 	}
 }

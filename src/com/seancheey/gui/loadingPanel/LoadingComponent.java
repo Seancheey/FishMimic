@@ -36,7 +36,13 @@ public class LoadingComponent extends JComponent {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawArc(0, 0, width, height, 0, (int) (360 * mainProgress));
-		repaint();
+		g.drawArc(0, 0, width, height, 0, (int) (360 * subProgress));
+		try {
+			Thread.sleep(1);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	repaint();
 	}
 
 	public void resetLoadingComponent(double mainProgress) {

@@ -174,7 +174,7 @@ public abstract class Fish implements Serializable {
 	}
 
 	public void trackOnce(Fish fish) {
-		// ues mean angle
+		// use mean angle
 		double diffx = fish.getX() - x, diffy = fish.getY() - y;
 		double vangle = Math.atan2(vy, vx), aimangle = Math.atan2(diffy, diffx);
 		double diffangle = Math.abs(vangle - aimangle);
@@ -192,6 +192,21 @@ public abstract class Fish implements Serializable {
 		// set vx and vy
 		vx = Math.cos(vangle) * v;
 		vy = Math.sin(vangle) * v;
+	}
+
+	public void trackOnce(double px, double py) {
+		// use mean angle
+		double diffx = px - x, diffy = py - y;
+		double vangle = Math.atan2(vy, vx), aimangle = Math.atan2(diffy, diffx);
+		double diffangle = Math.abs(vangle - aimangle);
+		if (diffangle > Math.PI) {
+			vangle = (vangle + aimangle) / 2 + Math.PI;
+		} else {
+			vangle = (vangle + aimangle) / 2;
+		}
+		// set vx and vy
+		vx = Math.cos(vangle) * getVelocity();
+		vy = Math.sin(vangle) * getVelocity();
 	}
 
 	public boolean isCollidedBy(Fish fish) {
