@@ -15,6 +15,7 @@ public abstract class Fish implements Serializable {
 	protected final Pond pond;// the container of fish
 	protected transient Image image;// the image of the fish
 	protected boolean immobilized = false;// if the fish is fixed
+	private double shearTime = Math.random() * 10, shearY;
 
 	// constructor
 	public Fish(int width, int height, double x, double y, double vx,
@@ -171,6 +172,9 @@ public abstract class Fish implements Serializable {
 			x += vx;
 			y += vy;
 		}
+		// calculate the shear
+		shearY = Math.sin(shearTime) * 0.25;
+		shearTime += getVelocity() / 15;
 	}
 
 	public void trackOnce(Fish fish) {
@@ -224,9 +228,11 @@ public abstract class Fish implements Serializable {
 		g.translate(xcenter, ycenter);
 		Graphics2D g2 = (Graphics2D) g;
 		double angle = Math.atan2(vy, vx);
+		g2.shear(0, shearY);
 		g2.rotate(angle);
 		drawShape(g);
 		g2.rotate(-angle);
+		g2.shear(0, -shearY);
 		g.translate(-xcenter, -ycenter);
 	}
 

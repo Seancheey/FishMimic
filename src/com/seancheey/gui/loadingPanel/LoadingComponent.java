@@ -42,7 +42,7 @@ public class LoadingComponent extends JComponent {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-	repaint();
+		repaint();
 	}
 
 	public void resetLoadingComponent(double mainProgress) {
