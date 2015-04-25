@@ -8,12 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -27,48 +26,35 @@ public abstract class FishSelectPanel extends JPanel implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	// unified font for all components
-	private static final Font UNIFIED_FONT = new Font("serif", Font.PLAIN, 30);
+	private static final Font UNIFIED_FONT = new Font("serif", Font.PLAIN, 25);
 	// all of the components contained in the panel
 	private ArrayList<JLabel> labels = new ArrayList<JLabel>();
 	private ArrayList<JTextField> fields = new ArrayList<JTextField>();
 	private ArrayList<JCheckBox> checks = new ArrayList<JCheckBox>();
-	private ArrayList<JRadioButton> radios = new ArrayList<JRadioButton>();
 	private ArrayList<JButton> buttons = new ArrayList<JButton>();
-	// button group to bind radio buttons
-	private ButtonGroup typeGroup = new ButtonGroup();
+	private ArrayList<String> fishTypes = new ArrayList<String>();
+	private JComboBox<String> comboBox = new JComboBox<>();
 	// the pond that created fish will be added to
 	private Pond pond;
 
 	// constructor
 	public FishSelectPanel(Pond pond) {
 		this.pond = pond;
-		// the tags of all parameters received
-		class RightLabel extends JLabel {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 7786963310578431159L;
-
-			public RightLabel(String arg) {
-				super(arg);
-				setHorizontalAlignment(SwingConstants.RIGHT);
-			}
-
-		}
-		labels.add(new RightLabel("width   "));
-		labels.add(new RightLabel("height   "));
-		labels.add(new RightLabel("position-x   "));
-		labels.add(new RightLabel("position-y   "));
-		labels.add(new RightLabel("speed-x   "));
-		labels.add(new RightLabel("speed-y   "));
-		labels.add(new RightLabel("number   "));
+		labels.add(new JLabel("width"));
+		labels.add(new JLabel("height"));
+		labels.add(new JLabel("position-x"));
+		labels.add(new JLabel("position-y"));
+		labels.add(new JLabel("speed-x"));
+		labels.add(new JLabel("speed-y"));
+		labels.add(new JLabel("number"));
 		// unify and add all to the panel
 		for (int i = 0; i < labels.size(); i++) {
-			fields.add(new JTextField("0", 3));
+			fields.add(new JTextField("0", 5));
 			labels.get(i).setFont(UNIFIED_FONT);
+			labels.get(i).setHorizontalAlignment(SwingConstants.RIGHT);
 			fields.get(i).setFont(UNIFIED_FONT);
-			this.add(labels.get(i));
-			this.add(fields.get(i));
+			add(labels.get(i));
+			add(fields.get(i));
 		}
 		// set default editable to some fields as false
 		fields.get(2).setEditable(false);
@@ -87,23 +73,21 @@ public abstract class FishSelectPanel extends JPanel implements ActionListener {
 			checkBox.setFont(UNIFIED_FONT);
 			checkBox.addActionListener(this);
 			checkBox.setSelected(true);
-			this.add(checkBox);
+			add(checkBox);
 		}
-		// the radio buttons of the type available for selection
-		radios.add(new JRadioButton("Rectangular Fish"));
-		radios.add(new JRadioButton("Round Fish"));
-		radios.add(new JRadioButton("Follower Fish"));
-		radios.add(new JRadioButton("Guider Fish"));
-		radios.add(new JRadioButton("Cat Fish"));
-		radios.add(new JRadioButton("Rainbow Fish"));
+		// the combo box of the type available for selection
+		fishTypes.add("Rectangular Fish");
+		fishTypes.add("Round Fish");
+		fishTypes.add("Follower Fish");
+		fishTypes.add("Guider Fish");
+		fishTypes.add("Cat Fish");
+		fishTypes.add("Rainbow Fish");
 		// unify and add all to the panel and a single button group
-		for (JRadioButton radio : radios) {
-			radio.setFont(UNIFIED_FONT);
-			typeGroup.add(radio);
-			this.add(radio);
+		for (String fishType : fishTypes) {
+			comboBox.setFont(UNIFIED_FONT);
+			comboBox.addItem(fishType);
 		}
-		// set a default value
-		radios.get(0).setSelected(true);
+		add(comboBox);
 		// the buttons of all in the panel
 		buttons.add(new JButton("Add"));
 		buttons.add(new JButton("Back"));
@@ -121,7 +105,7 @@ public abstract class FishSelectPanel extends JPanel implements ActionListener {
 		// create grid bag layout
 		GridBagLayout layout = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
-		c.fill = GridBagConstraints.HORIZONTAL;
+		c.fill = GridBagConstraints.NONE;
 		c.gridheight = 1;
 		c.weightx = 1;
 		c.weighty = 1;
@@ -147,12 +131,9 @@ public abstract class FishSelectPanel extends JPanel implements ActionListener {
 			layout.setConstraints(checks.get(i), c);
 		}
 		// set layout for radio buttons
-		for (int i = 0; i < radios.size(); i++) {
-			c.gridwidth = 1;
-			if (i % 4 == 3 || i == radios.size() - 1)
-				c.gridwidth = 0;
-			layout.setConstraints(radios.get(i), c);
-		}
+
+		layout.setConstraints(comboBox, c);
+
 		// set layout for buttons
 		for (int i = 0; i < buttons.size(); i++) {
 			c.gridwidth = 1;
@@ -166,16 +147,10 @@ public abstract class FishSelectPanel extends JPanel implements ActionListener {
 			switch (((JButton) a.getSource()).getText()) {
 			case "Add":
 				// find the selected type of fish
-				JRadioButton selected = null;
-				for (int i = 0; i < radios.size(); i++) {
-					if (radios.get(i).isSelected()) {
-						selected = radios.get(i);
-						break;
-					}
-				}
+				String selected = comboBox.getSelectedItem().toString();
 				// convert the selected type to fit type in Fish Generator
 				String type;
-				switch (selected.getText()) {
+				switch (selected) {
 				case "Rectangular Fish":
 					type = "RectFish";
 					break;
