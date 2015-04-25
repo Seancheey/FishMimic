@@ -1,5 +1,7 @@
 package com.seancheey.data.fish;
 
+import java.awt.Image;
+
 import com.seancheey.data.Fish;
 import com.seancheey.data.ImagePond;
 import com.seancheey.data.Pond;
@@ -37,5 +39,10 @@ public class RoundFish extends Fish {
 	@Override
 	protected Fish clone() {
 		return new RoundFish(width, height, x, y, vx, vy, pond);
+	}
+
+	@Override
+	protected Image fetchLostImage() {
+		return ImagePond.get("fish - bluefish");
 	}
 }

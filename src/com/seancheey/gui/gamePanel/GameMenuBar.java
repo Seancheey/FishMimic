@@ -4,8 +4,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -87,11 +93,53 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 		Main.controlFrame.switchPanel(gamePanel, panel);
 	}
 
+	private void popSaveDialog() {
+		JFileChooser fileChooser = new JFileChooser("dat");
+		fileChooser.showSaveDialog(gamePanel);
+		File file = fileChooser.getSelectedFile();
+		if (file != null) {
+			try {
+				FileOutputStream fileout = new FileOutputStream(file);
+				ObjectOutputStream objout = new ObjectOutputStream(fileout);
+				objout.writeObject(pond);
+				fileout.close();
+				objout.close();
+			} catch (Exception e) {
+			}
+		}
+	}
+
+	private void popReadDialog() {
+		JFileChooser fileChooser = new JFileChooser("dat");
+		fileChooser.showOpenDialog(gamePanel);
+		File file = fileChooser.getSelectedFile();
+		if (file != null) {
+			try {
+				FileInputStream filein = new FileInputStream(file);
+				ObjectInputStream objin = new ObjectInputStream(filein);
+				Object p = objin.readObject();
+				if (p instanceof Pond) {
+					pond = (Pond) p;
+					gamePanel.getPondPanel().setPond(pond);
+				}
+				filein.close();
+				objin.close();
+			} catch (Exception e) {
+			}
+		}
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent a) {
 		if (a.getSource() instanceof JMenuItem) {
 			JMenuItem item = (JMenuItem) a.getSource();
 			switch (item.getText()) {
+			case "Save process...":
+				popSaveDialog();
+				break;
+			case "Read process...":
+				popReadDialog();
+				break;
 			case "Exit...":
 				switchOutTo(new Menu());
 				break;

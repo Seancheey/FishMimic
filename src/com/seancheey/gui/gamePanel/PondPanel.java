@@ -23,7 +23,7 @@ public class PondPanel extends JPanel implements MouseListener,
 	// delay between every two refreshing event
 	private static int delay = 100;
 	// pond that contain all fishes
-	private final Pond pond;
+	private Pond pond;
 	// the background image
 	private transient Image background = ImagePond.get("background - sea");
 	// the fish that is being dragging
@@ -58,6 +58,21 @@ public class PondPanel extends JPanel implements MouseListener,
 			moveThread.interrupt();
 		} catch (Exception e) {
 		}
+	}
+
+	/**
+	 * @return the pond
+	 */
+	public Pond getPond() {
+		return pond;
+	}
+
+	/**
+	 * @param pond
+	 *            the pond to set
+	 */
+	public void setPond(Pond pond) {
+		this.pond = pond;
 	}
 
 	@Override

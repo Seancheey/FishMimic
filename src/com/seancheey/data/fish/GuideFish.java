@@ -1,5 +1,7 @@
 package com.seancheey.data.fish;
 
+import java.awt.Image;
+
 import com.seancheey.data.Fish;
 import com.seancheey.data.FishGenerator;
 import com.seancheey.data.Pond;
@@ -33,6 +35,11 @@ public class GuideFish extends GroupingFish {
 	@Override
 	protected Fish clone() {
 		return new GuideFish(width, height, x, y, vx, vy, pond);
+	}
+
+	@Override
+	protected Image fetchLostImage() {
+		return null;
 	}
 
 }

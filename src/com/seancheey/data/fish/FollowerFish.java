@@ -1,5 +1,6 @@
 package com.seancheey.data.fish;
 
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -62,6 +63,11 @@ public class FollowerFish extends GroupingFish {
 	@Override
 	protected Fish clone() {
 		return new FollowerFish(width, height, x, y, vx, vy, pond);
+	}
+
+	@Override
+	protected Image fetchLostImage() {
+		return null;
 	}
 
 }

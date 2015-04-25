@@ -182,21 +182,20 @@ public abstract class Fish implements Serializable {
 		// use mean angle
 		double diffx = fish.getX() - x, diffy = fish.getY() - y;
 		double vangle = Math.atan2(vy, vx), aimangle = Math.atan2(diffy, diffx);
-		double diffangle = Math.abs(vangle - aimangle);
-		if (diffangle > Math.PI) {
+		if (Math.abs(vangle - aimangle) > Math.PI) {
 			vangle = (vangle + aimangle) / 2 + Math.PI;
 		} else {
 			vangle = (vangle + aimangle) / 2;
 		}
-		// use mean velocity is not fixed
+		// use mean velocity if not fixed
 		double v = getVelocity();
 		if (immobilized == false) {
 			double diffv = fish.getVelocity();
 			v = (v + diffv) / 2;
+			// set vx and vy
+			vx = Math.cos(vangle) * v;
+			vy = Math.sin(vangle) * v;
 		}
-		// set vx and vy
-		vx = Math.cos(vangle) * v;
-		vy = Math.sin(vangle) * v;
 	}
 
 	public void trackOnce(double px, double py) {
@@ -242,8 +241,12 @@ public abstract class Fish implements Serializable {
 	}
 
 	protected void drawShape(Graphics g) {
+		if (image == null)
+			image = fetchLostImage();
 		g.drawImage(image, -width / 2, -height / 2, width, height, null);
 	}
+
+	protected abstract Image fetchLostImage();
 
 	/*
 	 * (non-Javadoc)
