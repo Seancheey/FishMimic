@@ -6,16 +6,20 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.seancheey.Main;
 import com.seancheey.data.ImagePond;
+import com.seancheey.data.Pond;
 
 public class Menu extends JPanel implements ActionListener {
 
@@ -77,12 +81,27 @@ public class Menu extends JPanel implements ActionListener {
 				Main.controlFrame.switchPanel(this, new GamePanel(null));
 				break;
 			case "Read Progress":
-				// unimplemented
-				JOptionPane
-						.showMessageDialog(
-								this,
-								"Sorry, this function is not implemented yet. Follow the developer to get updates. ",
-								"Error", JOptionPane.INFORMATION_MESSAGE);
+				JFileChooser fileChooser = new JFileChooser("dat");
+				fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				fileChooser.showOpenDialog(null);
+				fileChooser.setMultiSelectionEnabled(false);
+				fileChooser.setAcceptAllFileFilterUsed(false);
+				File file = fileChooser.getSelectedFile();
+				if (file != null) {
+					try {
+						FileInputStream filein = new FileInputStream(file);
+						ObjectInputStream objin = new ObjectInputStream(filein);
+						Object p = objin.readObject();
+						if (p instanceof Pond) {
+							Pond pond = (Pond) p;
+							Main.controlFrame.switchPanel(this, new GamePanel(
+									pond));
+						}
+						filein.close();
+						objin.close();
+					} catch (Exception e) {
+					}
+				}
 				break;
 			case "About us":
 				Main.controlFrame.switchPanel(this, new CreditPanel() {
