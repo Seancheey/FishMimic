@@ -28,7 +28,7 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 	private ArrayList<JMenu> menus = new ArrayList<JMenu>();
 	private ArrayList<JMenuItem> items = new ArrayList<JMenuItem>();
 	// unified font for all components
-	private static final Font UNIFIED_FONT = new Font("serif", Font.PLAIN, 25);
+	private static final Font UNIFIED_FONT = new Font("serif", Font.PLAIN, 22);
 	private Pond pond;
 	private JPanel gamePanel;
 
@@ -46,14 +46,14 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 			menu.setBackground(Color.WHITE);
 		}
 		// set the menu items
-		items.add(new JMenuItem("Save process"));
-		items.add(new JMenuItem("Read process"));
+		items.add(new JMenuItem("Save process..."));
+		items.add(new JMenuItem("Read process..."));
 
-		items.add(new JMenuItem("Add new fish"));
+		items.add(new JMenuItem("Add new fish..."));
 		items.add(new JMenuItem("Reset all fishes"));
 		items.add(new JMenuItem("Remove all fishes"));
 
-		items.add(new JMenuItem("About"));
+		items.add(new JMenuItem("About..."));
 
 		for (JMenuItem item : items) {
 			item.addActionListener(this);
@@ -78,7 +78,7 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 		if (a.getSource() instanceof JMenuItem) {
 			JMenuItem item = (JMenuItem) a.getSource();
 			switch (item.getText()) {
-			case "Add new fish":
+			case "Add new fish...":
 				// disable the menu bar
 				Main.controlFrame.setJMenuBar(null);
 				// switch the the fish selection panel
@@ -115,7 +115,7 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 			case "Remove all fishes":
 				pond.getFishes().clear();
 				break;
-			case "About":
+			case "About...":
 				Main.controlFrame.setJMenuBar(null);
 				Main.controlFrame.switchPanel(gamePanel, new CreditPanel() {
 
