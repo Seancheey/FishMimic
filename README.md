@@ -7,8 +7,11 @@ This program is written in Java.
 ## Summary
 
 Class Main is included in com.seancheey package.
+
 Class related to GUI is included in com.seancheey.gui package.
+
 Class related to Data is included in com.seancheey.data package.
+
 All the resources are in res folder
 
 ## Import into eclipse
@@ -18,6 +21,7 @@ To grab the latest source of the program, you should have __git__ and __jdk__ in
 Clone the project into eclipse's workspace using __https__ or __ssh__ if you like.  
  
 > git clone https://github.com/Seancheey/FishMimic.git
+
 > git clone https://git.coding.net/Seancheey/FishMimic.git
 
 2. Create a new project named _FishMimic_. 
