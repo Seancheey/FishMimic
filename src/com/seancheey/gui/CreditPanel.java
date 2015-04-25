@@ -11,9 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.seancheey.Main;
-
-public class CreditPanel extends JPanel implements ActionListener {
+public abstract class CreditPanel extends JPanel implements ActionListener {
 
 	/**
 	 * 
@@ -57,6 +55,8 @@ public class CreditPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		Main.controlFrame.switchPanel(this, new Menu());
+		backAction();
 	}
+
+	public abstract void backAction();
 }

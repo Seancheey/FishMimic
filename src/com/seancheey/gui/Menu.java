@@ -84,7 +84,18 @@ public class Menu extends JPanel implements ActionListener {
 								"Error", JOptionPane.INFORMATION_MESSAGE);
 				break;
 			case "About us":
-				Main.controlFrame.switchPanel(this, new CreditPanel());
+				Main.controlFrame.switchPanel(this, new CreditPanel() {
+
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					@Override
+					public void backAction() {
+						Main.controlFrame.switchPanel(this, new Menu());
+					}
+				});
 				break;
 			}
 		}

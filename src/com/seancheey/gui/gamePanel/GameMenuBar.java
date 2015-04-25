@@ -117,7 +117,19 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 				break;
 			case "About":
 				Main.controlFrame.setJMenuBar(null);
-				Main.controlFrame.switchPanel(gamePanel, new CreditPanel());
+				Main.controlFrame.switchPanel(gamePanel, new CreditPanel() {
+
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					@Override
+					public void backAction() {
+						Main.controlFrame
+								.switchPanel(this, new GamePanel(pond));
+					}
+				});
 
 				break;
 			default:
