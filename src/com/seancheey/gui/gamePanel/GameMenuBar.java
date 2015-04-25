@@ -95,7 +95,10 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 
 	private void popSaveDialog() {
 		JFileChooser fileChooser = new JFileChooser("dat");
+		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		fileChooser.showSaveDialog(gamePanel);
+		fileChooser.setMultiSelectionEnabled(false);
+		fileChooser.setAcceptAllFileFilterUsed(false);
 		File file = fileChooser.getSelectedFile();
 		if (file != null) {
 			try {
@@ -111,7 +114,10 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 
 	private void popReadDialog() {
 		JFileChooser fileChooser = new JFileChooser("dat");
+		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		fileChooser.showOpenDialog(gamePanel);
+		fileChooser.setMultiSelectionEnabled(false);
+		fileChooser.setAcceptAllFileFilterUsed(false);
 		File file = fileChooser.getSelectedFile();
 		if (file != null) {
 			try {
