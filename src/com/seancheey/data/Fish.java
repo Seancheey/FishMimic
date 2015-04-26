@@ -14,8 +14,25 @@ public abstract class Fish extends Entity implements Serializable {
 	protected transient Image image;// the image of the fish
 	protected boolean immobilized = false;// if the fish is fixed
 	private double energyUsed, shearY;
+	private final double matureWidth, matureHeight;
 
 	// constructor
+	public Fish(double width, double height, double x, double y, double vx,
+			double vy, Pond pond, Image image, double matureWidth,
+			double matureHeight) {
+		super();
+		this.width = width;
+		this.height = height;
+		this.x = x;
+		this.y = y;
+		this.vx = vx;
+		this.vy = vy;
+		this.pond = pond;
+		this.image = image;
+		this.matureWidth = matureHeight;
+		this.matureHeight = matureHeight;
+	}
+
 	public Fish(double width, double height, double x, double y, double vx,
 			double vy, Pond pond, Image image) {
 		super();
@@ -27,6 +44,8 @@ public abstract class Fish extends Entity implements Serializable {
 		this.vy = vy;
 		this.pond = pond;
 		this.image = image;
+		this.matureWidth = 150;
+		this.matureHeight = 75;
 	}
 
 	public void setFixed(boolean value) {
@@ -47,6 +66,15 @@ public abstract class Fish extends Entity implements Serializable {
 
 	// ***Main Algorithm is here!!!***
 	protected void perform() {
+		// grow a bit or die if mature
+		if (width < matureWidth)
+			width += Math.random() / 10;
+		else if (Math.random() < 0.01)
+			getPond().remove(this);
+		if (height < matureHeight)
+			height += Math.random() / 20;
+		else if (Math.random() < 0.01)
+			getPond().remove(this);
 		// to prevent the ball from sticking into wall
 		if (x > getPond().getWidth()) {
 			x = getPond().getWidth() - width;
@@ -73,10 +101,10 @@ public abstract class Fish extends Entity implements Serializable {
 		energyUsed += getVelocity() / 15;
 		// calculate the shear
 		shearY = Math.sin(energyUsed) * 0.25;
+
 		// propagate in a small probability
 		for (Fish f : pond.getFishes()) {
-			if (f.getClass().getName() == getClass().getName()
-					&& isCollidedBy(f)) {
+			if (isCollidedBy(f)) {
 				if (Math.random() < 0.001)
 					propagate();
 				break;
@@ -122,10 +150,12 @@ public abstract class Fish extends Entity implements Serializable {
 	public boolean isCollidedBy(Fish fish) {
 		if ((Math.abs(fish.getXCenter() - getXCenter()) <= (fish.getWidth() + width) / 2.0)
 				&& (Math.abs(fish.getYCenter() - getYCenter()) <= (fish
-						.getHeight() + height) / 2.0))
-			return true;
-		else
-			return false;
+						.getHeight() + height) / 2.0)) {
+			if (!fish.equals(this)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void propagate() {
