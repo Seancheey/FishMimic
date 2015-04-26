@@ -151,9 +151,7 @@ public abstract class Fish extends Entity implements Serializable {
 		if ((Math.abs(fish.getXCenter() - getXCenter()) <= (fish.getWidth() + width) / 2.0)
 				&& (Math.abs(fish.getYCenter() - getYCenter()) <= (fish
 						.getHeight() + height) / 2.0)) {
-			if (!fish.equals(this)) {
-				return true;
-			}
+			return true;
 		}
 		return false;
 	}

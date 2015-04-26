@@ -71,6 +71,10 @@ public class Pond implements Serializable {
 		return null;
 	}
 
+	public Fish getRandomFish() {
+		return fishes.get((int) (Math.random() * fishes.size()));
+	}
+
 	// list of setter
 	public synchronized void resize(Dimension dimension) {
 		width = dimension.width;

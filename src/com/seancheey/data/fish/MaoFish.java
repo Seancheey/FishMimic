@@ -26,8 +26,7 @@ public class MaoFish extends Fish {
 		// set new action after finish all action
 		if (timeLeft <= 0 || aim == null) {
 			timeLeft = (int) (Math.random() * 30);
-			aim = getPond().getFishes().get(
-					(int) (Math.random() * getPond().getFishes().size()));
+			aim = getPond().getRandomFish();
 		}
 		trackOnce(aim);
 		timeLeft--;
