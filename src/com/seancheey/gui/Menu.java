@@ -43,6 +43,7 @@ public class Menu extends JPanel implements ActionListener {
 				((JButton) c).setBackground(Color.WHITE);
 			} else if (c instanceof JLabel) {
 				((JLabel) c).setFont(UNIFIED_FONT);
+				((JLabel) c).setForeground(Color.MAGENTA);
 			}
 			c.setFocusable(false);
 			add(c);
