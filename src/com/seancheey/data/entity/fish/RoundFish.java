@@ -13,8 +13,8 @@ public class RoundFish extends Fish {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public RoundFish(double width, double height, double x, double y, double vx,
-			double vy, Pond pond) {
+	public RoundFish(double width, double height, double x, double y,
+			double vx, double vy, Pond pond) {
 		super(width, height, x, y, vx, vy, pond, ImagePond
 				.get("fish - bluefish"));
 	}

@@ -10,7 +10,6 @@ public abstract class Entity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected double width, height, x, y, vx, vy;// the location and velocity
 
-
 	/**
 	 * @return the width
 	 */
@@ -19,7 +18,8 @@ public abstract class Entity implements Serializable {
 	}
 
 	/**
-	 * @param width the width to set
+	 * @param width
+	 *            the width to set
 	 */
 	public void setWidth(double width) {
 		this.width = width;
@@ -33,7 +33,8 @@ public abstract class Entity implements Serializable {
 	}
 
 	/**
-	 * @param height the height to set
+	 * @param height
+	 *            the height to set
 	 */
 	public void setHeight(double height) {
 		this.height = height;
@@ -47,7 +48,8 @@ public abstract class Entity implements Serializable {
 	}
 
 	/**
-	 * @param x the x to set
+	 * @param x
+	 *            the x to set
 	 */
 	public void setX(double x) {
 		this.x = x;
@@ -61,7 +63,8 @@ public abstract class Entity implements Serializable {
 	}
 
 	/**
-	 * @param y the y to set
+	 * @param y
+	 *            the y to set
 	 */
 	public void setY(double y) {
 		this.y = y;
@@ -75,7 +78,8 @@ public abstract class Entity implements Serializable {
 	}
 
 	/**
-	 * @param vx the vx to set
+	 * @param vx
+	 *            the vx to set
 	 */
 	public void setVx(double vx) {
 		this.vx = vx;
@@ -89,7 +93,8 @@ public abstract class Entity implements Serializable {
 	}
 
 	/**
-	 * @param vy the vy to set
+	 * @param vy
+	 *            the vy to set
 	 */
 	public void setVy(double vy) {
 		this.vy = vy;

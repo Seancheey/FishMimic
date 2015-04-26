@@ -5,20 +5,14 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import com.seancheey.data.FishGenerator;
 import com.seancheey.data.ImagePond;
 import com.seancheey.data.Pond;
-import com.seancheey.data.entity.Fish;
 
-public class PondPanel extends JPanel implements MouseListener,
-		MouseMotionListener, ActionListener {
+public class PondPanel extends JPanel implements ActionListener {
 	/**
 	 * 
 	 */
@@ -29,8 +23,6 @@ public class PondPanel extends JPanel implements MouseListener,
 	private Pond pond;
 	// the background image
 	private transient Image background = ImagePond.get("background - sea");
-	// the fish that is being dragging
-	private Fish draggedFish = null;
 	// thread to operate fish's movement
 	private Timer timer = new Timer(delay, this);
 
@@ -38,8 +30,9 @@ public class PondPanel extends JPanel implements MouseListener,
 	public PondPanel(Pond pond) {
 		super();
 		this.pond = pond;
-		addMouseListener(this);
-		addMouseMotionListener(this);
+		FishMouseListener listener = new FishMouseListener(pond);
+		addMouseListener(listener);
+		addMouseMotionListener(listener);
 		timer.start();
 	}
 
@@ -80,61 +73,8 @@ public class PondPanel extends JPanel implements MouseListener,
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		if (e.getButton() == MouseEvent.BUTTON3)
-			pond.getFishes().add(
-					new FishGenerator(pond).generateRandom(e.getX()
-							- FishGenerator.DEFAULT_WIDTH / 2, e.getY()
-							- FishGenerator.DEFAULT_HEIGHT / 2));
-	}
-
-	@Override
 	public void update(Graphics g) {
 		paint(g);
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		if (e.getButton() == MouseEvent.BUTTON1) {
-			draggedFish = pond.getFishAt(e.getX(), e.getY());
-			if (draggedFish != null)
-				draggedFish.setFixed(true);
-		}
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		if (e.getButton() == MouseEvent.BUTTON1) {
-			if (draggedFish != null) {
-				draggedFish.setFixed(false);
-				draggedFish.setVx(0);
-				draggedFish.setVy(0);
-				draggedFish = null;
-			}
-		}
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		if (draggedFish != null) {
-			draggedFish.setX(e.getX() - draggedFish.getWidth() / 2);
-			draggedFish.setY(e.getY() - draggedFish.getHeight() / 2);
-		}
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-
 	}
 
 	@Override
