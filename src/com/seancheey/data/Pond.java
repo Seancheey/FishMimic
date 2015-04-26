@@ -30,11 +30,12 @@ public class Pond implements Serializable {
 	private ArrayList<Fish> added = new ArrayList<Fish>(),
 			removed = new ArrayList<Fish>();
 
-	// List of constructor
+	// simplified constructor
 	public Pond(int width, int height) {
 		this(width, height, new ArrayList<Fish>(), new Player(500));
 	}
 
+	// origin constructor
 	public Pond(int width, int height, ArrayList<Fish> fishes, Player player) {
 		super();
 		this.width = width;
@@ -131,15 +132,6 @@ public class Pond implements Serializable {
 		return null;
 	}
 
-	public void resetAll() {
-		for (Fish fish : fishes) {
-			fish.setX(randX());
-			fish.setY(randY());
-			fish.setVx(randV(5));
-			fish.setVy(randV(5));
-		}
-	}
-
 	public int getHeight() {
 		return height;
 	}
@@ -160,6 +152,7 @@ public class Pond implements Serializable {
 		return width;
 	}
 
+	// return the next fish of the argument in the array
 	public Fish nextFish(Fish fish) {
 		int index = fishes.indexOf(fish);
 		if (index + 1 == fishes.size()) {
@@ -169,6 +162,7 @@ public class Pond implements Serializable {
 		}
 	}
 
+	// invoke next performance
 	public synchronized void nextMove() {
 		// add and remove the waiting fish
 		fishes.addAll(added);
@@ -178,14 +172,14 @@ public class Pond implements Serializable {
 		// chear the wait list
 		added.clear();
 		removed.clear();
-		// invoke next perform
+		// invoke next performance
 		Iterator<Fish> i = getIterator();
 		while (i.hasNext()) {
 			i.next().perform();
 		}
 	}
 
-	// paint self
+	// paint the pond itself with all fish
 	public synchronized void paint(Graphics g) {
 		Iterator<Fish> i = getIterator();
 		while (i.hasNext()) {
@@ -193,28 +187,44 @@ public class Pond implements Serializable {
 		}
 	}
 
+	// return random x form 0 to width
 	public int randX() {
 		return (int) (Math.random() * getWidth());
 	}
 
+	// return random y form 0 to height
 	public int randY() {
 		return (int) (Math.random() * getHeight());
 	}
 
+	// add the fish to the removal list
 	public void remove(Fish fish) {
 		removed.add(fish);
 	}
 
+	// reset all fish's velocity and position
+	public void resetAll() {
+		for (Fish fish : fishes) {
+			fish.setX(randX());
+			fish.setY(randY());
+			fish.setVx(randV(5));
+			fish.setVy(randV(5));
+		}
+	}
+
+	// resize the width and height of the pond
 	public synchronized void resize(Dimension dimension) {
 		width = dimension.width;
 		height = dimension.height;
 	}
 
+	// sell the fish and add money to the player
 	public void sell(Fish fish) {
 		player.earnMoney(fish.getPrice());
 		removed.add(fish);
 	}
 
+	// sell all fish
 	public void sellAll() {
 		for (Fish fish : fishes) {
 			sell(fish);
