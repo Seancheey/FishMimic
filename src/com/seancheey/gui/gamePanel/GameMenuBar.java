@@ -17,6 +17,7 @@ import com.seancheey.data.Pond;
 import com.seancheey.gui.CreditPanel;
 import com.seancheey.gui.FishSelectPanel;
 import com.seancheey.gui.GamePanel;
+import com.seancheey.gui.Menu;
 
 public class GameMenuBar extends JMenuBar implements ActionListener {
 
@@ -47,6 +48,7 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 		// set the menu items
 		items.add(new JMenuItem("Save process..."));
 		items.add(new JMenuItem("Read process..."));
+		items.add(new JMenuItem("Exit..."));
 
 		items.add(new JMenuItem("Add new fish..."));
 		items.add(new JMenuItem("Reset all fishes"));
@@ -61,10 +63,13 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 		// add items to menus
 		menus.get(0).add(items.get(0));
 		menus.get(0).add(items.get(1));
-		menus.get(1).add(items.get(2));
+		menus.get(0).add(items.get(2));
+
 		menus.get(1).add(items.get(3));
 		menus.get(1).add(items.get(4));
-		menus.get(2).add(items.get(5));
+		menus.get(1).add(items.get(5));
+
+		menus.get(2).add(items.get(6));
 
 		// add menus to the bar
 		for (JMenu menu : menus) {
@@ -77,6 +82,10 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 		if (a.getSource() instanceof JMenuItem) {
 			JMenuItem item = (JMenuItem) a.getSource();
 			switch (item.getText()) {
+			case "Exit...":
+				gamePanel.getPondPanel().stopRefreshing();
+				Main.controlFrame.switchPanel(gamePanel, new Menu());
+				break;
 			case "Add new fish...":
 				// disable the menu bar
 				Main.controlFrame.setJMenuBar(null);
