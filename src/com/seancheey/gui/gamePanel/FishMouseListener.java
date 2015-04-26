@@ -48,8 +48,7 @@ public class FishMouseListener implements MouseListener, MouseMotionListener {
 				draggedFish.setVy(0);
 				draggedFish = null;
 			} else {
-				player.earnMoney((int) ((draggedFish.getWidth() + draggedFish
-						.getHeight()) / 2));
+				player.earnMoney(draggedFish.getPrice());
 				pond.remove(draggedFish);
 			}
 		}
@@ -71,11 +70,11 @@ public class FishMouseListener implements MouseListener, MouseMotionListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getButton() == MouseEvent.BUTTON3 && player.getMoney() > 10) {
-			player.spendMoney(100);
-			pond.getFishes().add(
-					new FishGenerator(pond).generateRandom(e.getX()
-							- FishGenerator.DEFAULT_WIDTH / 2, e.getY()
-							- FishGenerator.DEFAULT_HEIGHT / 2));
+			Fish fish = new FishGenerator(pond).generateRandom(e.getX()
+					- FishGenerator.DEFAULT_WIDTH / 2, e.getY()
+					- FishGenerator.DEFAULT_HEIGHT / 2);
+			player.spendMoney(fish.getPrice() + 10);
+			pond.add(fish);
 		}
 	}
 }

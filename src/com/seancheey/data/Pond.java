@@ -30,7 +30,7 @@ public class Pond implements Serializable {
 	}
 
 	public Pond(int width, int height) {
-		this(width, height, new ArrayList<Fish>(), new Player(100));
+		this(width, height, new ArrayList<Fish>(), new Player(500));
 	}
 
 	@Override
@@ -103,6 +103,17 @@ public class Pond implements Serializable {
 
 	public void add(Fish fish) {
 		added.add(fish);
+	}
+
+	public void sell(Fish fish) {
+		player.earnMoney(fish.getPrice());
+		removed.add(fish);
+	}
+
+	public void sellAll() {
+		for (Fish fish : fishes) {
+			sell(fish);
+		}
 	}
 
 	// paint self

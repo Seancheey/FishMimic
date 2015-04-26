@@ -68,6 +68,10 @@ public abstract class Fish extends Entity implements Serializable {
 		return pond;
 	}
 
+	public int getPrice() {
+		return (int) ((width + height) / 2);
+	}
+
 	// ***Main Algorithm is here!!!***
 	public void perform() {
 		// grow a bit or die if mature
