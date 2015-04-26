@@ -3,11 +3,14 @@ package com.seancheey.gui.gamePanel;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import com.seancheey.data.Fish;
 import com.seancheey.data.FishGenerator;
@@ -15,13 +18,13 @@ import com.seancheey.data.ImagePond;
 import com.seancheey.data.Pond;
 
 public class PondPanel extends JPanel implements MouseListener,
-		MouseMotionListener {
+		MouseMotionListener, ActionListener {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	// delay between every two refreshing event
-	private static int delay = 100;
+	private static int delay = 10;
 	// pond that contain all fishes
 	private Pond pond;
 	// the background image
@@ -29,20 +32,7 @@ public class PondPanel extends JPanel implements MouseListener,
 	// the fish that is being dragging
 	private Fish draggedFish = null;
 	// thread to operate fish's movement
-	private Thread moveThread = new Thread() {
-		public void run() {
-			while (true) {
-				try {
-					pond.nextMove();
-				} catch (NullPointerException nulle) {
-				}
-				try {
-					sleep(delay);
-				} catch (InterruptedException ie) {
-				}
-			}
-		}
-	};
+	private Timer timer = new Timer(delay, this);
 
 	// constructor
 	public PondPanel(Pond pond) {
@@ -50,14 +40,11 @@ public class PondPanel extends JPanel implements MouseListener,
 		this.pond = pond;
 		addMouseListener(this);
 		addMouseMotionListener(this);
-		moveThread.start();
+		timer.start();
 	}
 
 	public void stopRefreshing() {
-		try {
-			moveThread.interrupt();
-		} catch (Exception e) {
-		}
+		timer.stop();
 	}
 
 	/**
@@ -97,6 +84,11 @@ public class PondPanel extends JPanel implements MouseListener,
 		if (e.getButton() == MouseEvent.BUTTON3)
 			pond.getFishes().add(
 					new FishGenerator(pond).generateRandom(e.getX(), e.getY()));
+	}
+
+	@Override
+	public void update(Graphics g) {
+		paint(g);
 	}
 
 	@Override
@@ -141,5 +133,13 @@ public class PondPanel extends JPanel implements MouseListener,
 	@Override
 	public void mouseMoved(MouseEvent e) {
 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		try {
+			pond.nextMove();
+		} catch (NullPointerException nulle) {
+		}
 	}
 }
