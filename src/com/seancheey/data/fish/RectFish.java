@@ -16,7 +16,7 @@ public class RectFish extends Fish {
 	public RectFish(int width, int height, double x, double y, double vx,
 			double vy, Pond pond) {
 		super(width, height, x, y, vx, vy, pond, ImagePond
-				.get("fish - yellowfish"));
+				.get("fish - redfish"));
 	}
 
 	@Override
