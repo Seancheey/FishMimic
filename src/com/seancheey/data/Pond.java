@@ -7,12 +7,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.seancheey.data.entity.Fish;
+import com.seancheey.data.entity.fish.MaoFish;
+import com.seancheey.data.entity.fish.RainbowFish;
+import com.seancheey.data.entity.fish.RectFish;
+import com.seancheey.data.entity.fish.RoundFish;
 
 public class Pond implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2L;
+	public static final int DEFAULT_WIDTH = 120, DEFAULT_HEIGHT = 60;
 	private int width, height;// width and height of the pond
 	private final ArrayList<Fish> fishes;// fish container
 	private Player player;
@@ -105,6 +110,13 @@ public class Pond implements Serializable {
 		added.add(fish);
 	}
 
+	public void buy(Fish fish) {
+		if (player.getMoney() >= fish.getPrice()) {
+			add(fish);
+			player.spendMoney(fish.getPrice());
+		}
+	}
+
 	public void sell(Fish fish) {
 		player.earnMoney(fish.getPrice());
 		removed.add(fish);
@@ -113,6 +125,60 @@ public class Pond implements Serializable {
 	public void sellAll() {
 		for (Fish fish : fishes) {
 			sell(fish);
+		}
+	}
+
+	public int randX() {
+		return (int) (Math.random() * getWidth());
+	}
+
+	public int randY() {
+		return (int) (Math.random() * getHeight());
+	}
+
+	public void buy(String type, int width, int height, double x, double y,
+			double vx, double vy) {
+		switch (type) {
+		case "RectFish":
+			buy(new RectFish(width, height, x, y, vx, vy, this));
+			break;
+		case "RoundFish":
+			buy(new RoundFish(width, height, x, y, vx, vy, this));
+			break;
+		case "MaoFish":
+			buy(new MaoFish(width, height, x, y, vx, vy, this));
+			break;
+		case "RainbowFish":
+			buy(new RainbowFish(width, height, x, y, vx, vy, this));
+			break;
+		default:
+			throw new IllegalArgumentException("Fish type mismatch! :" + type);
+		}
+	}
+
+	public static final double randV(double range) {
+		return Math.random() * range * 2 - range;
+	}
+
+	public void buyFishAndPut(int x, int y) {
+		switch (new java.util.Random().nextInt(4)) {
+		case 0:
+			buy(new RectFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x - DEFAULT_WIDTH
+					/ 2, y - DEFAULT_HEIGHT / 2, randV(5), randV(5), this));
+			break;
+		case 1:
+			buy(new RoundFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x - DEFAULT_WIDTH
+					/ 2, y - DEFAULT_HEIGHT / 2, randV(5), randV(5), this));
+			break;
+		case 2:
+			buy(new MaoFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x - DEFAULT_WIDTH
+					/ 2, y - DEFAULT_HEIGHT / 2, randV(5), randV(5), this));
+			break;
+		case 3:
+			buy(new RainbowFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x
+					- DEFAULT_WIDTH / 2, y - DEFAULT_HEIGHT / 2, randV(5),
+					randV(5), this));
+			break;
 		}
 	}
 

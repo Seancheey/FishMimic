@@ -6,7 +6,6 @@ import java.awt.Image;
 import java.io.Serializable;
 
 import com.seancheey.data.Entity;
-import com.seancheey.data.FishGenerator;
 import com.seancheey.data.Pond;
 
 public abstract class Fish extends Entity implements Serializable {
@@ -169,8 +168,8 @@ public abstract class Fish extends Entity implements Serializable {
 		Fish fish = clone();
 		fish.setWidth(20);
 		fish.setHeight(10);
-		fish.setVx(FishGenerator.randV(5));
-		fish.setVy(FishGenerator.randV(5));
+		fish.setVx(Pond.randV(5));
+		fish.setVy(Pond.randV(5));
 		pond.add(fish);
 	}
 

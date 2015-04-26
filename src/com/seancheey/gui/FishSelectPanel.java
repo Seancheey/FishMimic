@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import com.seancheey.data.FishGenerator;
 import com.seancheey.data.Pond;
 
 public abstract class FishSelectPanel extends JPanel implements ActionListener {
@@ -178,17 +177,11 @@ public abstract class FishSelectPanel extends JPanel implements ActionListener {
 				// initialize a new pond if don't have one
 				if (pond == null)
 					pond = new Pond(getWidth(), getHeight());
-				// add the number of fish equal to the inputed
-				FishGenerator gen = new FishGenerator(pond);
 				for (int i = 0; i < createNum; i++) {
 					// insert at random place
-					pond.getFishes().add(
-							(int) (pond.getFishes().size() * Math.random()),
-							gen.generate(type, width, height,
-									randP ? FishGenerator.randX() : x,
-									randP ? FishGenerator.randY() : y,
-									randV ? FishGenerator.randV(5) : vx,
-									randV ? FishGenerator.randV(5) : vy));
+					pond.buy(type, width, height, randP ? pond.randX() : x,
+							randP ? pond.randY() : y, randV ? Pond.randV(5)
+									: vx, randV ? Pond.randV(5) : vy);
 				}
 				// switch to Pond panel
 				addAction();

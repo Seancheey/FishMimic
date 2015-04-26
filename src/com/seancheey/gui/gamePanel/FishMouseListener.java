@@ -4,7 +4,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import com.seancheey.data.FishGenerator;
 import com.seancheey.data.Player;
 import com.seancheey.data.Pond;
 import com.seancheey.data.entity.Fish;
@@ -70,11 +69,7 @@ public class FishMouseListener implements MouseListener, MouseMotionListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getButton() == MouseEvent.BUTTON3 && player.getMoney() > 10) {
-			Fish fish = new FishGenerator(pond).generateRandom(e.getX()
-					- FishGenerator.DEFAULT_WIDTH / 2, e.getY()
-					- FishGenerator.DEFAULT_HEIGHT / 2);
-			player.spendMoney(fish.getPrice() + 10);
-			pond.add(fish);
+			pond.buyFishAndPut(e.getX(), e.getY());
 		}
 	}
 }
