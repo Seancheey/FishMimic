@@ -83,7 +83,9 @@ public class PondPanel extends JPanel implements MouseListener,
 	public void mouseClicked(MouseEvent e) {
 		if (e.getButton() == MouseEvent.BUTTON3)
 			pond.getFishes().add(
-					new FishGenerator(pond).generateRandom(e.getX(), e.getY()));
+					new FishGenerator(pond).generateRandom(e.getX()
+							- FishGenerator.DEFAULT_WIDTH / 2, e.getY()
+							- FishGenerator.DEFAULT_HEIGHT / 2));
 	}
 
 	@Override

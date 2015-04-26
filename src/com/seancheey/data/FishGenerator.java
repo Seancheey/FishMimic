@@ -14,7 +14,7 @@ public class FishGenerator implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final int DEFAULT_WIDTH = 120, DEFAULT_HEIGHT = 60;
+	public static final int DEFAULT_WIDTH = 120, DEFAULT_HEIGHT = 60;
 	private Pond pond;
 
 	public FishGenerator(Pond pond) {
