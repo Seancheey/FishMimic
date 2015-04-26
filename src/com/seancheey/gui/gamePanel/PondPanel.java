@@ -108,6 +108,8 @@ public class PondPanel extends JPanel implements MouseListener,
 		if (e.getButton() == MouseEvent.BUTTON1) {
 			if (draggedFish != null) {
 				draggedFish.setFixed(false);
+				draggedFish.setVx(0);
+				draggedFish.setVy(0);
 				draggedFish = null;
 			}
 		}
