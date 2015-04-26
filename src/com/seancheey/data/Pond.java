@@ -111,9 +111,9 @@ public class Pond implements Serializable {
 	}
 
 	public void buy(Fish fish) {
-		if (player.getMoney() >= fish.getPrice()) {
+		if (player.getMoney() >= fish.getPrice() + 10) {
 			add(fish);
-			player.spendMoney(fish.getPrice());
+			player.spendMoney(fish.getPrice() + 10);
 		}
 	}
 
