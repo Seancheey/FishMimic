@@ -62,9 +62,9 @@ public abstract class FishSelectPanel extends JPanel implements ActionListener {
 		fields.get(4).setEditable(false);
 		fields.get(5).setEditable(false);
 		// default value for width and height
-		fields.get(0).setText("80");
-		fields.get(1).setText("40");
-		fields.get(6).setText("50");
+		fields.get(0).setText("120");
+		fields.get(1).setText("60");
+		fields.get(6).setText("40");
 		// the check box of fast creation
 		checks.add(new JCheckBox("random position"));
 		checks.add(new JCheckBox("random speed"));
