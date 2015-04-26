@@ -1,6 +1,7 @@
 package com.seancheey.gui.gamePanel;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -65,6 +66,7 @@ public class PondPanel extends JPanel implements ActionListener {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		g.setFont(new Font("serif", Font.BOLD, 30));
 		// paint the background
 		g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
 		// resize the pond to match the size of panel
@@ -72,7 +74,9 @@ public class PondPanel extends JPanel implements ActionListener {
 		// Keep painting
 		pond.paint(g);
 		// paint the money
-		g.drawString(String.valueOf(pond.getPlayer().getMoney()), 50, 50);
+		g.drawString(
+				"Money left:" + String.valueOf(pond.getPlayer().getMoney()),
+				50, 50);
 		repaint();
 	}
 

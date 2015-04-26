@@ -10,17 +10,27 @@ import com.seancheey.data.Entity;
 import com.seancheey.data.Pond;
 
 public abstract class Fish extends Entity implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2L;
-	protected final Pond pond;// the container of fish
-	protected transient Image image;// the image of the fish
-	protected boolean immobilized = false;// if the fish is fixed
-	private double energyUsed, shearY;
+	/** the container of fish */
+	protected final Pond pond;
+	/** the image of the fish */
+	protected transient Image image;
+	/** if the fish is fixed */
+	protected boolean immobilized = false;
+	/** the energy used by the fish(used to calculate shear) */
+	private double energyUsed;
+	/** the shear that distort the fish to make it seems move */
+	private double shearY;
+	/** the size of mature fish */
 	private final double matureWidth, matureHeight;
 
-	// constructor
+	/** simplified constructor */
+	public Fish(double width, double height, double x, double y, double vx,
+			double vy, Pond pond, Image image) {
+		this(width, height, x, y, vx, vy, pond, image, 150, 75);
+	}
+
+	/** origin constructor */
 	public Fish(double width, double height, double x, double y, double vx,
 			double vy, Pond pond, Image image, double matureWidth,
 			double matureHeight) {
@@ -37,42 +47,55 @@ public abstract class Fish extends Entity implements Serializable {
 		this.matureHeight = matureHeight;
 	}
 
-	public Fish(double width, double height, double x, double y, double vx,
-			double vy, Pond pond, Image image) {
-		super();
-		this.width = width;
-		this.height = height;
-		this.x = x;
-		this.y = y;
-		this.vx = vx;
-		this.vy = vy;
-		this.pond = pond;
-		this.image = image;
-		this.matureWidth = 150;
-		this.matureHeight = 75;
-	}
-
-	public void setFixed(boolean value) {
-		immobilized = value;
-	}
-
 	@Override
-	public String toString() {
-		return "Fish [width=" + width + ", height=" + height + ", x=" + x
-				+ ", y=" + y + ", vx=" + vx + ", vy=" + vy + "]";
+	protected abstract Fish clone();
+
+	/** draw the image of fish by the graphics */
+	protected void drawShape(Graphics g) {
+		if (image == null)
+			image = fetchLostImage();
+		g.drawImage(image, (int) (-width / 2), (int) (-height / 2),
+				(int) (width), (int) (height), null);
 	}
 
-	// List of getter
+	/** the fetch the lost image (used in recovered serialized object) */
+	protected abstract Image fetchLostImage();
 
 	public Pond getPond() {
 		return pond;
 	}
 
+	/** return the price of selling the fish */
 	public int getPrice() {
 		return (int) ((width + height) / 2);
 	}
 
-	// ***Main Algorithm is here!!!***
+	/** detect if the fish collides with another fish */
+	public boolean isCollidedBy(Fish fish) {
+		if ((Math.abs(fish.getXCenter() - getXCenter()) <= (fish.getWidth() + width) / 2.0)
+				&& (Math.abs(fish.getYCenter() - getYCenter()) <= (fish
+						.getHeight() + height) / 2.0)) {
+			return true;
+		}
+		return false;
+	}
+
+	/** paint the image on the graph */
+	public void paint(Graphics g) {
+		int xcenter = (int) getXCenter();
+		int ycenter = (int) getYCenter();
+		g.translate(xcenter, ycenter);
+		Graphics2D g2 = (Graphics2D) g;
+		double angle = Math.atan2(vy, vx);
+		g2.shear(0, shearY);
+		g2.rotate(angle);
+		drawShape(g);
+		g2.rotate(-angle);
+		g2.shear(0, -shearY);
+		g.translate(-xcenter, -ycenter);
+	}
+
+	/** perform the next movement */
 	public void perform() {
 		// grow a bit or die if mature
 		if (width < matureWidth)
@@ -125,6 +148,43 @@ public abstract class Fish extends Entity implements Serializable {
 		}
 	}
 
+	/** add a new small fish to the contaiener */
+	public void propagate() {
+		Fish fish = clone();
+		fish.setWidth(20);
+		fish.setHeight(10);
+		fish.setVx(Pond.randV(5));
+		fish.setVy(Pond.randV(5));
+		pond.add(fish);
+	}
+
+	public void setFixed(boolean value) {
+		immobilized = value;
+	}
+
+	@Override
+	public String toString() {
+		return "Fish [width=" + width + ", height=" + height + ", x=" + x
+				+ ", y=" + y + ", vx=" + vx + ", vy=" + vy + "]";
+	}
+
+	/** move towards the point directly once */
+	public void trackOnce(double px, double py) {
+		// use mean angle
+		double diffx = px - x, diffy = py - y;
+		double vangle = Math.atan2(vy, vx), aimangle = Math.atan2(diffy, diffx);
+		double diffangle = Math.abs(vangle - aimangle);
+		if (diffangle > Math.PI) {
+			vangle = (vangle + aimangle) / 2 + Math.PI;
+		} else {
+			vangle = (vangle + aimangle) / 2;
+		}
+		// set vx and vy
+		vx = Math.cos(vangle) * getVelocity();
+		vy = Math.sin(vangle) * getVelocity();
+	}
+
+	/** move towards the fish directly once */
 	public void trackOnce(Fish fish) {
 		// use mean angle
 		double diffx = fish.getX() - x, diffy = fish.getY() - y;
@@ -144,69 +204,5 @@ public abstract class Fish extends Entity implements Serializable {
 			vy = Math.sin(vangle) * v;
 		}
 	}
-
-	public void trackOnce(double px, double py) {
-		// use mean angle
-		double diffx = px - x, diffy = py - y;
-		double vangle = Math.atan2(vy, vx), aimangle = Math.atan2(diffy, diffx);
-		double diffangle = Math.abs(vangle - aimangle);
-		if (diffangle > Math.PI) {
-			vangle = (vangle + aimangle) / 2 + Math.PI;
-		} else {
-			vangle = (vangle + aimangle) / 2;
-		}
-		// set vx and vy
-		vx = Math.cos(vangle) * getVelocity();
-		vy = Math.sin(vangle) * getVelocity();
-	}
-
-	public boolean isCollidedBy(Fish fish) {
-		if ((Math.abs(fish.getXCenter() - getXCenter()) <= (fish.getWidth() + width) / 2.0)
-				&& (Math.abs(fish.getYCenter() - getYCenter()) <= (fish
-						.getHeight() + height) / 2.0)) {
-			return true;
-		}
-		return false;
-	}
-
-	public void propagate() {
-		Fish fish = clone();
-		fish.setWidth(20);
-		fish.setHeight(10);
-		fish.setVx(Pond.randV(5));
-		fish.setVy(Pond.randV(5));
-		pond.add(fish);
-	}
-
-	public void paint(Graphics g) {
-		int xcenter = (int) getXCenter();
-		int ycenter = (int) getYCenter();
-		g.translate(xcenter, ycenter);
-		Graphics2D g2 = (Graphics2D) g;
-		double angle = Math.atan2(vy, vx);
-		g2.shear(0, shearY);
-		g2.rotate(angle);
-		drawShape(g);
-		g2.rotate(-angle);
-		g2.shear(0, -shearY);
-		g.translate(-xcenter, -ycenter);
-	}
-
-	protected void drawShape(Graphics g) {
-		if (image == null)
-			image = fetchLostImage();
-		g.drawImage(image, (int) (-width / 2), (int) (-height / 2),
-				(int) (width), (int) (height), null);
-	}
-
-	protected abstract Image fetchLostImage();
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#clone()
-	 */
-	@Override
-	protected abstract Fish clone();
 
 }
