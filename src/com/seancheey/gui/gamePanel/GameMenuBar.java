@@ -19,7 +19,6 @@ import javax.swing.JPanel;
 
 import com.seancheey.Main;
 import com.seancheey.data.Pond;
-import com.seancheey.data.entity.Fish;
 import com.seancheey.gui.CreditPanel;
 import com.seancheey.gui.FishSelectPanel;
 import com.seancheey.gui.GamePanel;
@@ -57,8 +56,8 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 		items.add(new JMenuItem("Exit..."));
 
 		items.add(new JMenuItem("Add new fish..."));
-		items.add(new JMenuItem("Reset all fishes"));
-		items.add(new JMenuItem("Remove all fishes"));
+		items.add(new JMenuItem("Reset all fish"));
+		items.add(new JMenuItem("Sell all fish"));
 
 		items.add(new JMenuItem("About..."));
 
@@ -170,16 +169,11 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 					}
 				});
 				break;
-			case "Reset all fishes":
-				for (Fish fish : pond.getFishes()) {
-					fish.setX(pond.randX());
-					fish.setY(pond.randY());
-					fish.setVx(Pond.randV(5));
-					fish.setVy(Pond.randV(5));
-				}
+			case "Reset all fish":
+				pond.resetAll();
 				break;
-			case "Remove all fishes":
-				pond.getFishes().clear();
+			case "Sell all fish":
+				pond.sellAll();
 				break;
 			case "About...":
 				switchOutTo(new CreditPanel() {

@@ -23,8 +23,7 @@ public class RectFish extends Fish {
 	public void perform() {
 		super.perform();
 		// pick a random fish
-		Fish randFish = pond.getFishes().get(
-				Math.abs((int) x % pond.getFishes().size()));
+		Fish randFish = pond.getRandomFish();
 		// close to it
 		if (immobilized == false) {
 			vx += (randFish.getX() - x) / 1000;

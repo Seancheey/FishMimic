@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.Serializable;
+import java.util.Iterator;
 
 import com.seancheey.data.Entity;
 import com.seancheey.data.Pond;
@@ -110,14 +111,18 @@ public abstract class Fish extends Entity implements Serializable {
 		shearY = Math.sin(energyUsed) * 0.25;
 
 		// propagate in a small probability
-		if (width > matureWidth * 0.80 && height > matureHeight * 0.80)
-			for (Fish f : pond.getFishes()) {
+		if (width > matureWidth * 0.80 && height > matureHeight * 0.80) {
+			Iterator<Fish> i = pond.getIterator();
+			Fish f;
+			while (i.hasNext()) {
+				f = i.next();
 				if (isCollidedBy(f)) {
 					if (Math.random() < 0.001)
 						propagate();
 					break;
 				}
 			}
+		}
 	}
 
 	public void trackOnce(Fish fish) {

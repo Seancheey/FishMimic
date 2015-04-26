@@ -23,15 +23,7 @@ public class RoundFish extends Fish {
 	public void perform() {
 		super.perform();
 		// pick the next fish
-		Fish nextFish;
-		int i = 0;
-		for (Fish fish : getPond().getFishes()) {
-			if (fish.equals(this))
-				break;
-			i++;
-		}
-		nextFish = getPond().getFishes().get(
-				i + 1 >= getPond().getFishes().size() ? 0 : i + 1);
+		Fish nextFish = getPond().nextFish(this);
 		// close to it
 		trackOnce(nextFish);
 	}
