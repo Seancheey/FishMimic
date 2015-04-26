@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 
 import com.seancheey.Main;
 import com.seancheey.data.Fish;
@@ -30,9 +29,9 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 	// unified font for all components
 	private static final Font UNIFIED_FONT = new Font("serif", Font.PLAIN, 22);
 	private Pond pond;
-	private JPanel gamePanel;
+	private GamePanel gamePanel;
 
-	public GameMenuBar(JPanel gamePanel, Pond pond) {
+	public GameMenuBar(GamePanel gamePanel, Pond pond) {
 		// initialize
 		this.pond = pond;
 		this.gamePanel = gamePanel;
@@ -82,6 +81,7 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 				// disable the menu bar
 				Main.controlFrame.setJMenuBar(null);
 				// switch the the fish selection panel
+				gamePanel.getPondPanel().stopRefreshing();
 				Main.controlFrame.switchPanel(gamePanel, new FishSelectPanel(
 						pond) {
 
@@ -117,6 +117,7 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 				break;
 			case "About...":
 				Main.controlFrame.setJMenuBar(null);
+				gamePanel.getPondPanel().stopRefreshing();
 				Main.controlFrame.switchPanel(gamePanel, new CreditPanel() {
 
 					/**

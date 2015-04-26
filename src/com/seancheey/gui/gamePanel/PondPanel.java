@@ -21,13 +21,28 @@ public class PondPanel extends JPanel implements MouseListener,
 	 */
 	private static final long serialVersionUID = 1L;
 	// delay between every two refreshing event
-	private static int delay = 5;
+	private static int delay = 100;
 	// pond that contain all fishes
 	private final Pond pond;
 	// the background image
 	private transient Image background = ImagePond.get("background - sea");
 	// the fish that is being dragging
 	private Fish draggedFish = null;
+	// thread to operate fish's movement
+	private Thread moveThread = new Thread() {
+		public void run() {
+			while (true) {
+				try {
+					pond.nextMove();
+				} catch (NullPointerException nulle) {
+				}
+				try {
+					sleep(delay);
+				} catch (InterruptedException ie) {
+				}
+			}
+		}
+	};
 
 	// constructor
 	public PondPanel(Pond pond) {
@@ -35,6 +50,14 @@ public class PondPanel extends JPanel implements MouseListener,
 		this.pond = pond;
 		addMouseListener(this);
 		addMouseMotionListener(this);
+		moveThread.start();
+	}
+
+	public void stopRefreshing() {
+		try {
+			moveThread.interrupt();
+		} catch (Exception e) {
+		}
 	}
 
 	@Override
@@ -49,14 +72,8 @@ public class PondPanel extends JPanel implements MouseListener,
 		g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
 		// resize the pond to match the size of panel
 		pond.resize(getSize());
-		// Keep updating
-		pond.nextMove();
+		// Keep painting
 		pond.paint(g);
-		try {
-			Thread.sleep(PondPanel.delay);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		repaint();
 	}
 

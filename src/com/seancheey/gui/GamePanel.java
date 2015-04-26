@@ -23,4 +23,12 @@ public class GamePanel extends JPanel {
 		this.pondPanel = new PondPanel(pond);
 		add(pondPanel);
 	}
+
+	/**
+	 * @return the pondPanel
+	 */
+	public PondPanel getPondPanel() {
+		return pondPanel;
+	}
+	
 }
