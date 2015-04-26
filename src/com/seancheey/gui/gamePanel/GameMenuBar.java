@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 import com.seancheey.Main;
 import com.seancheey.data.Fish;
@@ -77,22 +78,25 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 		}
 	}
 
+	private void switchOutTo(JPanel panel) {
+		// disable the menu bar
+		Main.controlFrame.setJMenuBar(null);
+		// stop refreshing fish's movement
+		gamePanel.getPondPanel().stopRefreshing();
+		// switch the panel
+		Main.controlFrame.switchPanel(gamePanel, panel);
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent a) {
 		if (a.getSource() instanceof JMenuItem) {
 			JMenuItem item = (JMenuItem) a.getSource();
 			switch (item.getText()) {
 			case "Exit...":
-				gamePanel.getPondPanel().stopRefreshing();
-				Main.controlFrame.switchPanel(gamePanel, new Menu());
+				switchOutTo(new Menu());
 				break;
 			case "Add new fish...":
-				// disable the menu bar
-				Main.controlFrame.setJMenuBar(null);
-				// switch the the fish selection panel
-				gamePanel.getPondPanel().stopRefreshing();
-				Main.controlFrame.switchPanel(gamePanel, new FishSelectPanel(
-						pond) {
+				switchOutTo(new FishSelectPanel(pond) {
 
 					/**
 					 * 
@@ -125,9 +129,7 @@ public class GameMenuBar extends JMenuBar implements ActionListener {
 				pond.getFishes().clear();
 				break;
 			case "About...":
-				Main.controlFrame.setJMenuBar(null);
-				gamePanel.getPondPanel().stopRefreshing();
-				Main.controlFrame.switchPanel(gamePanel, new CreditPanel() {
+				switchOutTo(new CreditPanel() {
 
 					/**
 					 * 
