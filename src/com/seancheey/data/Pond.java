@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.seancheey.data.entity.Fish;
+
 public class Pond implements Serializable {
 	/**
 	 * 

@@ -3,10 +3,11 @@ package com.seancheey.data;
 import java.io.Serializable;
 
 import com.seancheey.Main;
-import com.seancheey.data.fish.MaoFish;
-import com.seancheey.data.fish.RainbowFish;
-import com.seancheey.data.fish.RectFish;
-import com.seancheey.data.fish.RoundFish;
+import com.seancheey.data.entity.Fish;
+import com.seancheey.data.entity.fish.MaoFish;
+import com.seancheey.data.entity.fish.RainbowFish;
+import com.seancheey.data.entity.fish.RectFish;
+import com.seancheey.data.entity.fish.RoundFish;
 
 public class FishGenerator implements Serializable {
 	/**

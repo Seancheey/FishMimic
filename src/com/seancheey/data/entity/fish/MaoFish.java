@@ -1,10 +1,10 @@
-package com.seancheey.data.fish;
+package com.seancheey.data.entity.fish;
 
 import java.awt.Image;
 
-import com.seancheey.data.Fish;
 import com.seancheey.data.ImagePond;
 import com.seancheey.data.Pond;
+import com.seancheey.data.entity.Fish;
 
 public class MaoFish extends Fish {
 
@@ -21,7 +21,7 @@ public class MaoFish extends Fish {
 	}
 
 	@Override
-	protected void perform() {
+	public void perform() {
 		super.perform();
 		// set new action after finish all action
 		if (timeLeft <= 0 || aim == null) {

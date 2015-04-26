@@ -1,9 +1,13 @@
-package com.seancheey.data;
+package com.seancheey.data.entity;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.Serializable;
+
+import com.seancheey.data.Entity;
+import com.seancheey.data.FishGenerator;
+import com.seancheey.data.Pond;
 
 public abstract class Fish extends Entity implements Serializable {
 	/**
@@ -65,7 +69,7 @@ public abstract class Fish extends Entity implements Serializable {
 	}
 
 	// ***Main Algorithm is here!!!***
-	protected void perform() {
+	public void perform() {
 		// grow a bit or die if mature
 		if (width < matureWidth)
 			width += Math.random() / 10;

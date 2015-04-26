@@ -18,9 +18,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import com.seancheey.Main;
-import com.seancheey.data.Fish;
 import com.seancheey.data.FishGenerator;
 import com.seancheey.data.Pond;
+import com.seancheey.data.entity.Fish;
 import com.seancheey.gui.CreditPanel;
 import com.seancheey.gui.FishSelectPanel;
 import com.seancheey.gui.GamePanel;

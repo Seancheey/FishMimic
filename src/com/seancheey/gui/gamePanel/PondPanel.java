@@ -12,10 +12,10 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import com.seancheey.data.Fish;
 import com.seancheey.data.FishGenerator;
 import com.seancheey.data.ImagePond;
 import com.seancheey.data.Pond;
+import com.seancheey.data.entity.Fish;
 
 public class PondPanel extends JPanel implements MouseListener,
 		MouseMotionListener, ActionListener {
