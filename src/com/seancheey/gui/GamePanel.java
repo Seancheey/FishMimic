@@ -30,5 +30,5 @@ public class GamePanel extends JPanel {
 	public PondPanel getPondPanel() {
 		return pondPanel;
 	}
-	
+
 }

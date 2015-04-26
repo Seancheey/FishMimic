@@ -1,7 +1,5 @@
 package com.seancheey.data.fish;
 
-import java.awt.Graphics;
-
 import com.seancheey.data.Fish;
 import com.seancheey.data.ImagePond;
 import com.seancheey.data.Pond;
@@ -17,11 +15,6 @@ public class RoundFish extends Fish {
 			double vy, Pond pond) {
 		super(width, height, x, y, vx, vy, pond, ImagePond
 				.get("fish - bluefish"));
-	}
-
-	@Override
-	protected void drawShape(Graphics g) {
-		g.drawImage(image, -width / 2, -height / 2, width, height, null);
 	}
 
 	@Override
@@ -43,6 +36,6 @@ public class RoundFish extends Fish {
 
 	@Override
 	protected Fish clone() {
-		return new RoundFish(width,height,x,y,vx,vy,pond);
+		return new RoundFish(width, height, x, y, vx, vy, pond);
 	}
 }

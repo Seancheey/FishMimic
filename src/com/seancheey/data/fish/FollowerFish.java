@@ -64,6 +64,4 @@ public class FollowerFish extends GroupingFish {
 		return new FollowerFish(width, height, x, y, vx, vy, pond);
 	}
 
-
-
 }

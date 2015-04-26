@@ -241,6 +241,10 @@ public abstract class Fish implements Serializable {
 		g.translate(-xcenter, -ycenter);
 	}
 
+	protected void drawShape(Graphics g) {
+		g.drawImage(image, -width / 2, -height / 2, width, height, null);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -249,5 +253,4 @@ public abstract class Fish implements Serializable {
 	@Override
 	protected abstract Fish clone();
 
-	protected abstract void drawShape(Graphics g);
 }

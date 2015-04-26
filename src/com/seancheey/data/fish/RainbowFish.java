@@ -1,7 +1,5 @@
 package com.seancheey.data.fish;
 
-import java.awt.Graphics;
-
 import com.seancheey.data.Fish;
 import com.seancheey.data.ImagePond;
 import com.seancheey.data.Pond;
@@ -41,18 +39,8 @@ public class RainbowFish extends Fish {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.seancheey.data.Fish#paint(java.awt.Graphics)
-	 */
-	@Override
-	protected void drawShape(Graphics g) {
-		g.drawImage(image, -width / 2, -height / 2, width, height, null);
-	}
-
 	@Override
 	protected Fish clone() {
-		return new RainbowFish(width,height,x,y,vx,vy,pond);
+		return new RainbowFish(width, height, x, y, vx, vy, pond);
 	}
 }
