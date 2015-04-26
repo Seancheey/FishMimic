@@ -12,26 +12,25 @@ public class Pond implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	private int width, height;// width and height of the pond
 	private final ArrayList<Fish> fishes;// fish container
+	private Player player;
 	// the list of fish waited to be added or removed
 	private ArrayList<Fish> added = new ArrayList<Fish>(),
 			removed = new ArrayList<Fish>();
 
 	// List of constructor
-	public Pond(int width, int height, ArrayList<Fish> fishes) {
+	public Pond(int width, int height, ArrayList<Fish> fishes, Player player) {
 		super();
 		this.width = width;
 		this.height = height;
 		this.fishes = fishes;
+		this.player = player;
 	}
 
 	public Pond(int width, int height) {
-		super();
-		this.width = width;
-		this.height = height;
-		fishes = new ArrayList<Fish>();
+		this(width, height, new ArrayList<Fish>(), new Player(100));
 	}
 
 	@Override
@@ -62,6 +61,13 @@ public class Pond implements Serializable {
 
 	public int getHeight() {
 		return height;
+	}
+
+	/**
+	 * @return the player
+	 */
+	public Player getPlayer() {
+		return player;
 	}
 
 	public Fish getFishAt(int x, int y) {

@@ -107,7 +107,7 @@ public abstract class Fish extends Entity implements Serializable {
 		shearY = Math.sin(energyUsed) * 0.25;
 
 		// propagate in a small probability
-		if (width > matureWidth * 0.75 && height > matureHeight * 0.75)
+		if (width > matureWidth * 0.80 && height > matureHeight * 0.80)
 			for (Fish f : pond.getFishes()) {
 				if (isCollidedBy(f)) {
 					if (Math.random() < 0.001)

@@ -13,26 +13,23 @@ import com.seancheey.data.ImagePond;
 import com.seancheey.data.Pond;
 
 public class PondPanel extends JPanel implements ActionListener {
-	/**
+	/*
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	// delay between every two refreshing event
-	private static int delay = 10;
+	private static final long serialVersionUID = 2L;
 	// pond that contain all fishes
 	private Pond pond;
 	// the background image
 	private transient Image background = ImagePond.get("background - sea");
 	// thread to operate fish's movement
-	private Timer timer = new Timer(delay, this);
+	private Timer timer = new Timer(15, this);
 
 	// constructor
 	public PondPanel(Pond pond) {
 		super();
 		this.pond = pond;
-		FishMouseListener listener = new FishMouseListener(pond);
-		addMouseListener(listener);
-		addMouseMotionListener(listener);
+		if (pond == null)
+			pond = new Pond(getWidth(), getHeight());
 		timer.start();
 	}
 
@@ -40,7 +37,7 @@ public class PondPanel extends JPanel implements ActionListener {
 		timer.stop();
 	}
 
-	/**
+	/*
 	 * @return the pond
 	 */
 	public Pond getPond() {
@@ -61,6 +58,11 @@ public class PondPanel extends JPanel implements ActionListener {
 	}
 
 	@Override
+	public Dimension getMinimumSize() {
+		return new Dimension(200, 200);
+	}
+
+	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		// paint the background
@@ -69,6 +71,8 @@ public class PondPanel extends JPanel implements ActionListener {
 		pond.resize(getSize());
 		// Keep painting
 		pond.paint(g);
+		// paint the money
+		g.drawString(String.valueOf(pond.getPlayer().getMoney()), 50, 50);
 		repaint();
 	}
 
