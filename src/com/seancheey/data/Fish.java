@@ -103,13 +103,14 @@ public abstract class Fish extends Entity implements Serializable {
 		shearY = Math.sin(energyUsed) * 0.25;
 
 		// propagate in a small probability
-		for (Fish f : pond.getFishes()) {
-			if (isCollidedBy(f)) {
-				if (Math.random() < 0.001)
-					propagate();
-				break;
+		if (width > matureWidth * 0.75 && height > matureHeight * 0.75)
+			for (Fish f : pond.getFishes()) {
+				if (isCollidedBy(f)) {
+					if (Math.random() < 0.001)
+						propagate();
+					break;
+				}
 			}
-		}
 	}
 
 	public void trackOnce(Fish fish) {
