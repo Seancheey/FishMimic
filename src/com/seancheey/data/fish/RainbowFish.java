@@ -50,4 +50,9 @@ public class RainbowFish extends Fish {
 	protected void drawShape(Graphics g) {
 		g.drawImage(image, -width / 2, -height / 2, width, height, null);
 	}
+
+	@Override
+	protected Fish clone() {
+		return new RainbowFish(width,height,x,y,vx,vy,pond);
+	}
 }

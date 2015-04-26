@@ -1,5 +1,6 @@
 package com.seancheey.data.fish;
 
+import com.seancheey.data.Fish;
 import com.seancheey.data.FishGenerator;
 import com.seancheey.data.Pond;
 
@@ -28,4 +29,10 @@ public class GuideFish extends GroupingFish {
 		trackOnce(aimX, aimY);
 		timeLeft--;
 	}
+
+	@Override
+	protected Fish clone() {
+		return new GuideFish(width, height, x, y, vx, vy, pond);
+	}
+
 }

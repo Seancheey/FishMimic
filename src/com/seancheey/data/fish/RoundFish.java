@@ -40,4 +40,9 @@ public class RoundFish extends Fish {
 		// close to it
 		trackOnce(nextFish);
 	}
+
+	@Override
+	protected Fish clone() {
+		return new RoundFish(width,height,x,y,vx,vy,pond);
+	}
 }

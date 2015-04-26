@@ -223,6 +223,10 @@ public abstract class Fish implements Serializable {
 			return false;
 	}
 
+	public void propagate() {
+		pond.getFishes().add(clone());
+	}
+
 	public void paint(Graphics g) {
 		int xcenter = (int) getXCenter();
 		int ycenter = (int) getYCenter();
@@ -236,6 +240,14 @@ public abstract class Fish implements Serializable {
 		g2.shear(0, -shearY);
 		g.translate(-xcenter, -ycenter);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#clone()
+	 */
+	@Override
+	protected abstract Fish clone();
 
 	protected abstract void drawShape(Graphics g);
 }

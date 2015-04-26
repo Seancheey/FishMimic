@@ -38,4 +38,10 @@ public class RectFish extends Fish {
 			trackOnce(randFish);
 		}
 	}
+
+	@Override
+	protected Fish clone() {
+		return new RectFish(width,height,x,y,vx,vy,pond);
+	}
+
 }

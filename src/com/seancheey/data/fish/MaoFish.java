@@ -37,4 +37,10 @@ public class MaoFish extends Fish {
 	protected void drawShape(Graphics g) {
 		g.drawImage(image, -width / 2, -height / 2, width, height, null);
 	}
+
+	@Override
+	protected Fish clone() {
+		return new MaoFish(width,height,x,y,vx,vy,pond);
+	}
+
 }

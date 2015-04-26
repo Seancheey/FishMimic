@@ -59,4 +59,11 @@ public class FollowerFish extends GroupingFish {
 		}
 	}
 
+	@Override
+	protected Fish clone() {
+		return new FollowerFish(width, height, x, y, vx, vy, pond);
+	}
+
+
+
 }
