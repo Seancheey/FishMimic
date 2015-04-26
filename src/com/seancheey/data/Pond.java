@@ -13,6 +13,9 @@ public class Pond implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int width, height;// width and height of the pond
 	private final ArrayList<Fish> fishes;// fish container
+	// the list of fish waited to be added or removed
+	private ArrayList<Fish> added = new ArrayList<Fish>(),
+			removed = new ArrayList<Fish>();
 
 	// List of constructor
 	public Pond(int width, int height, ArrayList<Fish> fishes) {
@@ -82,6 +85,14 @@ public class Pond implements Serializable {
 		return fishes.iterator();
 	}
 
+	public void remove(Fish fish) {
+		removed.add(fish);
+	}
+
+	public void add(Fish fish) {
+		added.add(fish);
+	}
+
 	// paint self
 	public synchronized void paint(Graphics g) {
 		Iterator<Fish> i = getFishes().iterator();
@@ -90,8 +101,16 @@ public class Pond implements Serializable {
 		}
 	}
 
-	// invoke next perform
 	public synchronized void nextMove() {
+		// add and remove the waiting fish
+		fishes.addAll(added);
+		for (Fish fish : removed) {
+			fishes.remove(fish);
+		}
+		// chear the wait list
+		added.clear();
+		removed.clear();
+		// invoke next perform
 		Iterator<Fish> i = getFishes().iterator();
 		while (i.hasNext()) {
 			i.next().perform();

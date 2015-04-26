@@ -73,6 +73,14 @@ public abstract class Fish extends Entity implements Serializable {
 		energyUsed += getVelocity() / 15;
 		// calculate the shear
 		shearY = Math.sin(energyUsed) * 0.25;
+		// propagate in a small probability
+		for (Fish f : pond.getFishes()) {
+			if (isCollidedBy(f)) {
+				if (Math.random() < 0.001)
+					propagate();
+				break;
+			}
+		}
 	}
 
 	public void trackOnce(Fish fish) {
@@ -120,7 +128,12 @@ public abstract class Fish extends Entity implements Serializable {
 	}
 
 	public void propagate() {
-		pond.getFishes().add(clone());
+		Fish fish = clone();
+		fish.setWidth(20);
+		fish.setHeight(10);
+		fish.setVx(FishGenerator.randV(5));
+		fish.setVy(FishGenerator.randV(5));
+		pond.add(fish);
 	}
 
 	public void paint(Graphics g) {
