@@ -3,8 +3,6 @@ package com.seancheey.data;
 import java.io.Serializable;
 
 import com.seancheey.Main;
-import com.seancheey.data.fish.FollowerFish;
-import com.seancheey.data.fish.GuideFish;
 import com.seancheey.data.fish.MaoFish;
 import com.seancheey.data.fish.RainbowFish;
 import com.seancheey.data.fish.RectFish;
@@ -23,7 +21,7 @@ public class FishGenerator implements Serializable {
 	}
 
 	public Fish generateRandom(int x, int y) {
-		int fishTypeNum = 6;
+		int fishTypeNum = 4;
 		switch (new java.util.Random().nextInt(fishTypeNum)) {
 		case 0:
 			return new RectFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x, y, randV(5),
@@ -37,12 +35,6 @@ public class FishGenerator implements Serializable {
 		case 3:
 			return new MaoFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x, y, randV(5),
 					randV(5), pond);
-		case 4:
-			return new GuideFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x, y, randV(5),
-					randV(5), pond);
-		case 5:
-			return new FollowerFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x, y,
-					randV(5), randV(5), pond);
 		}
 		return null;
 	}
@@ -58,10 +50,6 @@ public class FishGenerator implements Serializable {
 			return new RectFish(width, height, x, y, vx, vy, pond);
 		case "RoundFish":
 			return new RoundFish(width, height, x, y, vx, vy, pond);
-		case "FollowerFish":
-			return new FollowerFish(width, height, x, y, vx, vy, pond);
-		case "GuideFish":
-			return new GuideFish(width, height, x, y, vx, vy, pond);
 		case "MaoFish":
 			return new MaoFish(width, height, x, y, vx, vy, pond);
 		case "RainbowFish":

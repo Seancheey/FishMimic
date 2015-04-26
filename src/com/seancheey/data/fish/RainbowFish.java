@@ -14,7 +14,7 @@ public class RainbowFish extends Fish {
 	private static final long serialVersionUID = 1L;
 	private transient Fish aim;
 
-	public RainbowFish(int width, int height, double x, double y, double vx,
+	public RainbowFish(double width, double height, double x, double y, double vx,
 			double vy, Pond pond) {
 		super(width, height, x, y, vx, vy, pond, ImagePond
 				.get("fish - brownfish1"));
@@ -26,7 +26,7 @@ public class RainbowFish extends Fish {
 	 * @see com.seancheey.data.Fish#perform()
 	 */
 	@Override
-	protected void perform() {
+	protected void perform(){
 		super.perform();
 		// search for other fishes
 		if (aim == null) {

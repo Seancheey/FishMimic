@@ -78,8 +78,6 @@ public abstract class FishSelectPanel extends JPanel implements ActionListener {
 		// the combo box of the type available for selection
 		fishTypes.add("Rectangular Fish");
 		fishTypes.add("Round Fish");
-		fishTypes.add("Follower Fish");
-		fishTypes.add("Guider Fish");
 		fishTypes.add("Cat Fish");
 		fishTypes.add("Rainbow Fish");
 		// unify and add all to the panel and a single button group
@@ -156,12 +154,6 @@ public abstract class FishSelectPanel extends JPanel implements ActionListener {
 					break;
 				case "Round Fish":
 					type = "RoundFish";
-					break;
-				case "Follower Fish":
-					type = "FollowerFish";
-					break;
-				case "Guider Fish":
-					type = "GuideFish";
 					break;
 				case "Cat Fish":
 					type = "MaoFish";

@@ -15,7 +15,7 @@ public class MaoFish extends Fish {
 	private int timeLeft = 20;
 	private Fish aim;
 
-	public MaoFish(int width, int height, double x, double y, double vx,
+	public MaoFish(double width, double height, double x, double y, double vx,
 			double vy, Pond pond) {
 		super(width, height, x, y, vx, vy, pond, ImagePond.get("fish - cat"));
 	}

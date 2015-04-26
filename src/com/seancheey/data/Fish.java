@@ -16,7 +16,7 @@ public abstract class Fish extends Entity implements Serializable {
 	private double energyUsed, shearY;
 
 	// constructor
-	public Fish(int width, int height, double x, double y, double vx,
+	public Fish(double width, double height, double x, double y, double vx,
 			double vy, Pond pond, Image image) {
 		super();
 		this.width = width;
@@ -154,7 +154,8 @@ public abstract class Fish extends Entity implements Serializable {
 	protected void drawShape(Graphics g) {
 		if (image == null)
 			image = fetchLostImage();
-		g.drawImage(image, -width / 2, -height / 2, width, height, null);
+		g.drawImage(image, (int) (-width / 2), (int) (-height / 2),
+				(int) (width), (int) (height), null);
 	}
 
 	protected abstract Image fetchLostImage();
