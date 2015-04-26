@@ -5,13 +5,11 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.Serializable;
 
-public abstract class Fish implements Serializable {
+public abstract class Fish extends Entity implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	protected int width, height;// the size of fish
-	protected double x, y, vx, vy;// the location and velocity of fish1`
+	private static final long serialVersionUID = 2L;
 	protected final Pond pond;// the container of fish
 	protected transient Image image;// the image of the fish
 	protected boolean immobilized = false;// if the fish is fixed
@@ -31,30 +29,6 @@ public abstract class Fish implements Serializable {
 		this.image = image;
 	}
 
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
-	public void setX(double x) {
-		this.x = x;
-	}
-
-	public void setY(double y) {
-		this.y = y;
-	}
-
-	public void setVx(double vx) {
-		this.vx = vx;
-	}
-
-	public void setVy(double vy) {
-		this.vy = vy;
-	}
-
 	public void setFixed(boolean value) {
 		immobilized = value;
 	}
@@ -65,84 +39,7 @@ public abstract class Fish implements Serializable {
 				+ ", y=" + y + ", vx=" + vx + ", vy=" + vy + "]";
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + height;
-		long temp;
-		temp = Double.doubleToLongBits(vx);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(vy);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + width;
-		temp = Double.doubleToLongBits(x);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(y);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Fish other = (Fish) obj;
-		if (height != other.height)
-			return false;
-		if (Double.doubleToLongBits(vx) != Double.doubleToLongBits(other.vx))
-			return false;
-		if (Double.doubleToLongBits(vy) != Double.doubleToLongBits(other.vy))
-			return false;
-		if (width != other.width)
-			return false;
-		if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))
-			return false;
-		if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
-			return false;
-		return true;
-	}
-
 	// List of getter
-	public int getWidth() {
-		return width;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public double getX() {
-		return x;
-	}
-
-	public double getY() {
-		return y;
-	}
-
-	public double getVx() {
-		return vx;
-	}
-
-	public double getVy() {
-		return vy;
-	}
-
-	public double getVelocity() {
-		return Math.sqrt(vx * vx + vy * vy);
-	}
-
-	public double getXCenter() {
-		return x + width / 2;
-	}
-
-	public double getYCenter() {
-		return y + height / 2;
-	}
 
 	public Pond getPond() {
 		return pond;
