@@ -3,13 +3,10 @@ package com.seancheey.data.entity;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.io.Serializable;
-import java.util.Iterator;
 
 import com.seancheey.data.Entity;
-import com.seancheey.data.Pond;
 
-public abstract class Fish extends Entity implements Serializable {
+public abstract class Fish extends Entity {
 	private static final long serialVersionUID = 2L;
 	/** the container of fish */
 	protected Pond pond;
@@ -34,13 +31,7 @@ public abstract class Fish extends Entity implements Serializable {
 	public Fish(double width, double height, double x, double y, double vx,
 			double vy, Pond pond, Image image, double matureWidth,
 			double matureHeight) {
-		super();
-		this.width = width;
-		this.height = height;
-		this.x = x;
-		this.y = y;
-		this.vx = vx;
-		this.vy = vy;
+		super(width, height, x, y, vx, vy);
 		this.pond = pond;
 		this.image = image;
 		this.matureWidth = matureWidth;
@@ -49,6 +40,16 @@ public abstract class Fish extends Entity implements Serializable {
 
 	@Override
 	public abstract Fish clone();
+
+	public void reset(double width, double height, double x, double y,
+			double vx, double vy) {
+		this.width = width;
+		this.height = height;
+		this.x = x;
+		this.y = y;
+		this.vx = vx;
+		this.vy = vy;
+	}
 
 	private void correctShear() {
 		// calculate the energy use
@@ -80,13 +81,10 @@ public abstract class Fish extends Entity implements Serializable {
 	/** draw the image of fish by the graphics */
 	protected void drawShape(Graphics g) {
 		if (image == null)
-			image = fetchLostImage();
+			fetchLostImage();
 		g.drawImage(image, (int) (-width / 2), (int) (-height / 2),
 				(int) (width), (int) (height), null);
 	}
-
-	/** the fetch the lost image (used in recovered serialized object) */
-	protected abstract Image fetchLostImage();
 
 	public Pond getPond() {
 		return pond;
@@ -135,7 +133,7 @@ public abstract class Fish extends Entity implements Serializable {
 	}
 
 	/** perform the next movement */
-	public void perform() {
+	public void performNext() {
 		grow();
 		detectCollisionWithWall();
 		// have a move
@@ -213,10 +211,7 @@ public abstract class Fish extends Entity implements Serializable {
 
 	private boolean willPropagate() {
 		if (width > matureWidth * 0.80 && height > matureHeight * 0.80) {
-			Iterator<Fish> i = pond.getIterator();
-			Fish f;
-			while (i.hasNext()) {
-				f = i.next();
+			for (Fish f : getPond()) {
 				if (isCollidedBy(f)) {
 					if (Math.random() < 0.001)
 						return true;

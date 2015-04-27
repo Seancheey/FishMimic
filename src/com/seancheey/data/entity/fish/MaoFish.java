@@ -1,10 +1,8 @@
 package com.seancheey.data.entity.fish;
 
-import java.awt.Image;
-
 import com.seancheey.data.ImagePond;
-import com.seancheey.data.Pond;
 import com.seancheey.data.entity.Fish;
+import com.seancheey.data.entity.Pond;
 
 public class MaoFish extends Fish {
 
@@ -21,8 +19,8 @@ public class MaoFish extends Fish {
 	}
 
 	@Override
-	public void perform() {
-		super.perform();
+	public void performNext() {
+		super.performNext();
 		// set new action after finish all action
 		if (timeLeft <= 0 || aim == null) {
 			timeLeft = (int) (Math.random() * 30);
@@ -38,8 +36,8 @@ public class MaoFish extends Fish {
 	}
 
 	@Override
-	protected Image fetchLostImage() {
-		return ImagePond.get("fish - cat");
+	public void fetchLostImage() {
+		image = ImagePond.get("fish - cat");
 	}
 
 }

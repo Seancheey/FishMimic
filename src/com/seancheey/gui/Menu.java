@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 
 import com.seancheey.Main;
 import com.seancheey.data.ImagePond;
-import com.seancheey.data.Pond;
+import com.seancheey.data.entity.Pond;
 
 public class Menu extends JPanel implements ActionListener {
 

@@ -1,10 +1,8 @@
 package com.seancheey.data.entity.fish;
 
-import java.awt.Image;
-
 import com.seancheey.data.ImagePond;
-import com.seancheey.data.Pond;
 import com.seancheey.data.entity.Fish;
+import com.seancheey.data.entity.Pond;
 
 public class RoundFish extends Fish {
 
@@ -20,8 +18,8 @@ public class RoundFish extends Fish {
 	}
 
 	@Override
-	public void perform() {
-		super.perform();
+	public void performNext() {
+		super.performNext();
 		// pick the next fish
 		Fish nextFish = getPond().nextFish(this);
 		// close to it
@@ -34,7 +32,7 @@ public class RoundFish extends Fish {
 	}
 
 	@Override
-	protected Image fetchLostImage() {
-		return ImagePond.get("fish - bluefish");
+	public void fetchLostImage() {
+		image = ImagePond.get("fish - bluefish");
 	}
 }
