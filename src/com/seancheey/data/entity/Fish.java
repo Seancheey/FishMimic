@@ -43,7 +43,7 @@ public abstract class Fish extends Entity implements Serializable {
 		this.vy = vy;
 		this.pond = pond;
 		this.image = image;
-		this.matureWidth = matureHeight;
+		this.matureWidth = matureWidth;
 		this.matureHeight = matureHeight;
 	}
 
@@ -98,14 +98,20 @@ public abstract class Fish extends Entity implements Serializable {
 	/** perform the next movement */
 	public void perform() {
 		// grow a bit or die if mature
-		if (width < matureWidth)
+		if (width <= matureWidth) {
 			width += Math.random() / 10;
-		else if (Math.random() < 0.01)
-			getPond().remove(this);
-		if (height < matureHeight)
+		} else {
+			if (Math.random() < 0.01) {
+				getPond().remove(this);
+			}
+		}
+		if (height <= matureHeight) {
 			height += Math.random() / 20;
-		else if (Math.random() < 0.01)
-			getPond().remove(this);
+		} else {
+			if (Math.random() < 0.01) {
+				getPond().remove(this);
+			}
+		}
 		// to prevent the ball from sticking into wall
 		if (x > getPond().getWidth()) {
 			x = getPond().getWidth() - width;
@@ -132,7 +138,6 @@ public abstract class Fish extends Entity implements Serializable {
 		energyUsed += getVelocity() / 15;
 		// calculate the shear
 		shearY = Math.sin(energyUsed) * 0.25;
-
 		// propagate in a small probability
 		if (width > matureWidth * 0.80 && height > matureHeight * 0.80) {
 			Iterator<Fish> i = pond.getIterator();
