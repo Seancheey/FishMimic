@@ -29,7 +29,7 @@ public class RoundFish extends Fish {
 	}
 
 	@Override
-	protected Fish clone() {
+	public Fish clone() {
 		return new RoundFish(width, height, x, y, vx, vy, pond);
 	}
 

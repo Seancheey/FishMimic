@@ -17,6 +17,7 @@ public class Pond implements Serializable {
 		return Math.random() * range * 2 - range;
 	}
 
+	private static Fish[] ORIGINAL_FISH = new Fish[4];
 	private static final long serialVersionUID = 2L;
 	/** default generated fish's size */
 	public static final int DEFAULT_WIDTH = 120, DEFAULT_HEIGHT = 60;
@@ -29,6 +30,12 @@ public class Pond implements Serializable {
 	/** the list of fish waited to be added or removed */
 	private ArrayList<Fish> added = new ArrayList<Fish>(),
 			removed = new ArrayList<Fish>();
+	static {
+		ORIGINAL_FISH[0] = new RectFish(0, 0, 0, 0, 0, 0, null);
+		ORIGINAL_FISH[1] = new MaoFish(0, 0, 0, 0, 0, 0, null);
+		ORIGINAL_FISH[2] = new RoundFish(0, 0, 0, 0, 0, 0, null);
+		ORIGINAL_FISH[3] = new RainbowFish(0, 0, 0, 0, 0, 0, null);
+	}
 
 	/** simplified constructor */
 	public Pond(int width, int height) {
@@ -80,25 +87,14 @@ public class Pond implements Serializable {
 
 	/** buy a default random fish and put it on a place */
 	public void buyFishAndPut(int x, int y) {
-		switch (new java.util.Random().nextInt(4)) {
-		case 0:
-			buy(new RectFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x - DEFAULT_WIDTH
-					/ 2, y - DEFAULT_HEIGHT / 2, randV(5), randV(5), this));
-			break;
-		case 1:
-			buy(new RoundFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x - DEFAULT_WIDTH
-					/ 2, y - DEFAULT_HEIGHT / 2, randV(5), randV(5), this));
-			break;
-		case 2:
-			buy(new MaoFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x - DEFAULT_WIDTH
-					/ 2, y - DEFAULT_HEIGHT / 2, randV(5), randV(5), this));
-			break;
-		case 3:
-			buy(new RainbowFish(DEFAULT_WIDTH, DEFAULT_HEIGHT, x
-					- DEFAULT_WIDTH / 2, y - DEFAULT_HEIGHT / 2, randV(5),
-					randV(5), this));
-			break;
-		}
+		Fish f = getRandomOriginFish();
+		f.setX(x - DEFAULT_WIDTH / 2);
+		f.setY(y - DEFAULT_HEIGHT / 2);
+		f.setWidth(DEFAULT_WIDTH);
+		f.setHeight(DEFAULT_HEIGHT);
+		f.setVx(randV(5));
+		f.setVy(randV(5));
+		buy(f);
 	}
 
 	@Override
@@ -120,6 +116,17 @@ public class Pond implements Serializable {
 		if (width != other.width)
 			return false;
 		return true;
+	}
+
+	private void flushWaitingFishList() {
+		// add and remove the waiting fish
+		fishes.addAll(added);
+		for (Fish fish : removed) {
+			fishes.remove(fish);
+		}
+		// clear the wait list
+		added.clear();
+		removed.clear();
 	}
 
 	/** return the first fish at the place */
@@ -149,6 +156,13 @@ public class Pond implements Serializable {
 		return fishes.get((int) (Math.random() * fishes.size()));
 	}
 
+	private Fish getRandomOriginFish() {
+		Fish f = ORIGINAL_FISH[(int) (Math.random() * ORIGINAL_FISH.length)]
+				.clone();
+		f.setPond(this);
+		return f;
+	}
+
 	public int getWidth() {
 		return width;
 	}
@@ -165,14 +179,7 @@ public class Pond implements Serializable {
 
 	/** invoke next performance */
 	public synchronized void nextMove() {
-		// add and remove the waiting fish
-		fishes.addAll(added);
-		for (Fish fish : removed) {
-			fishes.remove(fish);
-		}
-		// clear the wait list
-		added.clear();
-		removed.clear();
+		flushWaitingFishList();
 		// invoke next performance
 		Iterator<Fish> i = getIterator();
 		while (i.hasNext()) {

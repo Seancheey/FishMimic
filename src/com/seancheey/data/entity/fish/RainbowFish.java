@@ -40,7 +40,7 @@ public class RainbowFish extends Fish {
 	}
 
 	@Override
-	protected Fish clone() {
+	public Fish clone() {
 		return new RainbowFish(width, height, x, y, vx, vy, pond);
 	}
 

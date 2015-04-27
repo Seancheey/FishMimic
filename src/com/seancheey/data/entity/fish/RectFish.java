@@ -34,7 +34,7 @@ public class RectFish extends Fish {
 	}
 
 	@Override
-	protected Fish clone() {
+	public Fish clone() {
 		return new RectFish(width, height, x, y, vx, vy, pond);
 	}
 

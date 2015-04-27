@@ -12,7 +12,7 @@ import com.seancheey.data.Pond;
 public abstract class Fish extends Entity implements Serializable {
 	private static final long serialVersionUID = 2L;
 	/** the container of fish */
-	protected final Pond pond;
+	protected Pond pond;
 	/** the image of the fish */
 	protected transient Image image;
 	/** if the fish is fixed */
@@ -48,7 +48,7 @@ public abstract class Fish extends Entity implements Serializable {
 	}
 
 	@Override
-	protected abstract Fish clone();
+	public abstract Fish clone();
 
 	private void correctShear() {
 		// calculate the energy use
@@ -166,6 +166,10 @@ public abstract class Fish extends Entity implements Serializable {
 
 	public void setFixed(boolean value) {
 		immobilized = value;
+	}
+
+	public void setPond(Pond pond) {
+		this.pond = pond;
 	}
 
 	@Override

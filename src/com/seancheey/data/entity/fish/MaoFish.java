@@ -33,7 +33,7 @@ public class MaoFish extends Fish {
 	}
 
 	@Override
-	protected Fish clone() {
+	public Fish clone() {
 		return new MaoFish(width, height, x, y, vx, vy, pond);
 	}
 
