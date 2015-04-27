@@ -113,7 +113,9 @@ public class Pond extends Entity implements Container<Fish> {
 	}
 
 	/** paint the pond itself with all fish */
+	@Override
 	public synchronized void paint(Graphics g) {
+		g.drawImage(background, 0, 0, (int) width, (int) height, null);
 		for (Fish fish : this) {
 			fish.paint(g);
 		}
