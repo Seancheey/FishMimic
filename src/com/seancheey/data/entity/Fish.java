@@ -50,6 +50,33 @@ public abstract class Fish extends Entity implements Serializable {
 	@Override
 	protected abstract Fish clone();
 
+	private void correctShear() {
+		// calculate the energy use
+		energyUsed += getVelocity() / 15;
+		// calculate the shear
+		shearY = Math.sin(energyUsed) * 0.25;
+	}
+
+	private void detectCollisionWithWall() {
+		// to prevent the ball from sticking into wall
+		if (x > getPond().getWidth()) {
+			x = getPond().getWidth() - width;
+			vx = -vx;
+		}
+		if (y > getPond().getHeight()) {
+			y = getPond().getHeight() - height;
+			vy = -vy;
+		}
+		if (x < 0) {
+			x = width;
+			vx = -vx;
+		}
+		if (y < 0) {
+			y = height;
+			vy = -vy;
+		}
+	}
+
 	/** draw the image of fish by the graphics */
 	protected void drawShape(Graphics g) {
 		if (image == null)
@@ -68,6 +95,18 @@ public abstract class Fish extends Entity implements Serializable {
 	/** return the price of selling the fish */
 	public int getPrice() {
 		return (int) ((width + height) / 2);
+	}
+
+	// grow a bit or die if mature
+	private void grow() {
+		if (width <= matureWidth || height <= matureHeight) {
+			width += Math.random() / 10;
+			height += Math.random() / 20;
+		} else {
+			if (Math.random() < 0.01) {
+				getPond().remove(this);
+			}
+		}
 	}
 
 	/** detect if the fish collides with another fish */
@@ -97,63 +136,20 @@ public abstract class Fish extends Entity implements Serializable {
 
 	/** perform the next movement */
 	public void perform() {
-		// grow a bit or die if mature
-		if (width <= matureWidth) {
-			width += Math.random() / 10;
-		} else {
-			if (Math.random() < 0.01) {
-				getPond().remove(this);
-			}
-		}
-		if (height <= matureHeight) {
-			height += Math.random() / 20;
-		} else {
-			if (Math.random() < 0.01) {
-				getPond().remove(this);
-			}
-		}
-		// to prevent the ball from sticking into wall
-		if (x > getPond().getWidth()) {
-			x = getPond().getWidth() - width;
-			vx = -vx;
-		}
-		if (y > getPond().getHeight()) {
-			y = getPond().getHeight() - height;
-			vy = -vy;
-		}
-		if (x < 0) {
-			x = width;
-			vx = -vx;
-		}
-		if (y < 0) {
-			y = height;
-			vy = -vy;
-		}
+		grow();
+		detectCollisionWithWall();
 		// have a move
 		if (!immobilized) {
 			x += vx;
 			y += vy;
 		}
-		// calculate the energy use
-		energyUsed += getVelocity() / 15;
-		// calculate the shear
-		shearY = Math.sin(energyUsed) * 0.25;
-		// propagate in a small probability
-		if (width > matureWidth * 0.80 && height > matureHeight * 0.80) {
-			Iterator<Fish> i = pond.getIterator();
-			Fish f;
-			while (i.hasNext()) {
-				f = i.next();
-				if (isCollidedBy(f)) {
-					if (Math.random() < 0.001)
-						propagate();
-					break;
-				}
-			}
-		}
+		correctShear();
+		if (willPropagate())
+			propagate();
+		;
 	}
 
-	/** add a new small fish to the contaiener */
+	/** add a new small fish to the container */
 	public void propagate() {
 		Fish fish = clone();
 		fish.setWidth(20);
@@ -161,6 +157,11 @@ public abstract class Fish extends Entity implements Serializable {
 		fish.setVx(Pond.randV(5));
 		fish.setVy(Pond.randV(5));
 		pond.add(fish);
+	}
+
+	public void setAngularVelocity(double velocity, double angle) {
+		vx = Math.cos(angle) * velocity;
+		vy = Math.sin(angle) * velocity;
 	}
 
 	public void setFixed(boolean value) {
@@ -184,9 +185,7 @@ public abstract class Fish extends Entity implements Serializable {
 		} else {
 			vangle = (vangle + aimangle) / 2;
 		}
-		// set vx and vy
-		vx = Math.cos(vangle) * getVelocity();
-		vy = Math.sin(vangle) * getVelocity();
+		setAngularVelocity(getVelocity(), vangle);
 	}
 
 	/** move towards the fish directly once */
@@ -204,10 +203,22 @@ public abstract class Fish extends Entity implements Serializable {
 		if (immobilized == false) {
 			double diffv = fish.getVelocity();
 			v = (v + diffv) / 2;
-			// set vx and vy
-			vx = Math.cos(vangle) * v;
-			vy = Math.sin(vangle) * v;
+			setAngularVelocity(getVelocity(), vangle);
 		}
 	}
 
+	private boolean willPropagate() {
+		if (width > matureWidth * 0.80 && height > matureHeight * 0.80) {
+			Iterator<Fish> i = pond.getIterator();
+			Fish f;
+			while (i.hasNext()) {
+				f = i.next();
+				if (isCollidedBy(f)) {
+					if (Math.random() < 0.001)
+						return true;
+				}
+			}
+		}
+		return false;
+	}
 }
