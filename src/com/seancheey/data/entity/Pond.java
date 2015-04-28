@@ -99,6 +99,26 @@ public class Pond extends Entity implements Container<Fish>, Performable {
 		return fishes.iterator();
 	}
 
+	/** method to prevent the fish from swimming outside */
+	private void keepInside(Fish fish) {
+		if (fish.getX() < 0) {
+			fish.setVx(-fish.getVx());
+			fish.setX(0);
+		}
+		if (fish.getY() < 0) {
+			fish.setVy(-fish.getVy());
+			fish.setY(0);
+		}
+		if (fish.getX() + fish.getWidth() > width) {
+			fish.setVx(-fish.getVx());
+			fish.setX(width - fish.getWidth());
+		}
+		if (fish.getY() > height) {
+			fish.setVy(-fish.getVy());
+			fish.setY(height - fish.getHeight());
+		}
+	}
+
 	/** return the next fish of the argument in the array */
 	public Fish nextFish(Fish fish) {
 		int index = fishes.indexOf(fish);
@@ -115,6 +135,7 @@ public class Pond extends Entity implements Container<Fish>, Performable {
 		flushWaitingFishList();
 		// invoke next performance
 		for (Fish fish : this) {
+			keepInside(fish);
 			fish.performNext();
 		}
 	}
