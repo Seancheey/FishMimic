@@ -20,14 +20,16 @@ public abstract class Map implements HasImage, Container<Entity>, Serializable,
 	private static final long serialVersionUID = 1L;
 	protected int width, height;
 	protected transient Image background;
+	protected Player owner;
 	private ArrayList<Entity> entities;
 
-	public Map(int width, int height, Image background,
+	public Map(int width, int height, Image background, Player owner,
 			ArrayList<Entity> entities) {
 		super();
 		this.width = width;
 		this.height = height;
 		this.background = background;
+		this.owner = owner;
 		this.entities = entities;
 	}
 
