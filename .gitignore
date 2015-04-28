@@ -40,3 +40,4 @@ local.properties
 *.db
 
 dat/
+res/
