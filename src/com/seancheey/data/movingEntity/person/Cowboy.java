@@ -17,11 +17,4 @@ public class Cowboy extends Person {
 	public void fetchLostImage() {
 		image = PersonPond.COWBOY;
 	}
-
-	@Override
-	public void performNext() {
-		x += vx;
-		y += vy;
-	}
-
 }

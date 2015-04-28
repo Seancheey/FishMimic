@@ -68,12 +68,11 @@ public abstract class Fish extends MovingEntity {
 
 	/** perform the next movement */
 	public void performNext() {
-		grow();
 		// have a move
 		if (!immobilized) {
-			x += vx;
-			y += vy;
+			super.performNext();
 		}
+		grow();
 		correctShear();
 		if (willPropagate())
 			propagate();

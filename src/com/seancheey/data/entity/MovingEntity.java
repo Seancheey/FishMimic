@@ -27,6 +27,12 @@ public abstract class MovingEntity extends Entity {
 		return vx;
 	}
 
+	@Override
+	public void performNext() {
+		x += vx;
+		y += vy;
+	}
+
 	public double getVy() {
 		return vy;
 	}
