@@ -8,6 +8,7 @@ public class ImagePond {
 	public static Image get(int index) {
 		return INT_TO_IMAGE.get(index);
 	}
+
 	public static Image get(String name) {
 		return INT_TO_IMAGE.get(STRING_TO_IMAGE.get(name));
 	}

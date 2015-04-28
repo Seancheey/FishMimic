@@ -7,7 +7,7 @@ import com.seancheey.Container;
 import com.seancheey.HasImage;
 import com.seancheey.Performable;
 
-public abstract class Entity implements Serializable, HasImage ,Performable{
+public abstract class Entity implements Serializable, HasImage, Performable {
 
 	/**
 	 * 

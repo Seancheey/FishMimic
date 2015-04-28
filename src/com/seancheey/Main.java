@@ -8,6 +8,7 @@ public class Main {
 		controlFrame.add(new Menu());
 		controlFrame.setVisible(true);
 	}
+
 	public static final String NAME = "Moving fishes";
 
 	public static Gui controlFrame;
