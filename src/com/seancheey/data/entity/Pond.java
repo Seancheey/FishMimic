@@ -1,7 +1,6 @@
 package com.seancheey.data.entity;
 
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -107,15 +106,6 @@ public class Pond extends Entity implements Container<Fish>, Performable {
 			return fishes.get(0);
 		} else {
 			return fishes.get(index + 1);
-		}
-	}
-
-	/** paint the pond itself with all fish */
-	@Override
-	public synchronized void paint(Graphics g) {
-		g.drawImage(getImage(), 0, 0, (int) width, (int) height, null);
-		for (Fish fish : this) {
-			fish.paint(g);
 		}
 	}
 
