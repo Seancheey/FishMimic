@@ -2,10 +2,10 @@ package com.seancheey.data.map;
 
 import java.util.ArrayList;
 
-import com.seancheey.BackgroundPond;
 import com.seancheey.data.Entity;
 import com.seancheey.data.Map;
 import com.seancheey.data.entity.Pond;
+import com.seancheey.source.BackgroundPond;
 
 public class MeadowMap extends Map {
 	private static final long serialVersionUID = 1L;

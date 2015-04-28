@@ -1,4 +1,4 @@
-package com.seancheey;
+package com.seancheey.source;
 
 import java.awt.Image;
 
