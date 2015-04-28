@@ -1,4 +1,4 @@
-package com.seancheey.source;
+package com.seancheey;
 
 import java.awt.Image;
 
@@ -8,7 +8,7 @@ public class BackgroundPond {
 
 	static {
 		pond = new ImagePond("res/background/");
-		pond.put("sea.jpg", SEA);
-		pond.put("meadow.jpg", MEADOW);
+		SEA = pond.get("sea.jpg");
+		MEADOW = pond.get("meadow.jpg");
 	}
 }

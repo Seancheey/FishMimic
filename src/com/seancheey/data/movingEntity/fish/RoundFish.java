@@ -3,10 +3,9 @@ package com.seancheey.data.movingEntity.fish;
 import java.awt.Image;
 
 import com.seancheey.Container;
+import com.seancheey.FishPond;
 import com.seancheey.data.Entity;
 import com.seancheey.data.movingEntity.Fish;
-import com.seancheey.source.FishPond;
-import com.seancheey.source.ImagePond;
 
 public class RoundFish extends Fish {
 

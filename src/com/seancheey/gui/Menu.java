@@ -17,11 +17,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.seancheey.BackgroundPond;
 import com.seancheey.GUIContainer;
 import com.seancheey.Main;
 import com.seancheey.data.Map;
-import com.seancheey.source.BackgroundPond;
-import com.seancheey.source.ImagePond;
 
 public class Menu extends JPanel implements ActionListener {
 

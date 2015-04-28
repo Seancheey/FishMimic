@@ -6,12 +6,11 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.seancheey.BackgroundPond;
 import com.seancheey.Container;
 import com.seancheey.Performable;
 import com.seancheey.data.Entity;
 import com.seancheey.data.movingEntity.Fish;
-import com.seancheey.source.BackgroundPond;
-import com.seancheey.source.ImagePond;
 
 public class Pond extends Entity implements Container<Fish>, Performable {
 	public static final double randV(double range) {
