@@ -10,6 +10,7 @@ import com.seancheey.Container;
 import com.seancheey.Performable;
 import com.seancheey.data.Entity;
 import com.seancheey.data.ImagePond;
+import com.seancheey.data.movingEntity.Fish;
 
 public class Pond extends Entity implements Container<Fish>, Performable {
 	public static final double randV(double range) {

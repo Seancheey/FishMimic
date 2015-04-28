@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 
 import com.seancheey.Main;
 import com.seancheey.data.ImagePond;
-import com.seancheey.data.entity.Pond;
+import com.seancheey.data.Map;
 
 public class Menu extends JPanel implements ActionListener {
 
@@ -66,6 +66,34 @@ public class Menu extends JPanel implements ActionListener {
 		setLayout(layout);
 	}
 
+	private Map readProgress() {
+		JFileChooser fileChooser = new JFileChooser("dat");
+		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		fileChooser.showOpenDialog(null);
+		fileChooser.setMultiSelectionEnabled(false);
+		fileChooser.setAcceptAllFileFilterUsed(false);
+		File file = fileChooser.getSelectedFile();
+		FileInputStream filein;
+		ObjectInputStream objin;
+		Object obj = null;
+		if (file != null) {
+			try {
+				filein = new FileInputStream(file);
+				objin = new ObjectInputStream(filein);
+				obj = objin.readObject();
+				filein.close();
+				objin.close();
+
+			} catch (Exception e) {
+			}
+		}
+		if (obj instanceof Map) {
+			return (Map) obj;
+		} else {
+			return null;
+		}
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent a) {
 		if (a.getSource() instanceof JButton) {
@@ -75,34 +103,11 @@ public class Menu extends JPanel implements ActionListener {
 				Main.controlFrame.switchPanel(this, new GamePanel(null));
 				break;
 			case "Read Progress":
-				JFileChooser fileChooser = new JFileChooser("dat");
-				fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-				fileChooser.showOpenDialog(null);
-				fileChooser.setMultiSelectionEnabled(false);
-				fileChooser.setAcceptAllFileFilterUsed(false);
-				File file = fileChooser.getSelectedFile();
-				if (file != null) {
-					try {
-						FileInputStream filein = new FileInputStream(file);
-						ObjectInputStream objin = new ObjectInputStream(filein);
-						Object p = objin.readObject();
-						if (p instanceof Pond) {
-							Pond pond = (Pond) p;
-							Main.controlFrame.switchPanel(this, new GamePanel(
-									pond));
-						}
-						filein.close();
-						objin.close();
-					} catch (Exception e) {
-					}
-				}
+				Main.controlFrame.switchPanel(this, new GamePanel(
+						readProgress()));
 				break;
 			case "About us":
 				Main.controlFrame.switchPanel(this, new CreditPanel() {
-
-					/**
-					 * 
-					 */
 					private static final long serialVersionUID = 1L;
 
 					@Override

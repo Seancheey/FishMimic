@@ -1,8 +1,9 @@
-package com.seancheey.data;
+package com.seancheey.data.entity;
 
 import java.awt.Image;
 
 import com.seancheey.Container;
+import com.seancheey.data.Entity;
 
 public abstract class MovingEntity extends Entity {
 	/**

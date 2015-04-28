@@ -1,9 +1,9 @@
-package com.seancheey.data.entity.fish;
+package com.seancheey.data.movingEntity.fish;
 
 import com.seancheey.Container;
 import com.seancheey.data.Entity;
 import com.seancheey.data.ImagePond;
-import com.seancheey.data.entity.Fish;
+import com.seancheey.data.movingEntity.Fish;
 
 public class RectFish extends Fish {
 

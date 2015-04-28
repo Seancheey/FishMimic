@@ -1,10 +1,10 @@
-package com.seancheey.data.entity;
+package com.seancheey.data.movingEntity;
 
 import java.awt.Image;
 
 import com.seancheey.Container;
 import com.seancheey.data.Entity;
-import com.seancheey.data.MovingEntity;
+import com.seancheey.data.entity.MovingEntity;
 
 public abstract class Person extends MovingEntity {
 
