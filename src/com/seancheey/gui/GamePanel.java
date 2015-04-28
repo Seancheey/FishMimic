@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 import com.seancheey.data.Map;
+import com.seancheey.data.map.MeadowMap;
 
 public class GamePanel extends JPanel {
 
@@ -20,6 +21,10 @@ public class GamePanel extends JPanel {
 	public GamePanel(Map map) {
 		super();
 		this.map = map;
+	}
+	
+	public GamePanel(){
+		this(new MeadowMap(800, 800));
 	}
 
 	private void paintOnBufferedImage() {

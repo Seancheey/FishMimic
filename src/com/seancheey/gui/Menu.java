@@ -103,7 +103,7 @@ public class Menu extends JPanel implements ActionListener {
 			JButton b = (JButton) a.getSource();
 			switch (b.getText()) {
 			case "New Game":
-				guiContainer.switchPanel(this, new GamePanel(null));
+				guiContainer.switchPanel(this, new GamePanel());
 				break;
 			case "Read Progress":
 				guiContainer.switchPanel(this, new GamePanel(readProgress()));
