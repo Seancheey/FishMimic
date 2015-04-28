@@ -1,4 +1,4 @@
-package com.seancheey;
+package com.seancheey.interfaces;
 
 /**
  * A interface that describes the behavior of a container. those who use the

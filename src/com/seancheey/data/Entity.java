@@ -5,9 +5,9 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.Serializable;
 
-import com.seancheey.Container;
-import com.seancheey.HasImage;
-import com.seancheey.Performable;
+import com.seancheey.interfaces.Container;
+import com.seancheey.interfaces.HasImage;
+import com.seancheey.interfaces.Performable;
 
 public abstract class Entity implements Serializable, HasImage, Performable {
 

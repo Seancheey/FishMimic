@@ -6,9 +6,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.seancheey.Container;
-import com.seancheey.HasImage;
-import com.seancheey.Performable;
+import com.seancheey.interfaces.Container;
+import com.seancheey.interfaces.HasImage;
+import com.seancheey.interfaces.Performable;
 
 /**
  * The container that includes all of the objects exist in the game. Player use

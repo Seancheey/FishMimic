@@ -2,7 +2,7 @@ package com.seancheey.data;
 
 import java.io.Serializable;
 
-import com.seancheey.HasImage;
+import com.seancheey.interfaces.HasImage;
 
 public abstract class Player implements Serializable, HasImage {
 	private static final long serialVersionUID = 1L;

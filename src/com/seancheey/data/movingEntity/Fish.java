@@ -2,10 +2,10 @@ package com.seancheey.data.movingEntity;
 
 import java.awt.Image;
 
-import com.seancheey.Container;
 import com.seancheey.data.Entity;
 import com.seancheey.data.entity.MovingEntity;
 import com.seancheey.data.entity.Pond;
+import com.seancheey.interfaces.Container;
 
 public abstract class Fish extends MovingEntity {
 	private static final long serialVersionUID = 2L;

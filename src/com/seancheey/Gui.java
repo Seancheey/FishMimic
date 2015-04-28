@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import com.seancheey.interfaces.GUIContainer;
+
 public class Gui extends JFrame implements GUIContainer {
 
 	/**

@@ -17,9 +17,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.seancheey.GUIContainer;
 import com.seancheey.Main;
 import com.seancheey.data.Map;
+import com.seancheey.interfaces.GUIContainer;
 import com.seancheey.source.BackgroundPond;
 
 public class Menu extends JPanel implements ActionListener {
