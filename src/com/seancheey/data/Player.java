@@ -19,14 +19,6 @@ public abstract class Player implements Serializable, HasImage {
 		this.name = name;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public void earnMoney(int amount) {
 		money += amount;
 	}
@@ -35,8 +27,16 @@ public abstract class Player implements Serializable, HasImage {
 		return money;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public void setMoney(int money) {
 		this.money = money;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void spendMoney(int amount) {
