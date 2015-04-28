@@ -36,33 +36,21 @@ public abstract class Map implements HasImage, Container<Entity>, Serializable,
 		entities.add(object);
 	}
 
-	@Override
-	public Iterator<Entity> iterator() {
-		return entities.iterator();
-	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public void setWidth(int width) {
-		this.width = width;
+	public Image getBackground() {
+		return background;
 	}
 
 	public int getHeight() {
 		return height;
 	}
 
-	public void setHeight(int height) {
-		this.height = height;
+	public int getWidth() {
+		return width;
 	}
 
-	public Image getBackground() {
-		return background;
-	}
-
-	public void setBackground(Image background) {
-		this.background = background;
+	@Override
+	public Iterator<Entity> iterator() {
+		return entities.iterator();
 	}
 
 	@Override
@@ -83,6 +71,18 @@ public abstract class Map implements HasImage, Container<Entity>, Serializable,
 	@Override
 	public void remove(Entity object) {
 		entities.remove(object);
+	}
+
+	public void setBackground(Image background) {
+		this.background = background;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
 	}
 
 }

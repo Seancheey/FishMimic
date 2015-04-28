@@ -36,16 +36,6 @@ public abstract class Entity implements Serializable, HasImage, Performable {
 		this.container = container;
 	}
 
-	@Override
-	public void paint(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
-		g2.rotate(rotation, getXCenter(), getYCenter());
-		g2.shear(shearX, shearY);
-		g2.drawImage(image, (int) x, (int) y, (int) width, (int) height, null);
-		g2.shear(-shearX, -shearY);
-		g2.rotate(-rotation, getXCenter(), getYCenter());
-	}
-
 	public Container<Entity> getContainer() {
 		return container;
 	}
@@ -88,6 +78,16 @@ public abstract class Entity implements Serializable, HasImage, Performable {
 
 	public double getYCenter() {
 		return y + height / 2;
+	}
+
+	@Override
+	public void paint(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+		g2.rotate(rotation, getXCenter(), getYCenter());
+		g2.shear(shearX, shearY);
+		g2.drawImage(image, (int) x, (int) y, (int) width, (int) height, null);
+		g2.shear(-shearX, -shearY);
+		g2.rotate(-rotation, getXCenter(), getYCenter());
 	}
 
 	public void setHeight(double height) {

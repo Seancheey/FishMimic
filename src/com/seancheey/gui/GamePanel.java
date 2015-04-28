@@ -17,6 +17,10 @@ public class GamePanel extends JPanel {
 	private Map map;
 	private BufferedImage bufferImage;
 
+	public GamePanel() {
+		this(new MeadowMap(800, 800));
+	}
+
 	public GamePanel(Map map) {
 		super();
 		this.map = map;
@@ -24,19 +28,15 @@ public class GamePanel extends JPanel {
 				BufferedImage.TYPE_3BYTE_BGR);
 	}
 
-	public GamePanel() {
-		this(new MeadowMap(800, 800));
-	}
-
-	private void paintOnBufferedImage() {
-		bufferImage.flush();
-		map.paint(bufferImage.getGraphics());
-	}
-
 	@Override
 	protected void paintComponent(Graphics g) {
 		paintOnBufferedImage();
 		g.drawImage(bufferImage, 0, 0, getWidth(), getHeight(), this);
 		repaint();
+	}
+
+	private void paintOnBufferedImage() {
+		bufferImage.flush();
+		map.paint(bufferImage.getGraphics());
 	}
 }

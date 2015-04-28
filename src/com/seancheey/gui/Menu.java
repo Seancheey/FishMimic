@@ -69,6 +69,36 @@ public class Menu extends JPanel implements ActionListener {
 		setLayout(layout);
 	}
 
+	@Override
+	public void actionPerformed(ActionEvent a) {
+		if (a.getSource() instanceof JButton) {
+			JButton b = (JButton) a.getSource();
+			switch (b.getText()) {
+			case "New Game":
+				guiContainer.switchPanel(this, new GamePanel());
+				break;
+			case "Read Progress":
+				guiContainer.switchPanel(this, new GamePanel(readProgress()));
+				break;
+			case "About us":
+				guiContainer.switchPanel(this, new CreditPanel() {
+					private static final long serialVersionUID = 1L;
+
+					@Override
+					public void backAction() {
+						guiContainer.switchPanel(this, new Menu(guiContainer));
+					}
+				});
+				break;
+			}
+		}
+	}
+
+	@Override
+	protected void paintComponent(java.awt.Graphics g) {
+		g.drawImage(BackgroundPond.SEA, 0, 0, getWidth(), getHeight(), this);
+	};
+
 	private Map readProgress() {
 		JFileChooser fileChooser = new JFileChooser("dat");
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -95,35 +125,5 @@ public class Menu extends JPanel implements ActionListener {
 		} else {
 			return null;
 		}
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent a) {
-		if (a.getSource() instanceof JButton) {
-			JButton b = (JButton) a.getSource();
-			switch (b.getText()) {
-			case "New Game":
-				guiContainer.switchPanel(this, new GamePanel());
-				break;
-			case "Read Progress":
-				guiContainer.switchPanel(this, new GamePanel(readProgress()));
-				break;
-			case "About us":
-				guiContainer.switchPanel(this, new CreditPanel() {
-					private static final long serialVersionUID = 1L;
-
-					@Override
-					public void backAction() {
-						guiContainer.switchPanel(this, new Menu(guiContainer));
-					}
-				});
-				break;
-			}
-		}
-	};
-
-	@Override
-	protected void paintComponent(java.awt.Graphics g) {
-		g.drawImage(BackgroundPond.SEA, 0, 0, getWidth(), getHeight(), this);
 	}
 }
