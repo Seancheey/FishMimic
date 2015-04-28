@@ -8,10 +8,10 @@ import java.util.Iterator;
 
 import com.seancheey.Container;
 import com.seancheey.HasImage;
-import com.seancheey.Movable;
+import com.seancheey.Performable;
 
 public abstract class Map implements HasImage, Container<Entity>, Serializable,
-		Movable {
+		Performable {
 	/**
 	 * 
 	 */
@@ -21,18 +21,13 @@ public abstract class Map implements HasImage, Container<Entity>, Serializable,
 	private ArrayList<Entity> entities;
 
 	@Override
-	public Iterator<Entity> iterator() {
-		return entities.iterator();
-	}
-
-	@Override
 	public void add(Entity object) {
 		entities.add(object);
 	}
 
 	@Override
-	public void remove(Entity object) {
-		entities.remove(object);
+	public Iterator<Entity> iterator() {
+		return entities.iterator();
 	}
 
 	@Override
@@ -48,6 +43,11 @@ public abstract class Map implements HasImage, Container<Entity>, Serializable,
 		for (Entity entity : this) {
 			entity.performNext();
 		}
+	}
+
+	@Override
+	public void remove(Entity object) {
+		entities.remove(object);
 	}
 
 }

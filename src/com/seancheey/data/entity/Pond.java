@@ -7,10 +7,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.seancheey.Container;
+import com.seancheey.Performable;
 import com.seancheey.data.Entity;
 import com.seancheey.data.ImagePond;
 
-public class Pond extends Entity implements Container<Fish> {
+public class Pond extends Entity implements Container<Fish>, Performable {
 	public static final double randV(double range) {
 		return Math.random() * range * 2 - range;
 	}
@@ -18,19 +19,20 @@ public class Pond extends Entity implements Container<Fish> {
 	private static final long serialVersionUID = 2L;
 	/** fish container */
 	private final ArrayList<Fish> fishes;
-	private Image background;
-	/** the list of fish waited to be added or removed */
-	private ArrayList<Fish> added = new ArrayList<Fish>(),
-			removed = new ArrayList<Fish>();
+	/** the list of fish waited to be added */
+	private ArrayList<Fish> added = new ArrayList<Fish>();
+	/** the list of fish waited to be removed */
+	private ArrayList<Fish> removed = new ArrayList<Fish>();
 
-	/** simplified constructor */
-	public Pond(int width, int height) {
-		this(width, height, new ArrayList<Fish>());
+	public Pond(double width, double height, double x, double y, Image image,
+			Container<Entity> container) {
+		this(width, height, x, y, image, container, new ArrayList<Fish>());
 	}
 
-	/** origin constructor */
-	public Pond(int width, int height, ArrayList<Fish> fishes) {
-		super(width, height, 0, 0, 0, 0);
+	/** original constructor */
+	public Pond(double width, double height, double x, double y, Image image,
+			Container<Entity> container, ArrayList<Fish> fishes) {
+		super(width, height, x, y, image, container);
 		this.fishes = fishes;
 	}
 
@@ -59,6 +61,11 @@ public class Pond extends Entity implements Container<Fish> {
 		if (width != other.width)
 			return false;
 		return true;
+	}
+
+	@Override
+	public void fetchLostImage() {
+		setImage(ImagePond.get("background - sea"));
 	}
 
 	private void flushWaitingFishList() {
@@ -102,6 +109,15 @@ public class Pond extends Entity implements Container<Fish> {
 		}
 	}
 
+	/** paint the pond itself with all fish */
+	@Override
+	public synchronized void paint(Graphics g) {
+		g.drawImage(getImage(), 0, 0, (int) width, (int) height, null);
+		for (Fish fish : this) {
+			fish.paint(g);
+		}
+	}
+
 	/** invoke next performance */
 	@Override
 	public void performNext() {
@@ -109,15 +125,6 @@ public class Pond extends Entity implements Container<Fish> {
 		// invoke next performance
 		for (Fish fish : this) {
 			fish.performNext();
-		}
-	}
-
-	/** paint the pond itself with all fish */
-	@Override
-	public synchronized void paint(Graphics g) {
-		g.drawImage(background, 0, 0, (int) width, (int) height, null);
-		for (Fish fish : this) {
-			fish.paint(g);
 		}
 	}
 
@@ -151,10 +158,5 @@ public class Pond extends Entity implements Container<Fish> {
 	public synchronized void resize(Dimension dimension) {
 		width = dimension.width;
 		height = dimension.height;
-	}
-
-	@Override
-	public void fetchLostImage() {
-		background = ImagePond.get("background - sea");
 	}
 }

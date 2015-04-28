@@ -4,52 +4,34 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
+import com.seancheey.Container;
 import com.seancheey.data.Entity;
+import com.seancheey.data.MovingEntity;
 
-public abstract class Fish extends Entity {
+public abstract class Fish extends MovingEntity {
 	private static final long serialVersionUID = 2L;
-	/** the container of fish */
-	protected Pond pond;
-	/** the image of the fish */
-	protected transient Image image;
 	/** if the fish is fixed */
 	protected boolean immobilized = false;
 	/** the energy used by the fish(used to calculate shear) */
 	private double energyUsed;
-	/** the shear that distort the fish to make it seems move */
-	private double shearY;
 	/** the size of mature fish */
-	private final double matureWidth, matureHeight;
+	protected final double matureWidth, matureHeight;
 
-	/** simplified constructor */
-	public Fish(double width, double height, double x, double y, double vx,
-			double vy, Pond pond, Image image) {
-		this(width, height, x, y, vx, vy, pond, image, 150, 75);
+	public Fish(double width, double height, double x, double y, Image image,
+			Container<Entity> container, double vx, double vy) {
+		this(width, height, x, y, image, container, vx, vy, 150, 75);
 	}
 
-	/** origin constructor */
-	public Fish(double width, double height, double x, double y, double vx,
-			double vy, Pond pond, Image image, double matureWidth,
-			double matureHeight) {
-		super(width, height, x, y, vx, vy);
-		this.pond = pond;
-		this.image = image;
+	public Fish(double width, double height, double x, double y, Image image,
+			Container<Entity> container, double vx, double vy,
+			double matureWidth, double matureHeight) {
+		super(width, height, x, y, image, container, vx, vy);
 		this.matureWidth = matureWidth;
 		this.matureHeight = matureHeight;
 	}
 
 	@Override
 	public abstract Fish clone();
-
-	public void reset(double width, double height, double x, double y,
-			double vx, double vy) {
-		this.width = width;
-		this.height = height;
-		this.x = x;
-		this.y = y;
-		this.vx = vx;
-		this.vy = vy;
-	}
 
 	private void correctShear() {
 		// calculate the energy use
@@ -58,36 +40,12 @@ public abstract class Fish extends Entity {
 		shearY = Math.sin(energyUsed) * 0.25;
 	}
 
-	private void detectCollisionWithWall() {
-		// to prevent the ball from sticking into wall
-		if (x > getPond().getWidth()) {
-			x = getPond().getWidth() - width;
-			vx = -vx;
-		}
-		if (y > getPond().getHeight()) {
-			y = getPond().getHeight() - height;
-			vy = -vy;
-		}
-		if (x < 0) {
-			x = width;
-			vx = -vx;
-		}
-		if (y < 0) {
-			y = height;
-			vy = -vy;
-		}
-	}
-
 	/** draw the image of fish by the graphics */
 	protected void drawShape(Graphics g) {
 		if (image == null)
 			fetchLostImage();
 		g.drawImage(image, (int) (-width / 2), (int) (-height / 2),
 				(int) (width), (int) (height), null);
-	}
-
-	public Pond getPond() {
-		return pond;
 	}
 
 	/** return the price of selling the fish */
@@ -102,7 +60,7 @@ public abstract class Fish extends Entity {
 			height += Math.random() / 20;
 		} else {
 			if (Math.random() < 0.01) {
-				getPond().remove(this);
+				getContainer().remove(this);
 			}
 		}
 	}
@@ -135,7 +93,6 @@ public abstract class Fish extends Entity {
 	/** perform the next movement */
 	public void performNext() {
 		grow();
-		detectCollisionWithWall();
 		// have a move
 		if (!immobilized) {
 			x += vx;
@@ -154,7 +111,17 @@ public abstract class Fish extends Entity {
 		fish.setHeight(10);
 		fish.setVx(Pond.randV(5));
 		fish.setVy(Pond.randV(5));
-		pond.add(fish);
+		getContainer().add(fish);
+	}
+
+	public void reset(double width, double height, double x, double y,
+			double vx, double vy) {
+		this.width = width;
+		this.height = height;
+		this.x = x;
+		this.y = y;
+		this.vx = vx;
+		this.vy = vy;
 	}
 
 	public void setAngularVelocity(double velocity, double angle) {
@@ -164,10 +131,6 @@ public abstract class Fish extends Entity {
 
 	public void setFixed(boolean value) {
 		immobilized = value;
-	}
-
-	public void setPond(Pond pond) {
-		this.pond = pond;
 	}
 
 	@Override
@@ -211,8 +174,8 @@ public abstract class Fish extends Entity {
 
 	private boolean willPropagate() {
 		if (width > matureWidth * 0.80 && height > matureHeight * 0.80) {
-			for (Fish f : getPond()) {
-				if (isCollidedBy(f)) {
+			for (Entity f : getContainer()) {
+				if (isCollidedBy((Fish) f)) {
 					if (Math.random() < 0.001)
 						return true;
 				}

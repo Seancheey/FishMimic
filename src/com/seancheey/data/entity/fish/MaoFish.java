@@ -1,8 +1,9 @@
 package com.seancheey.data.entity.fish;
 
+import com.seancheey.Container;
+import com.seancheey.data.Entity;
 import com.seancheey.data.ImagePond;
 import com.seancheey.data.entity.Fish;
-import com.seancheey.data.entity.Pond;
 
 public class MaoFish extends Fish {
 
@@ -10,34 +11,35 @@ public class MaoFish extends Fish {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int timeLeft = 20;
-	private Fish aim;
 
-	public MaoFish(double width, double height, double x, double y, double vx,
-			double vy, Pond pond) {
-		super(width, height, x, y, vx, vy, pond, ImagePond.get("fish - cat"));
+	public MaoFish(double width, double height, double x, double y,
+			Container<Entity> container, double vx, double vy) {
+		super(width, height, x, y, ImagePond.get("fish - cat"), container, vx,
+				vy);
 	}
 
-	@Override
-	public void performNext() {
-		super.performNext();
-		// set new action after finish all action
-		if (timeLeft <= 0 || aim == null) {
-			timeLeft = (int) (Math.random() * 30);
-			aim = getPond().getRandomFish();
-		}
-		trackOnce(aim);
-		timeLeft--;
+	public MaoFish(double width, double height, double x, double y,
+			Container<Entity> container, double vx, double vy,
+			double matureWidth, double matureHeight) {
+		super(width, height, x, y, ImagePond.get("fish - cat"), container, vx,
+				vy, matureWidth, matureHeight);
 	}
 
 	@Override
 	public Fish clone() {
-		return new MaoFish(width, height, x, y, vx, vy, pond);
+		return new MaoFish(width, height, x, y, container, vx, vy, matureWidth,
+				matureHeight);
 	}
 
 	@Override
 	public void fetchLostImage() {
 		image = ImagePond.get("fish - cat");
+	}
+
+	@Override
+	public void performNext() {
+		super.performNext();
+		// TODO moving method
 	}
 
 }

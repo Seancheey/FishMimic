@@ -67,12 +67,6 @@ public class Menu extends JPanel implements ActionListener {
 	}
 
 	@Override
-	protected void paintComponent(java.awt.Graphics g) {
-		g.drawImage(ImagePond.get("background - sea"), 0, 0, getWidth(),
-				getHeight(), this);
-	};
-
-	@Override
 	public void actionPerformed(ActionEvent a) {
 		if (a.getSource() instanceof JButton) {
 			JButton b = (JButton) a.getSource();
@@ -119,5 +113,11 @@ public class Menu extends JPanel implements ActionListener {
 				break;
 			}
 		}
+	};
+
+	@Override
+	protected void paintComponent(java.awt.Graphics g) {
+		g.drawImage(ImagePond.get("background - sea"), 0, 0, getWidth(),
+				getHeight(), this);
 	}
 }

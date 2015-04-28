@@ -2,21 +2,20 @@ package com.seancheey.data.entity;
 
 import java.awt.Image;
 
+import com.seancheey.Container;
 import com.seancheey.data.Entity;
+import com.seancheey.data.MovingEntity;
 
-public abstract class Person extends Entity {
+public abstract class Person extends MovingEntity {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	protected transient Image image;
-	protected double rotation;
 
-	public Person(double width, double height, double x, double y, double vx,
-			double vy, Image image) {
-		super(width, height, x, y, vx, vy);
-		this.image = image;
+	public Person(double width, double height, double x, double y, Image image,
+			Container<Entity> container, double vx, double vy) {
+		super(width, height, x, y, image, container, vx, vy);
 	}
 
 }

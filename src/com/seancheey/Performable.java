@@ -1,5 +1,5 @@
 package com.seancheey;
 
-public interface Movable {
+public interface Performable {
 	void performNext();
 }

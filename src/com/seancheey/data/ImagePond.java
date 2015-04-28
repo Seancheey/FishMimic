@@ -5,22 +5,11 @@ import java.awt.Toolkit;
 import java.util.HashMap;
 
 public class ImagePond {
-	private transient static HashMap<Integer, Image> INT_TO_IMAGE = new HashMap<Integer, Image>();
-	private transient static HashMap<String, Integer> STRING_TO_IMAGE = new HashMap<String, Integer>();
-
-	static {
-		put("background - sea", "res/background/sea.jpg");
-		put("fish - cat", "res/fish/github.png");
-		put("fish - redfish", "res/fish/red fish.png");
-		put("fish - yellowfish", "res/fish/yellow fish.png");
-		put("fish - greenfish", "res/fish/green fish.png");
-		put("fish - bluefish", "res/fish/blue fish.png");
-		put("fish - brownfish1", "res/fish/brown fish 1.png");
-		put("fish - brownfish2", "res/fish/brown fish 2.png");
+	public static Image get(int index) {
+		return INT_TO_IMAGE.get(index);
 	}
-
-	public static boolean init() {
-		return true;
+	public static Image get(String name) {
+		return INT_TO_IMAGE.get(STRING_TO_IMAGE.get(name));
 	}
 
 	public static boolean has(Image resource) {
@@ -29,6 +18,10 @@ public class ImagePond {
 				return true;
 		}
 		return false;
+	}
+
+	public static boolean init() {
+		return true;
 	}
 
 	public static void put(String name, Image resource) {
@@ -41,11 +34,18 @@ public class ImagePond {
 		put(name, Toolkit.getDefaultToolkit().getImage(url));
 	}
 
-	public static Image get(int index) {
-		return INT_TO_IMAGE.get(index);
-	}
+	private transient static HashMap<Integer, Image> INT_TO_IMAGE = new HashMap<Integer, Image>();
 
-	public static Image get(String name) {
-		return INT_TO_IMAGE.get(STRING_TO_IMAGE.get(name));
+	private transient static HashMap<String, Integer> STRING_TO_IMAGE = new HashMap<String, Integer>();
+
+	static {
+		put("background - sea", "res/background/sea.jpg");
+		put("fish - cat", "res/fish/github.png");
+		put("fish - redfish", "res/fish/red fish.png");
+		put("fish - yellowfish", "res/fish/yellow fish.png");
+		put("fish - greenfish", "res/fish/green fish.png");
+		put("fish - bluefish", "res/fish/blue fish.png");
+		put("fish - brownfish1", "res/fish/brown fish 1.png");
+		put("fish - brownfish2", "res/fish/brown fish 2.png");
 	}
 }
