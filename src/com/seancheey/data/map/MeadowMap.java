@@ -16,8 +16,7 @@ public class MeadowMap extends Map {
 
 	public MeadowMap(int width, int height) {
 		this(width, height, new ArrayList<Entity>());
-		add(new Pond(300, 300, 100, 100, BackgroundPond.SEA,
-				this));
+		add(new Pond(300, 300, 100, 100, BackgroundPond.SEA, this));
 	}
 
 	@Override

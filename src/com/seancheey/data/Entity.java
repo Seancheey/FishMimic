@@ -1,5 +1,7 @@
 package com.seancheey.data;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.Serializable;
 
@@ -32,6 +34,16 @@ public abstract class Entity implements Serializable, HasImage, Performable {
 		this.y = y;
 		this.image = image;
 		this.container = container;
+	}
+
+	@Override
+	public void paint(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+		g2.rotate(rotation, getXCenter(), getYCenter());
+		g2.shear(shearX, shearY);
+		g2.drawImage(image, (int) x, (int) y, (int) width, (int) height, null);
+		g2.shear(-shearX, -shearY);
+		g2.rotate(-rotation, getXCenter(), getYCenter());
 	}
 
 	public Container<Entity> getContainer() {

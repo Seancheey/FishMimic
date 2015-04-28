@@ -1,7 +1,5 @@
 package com.seancheey.data.movingEntity;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 
 import com.seancheey.Container;
@@ -41,14 +39,6 @@ public abstract class Fish extends MovingEntity {
 		shearY = Math.sin(energyUsed) * 0.25;
 	}
 
-	/** draw the image of fish by the graphics */
-	protected void drawShape(Graphics g) {
-		if (image == null)
-			fetchLostImage();
-		g.drawImage(image, (int) (-width / 2), (int) (-height / 2),
-				(int) (width), (int) (height), null);
-	}
-
 	/** return the price of selling the fish */
 	public int getPrice() {
 		return (int) ((width + height) / 2);
@@ -74,21 +64,6 @@ public abstract class Fish extends MovingEntity {
 			return true;
 		}
 		return false;
-	}
-
-	/** paint the image on the graph */
-	public void paint(Graphics g) {
-		int xcenter = (int) getXCenter();
-		int ycenter = (int) getYCenter();
-		g.translate(xcenter, ycenter);
-		Graphics2D g2 = (Graphics2D) g;
-		double angle = Math.atan2(vy, vx);
-		g2.shear(0, shearY);
-		g2.rotate(angle);
-		drawShape(g);
-		g2.rotate(-angle);
-		g2.shear(0, -shearY);
-		g.translate(-xcenter, -ycenter);
 	}
 
 	/** perform the next movement */

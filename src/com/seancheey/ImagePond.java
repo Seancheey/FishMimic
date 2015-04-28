@@ -11,6 +11,6 @@ public class ImagePond {
 	}
 
 	public Image get(String source) {
-		return Toolkit.getDefaultToolkit().getImage((path+source));
+		return Toolkit.getDefaultToolkit().getImage((path + source));
 	}
 }

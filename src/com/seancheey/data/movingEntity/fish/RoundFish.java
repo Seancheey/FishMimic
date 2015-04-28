@@ -16,15 +16,14 @@ public class RoundFish extends Fish {
 
 	public RoundFish(double width, double height, double x, double y,
 			Image image, Container<Entity> container, double vx, double vy) {
-		super(width, height, x, y, FishPond.BLUE, container,
-				vx, vy);
+		super(width, height, x, y, FishPond.BLUE, container, vx, vy);
 	}
 
 	public RoundFish(double width, double height, double x, double y,
 			Image image, Container<Entity> container, double vx, double vy,
 			double matureWidth, double matureHeight) {
-		super(width, height, x, y, FishPond.BLUE, container,
-				vx, vy, matureWidth, matureHeight);
+		super(width, height, x, y, FishPond.BLUE, container, vx, vy,
+				matureWidth, matureHeight);
 	}
 
 	@Override

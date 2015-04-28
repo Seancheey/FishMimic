@@ -14,15 +14,14 @@ public class MaoFish extends Fish {
 
 	public MaoFish(double width, double height, double x, double y,
 			Container<Entity> container, double vx, double vy) {
-		super(width, height, x, y, FishPond.GITHUB, container, vx,
-				vy);
+		super(width, height, x, y, FishPond.GITHUB, container, vx, vy);
 	}
 
 	public MaoFish(double width, double height, double x, double y,
 			Container<Entity> container, double vx, double vy,
 			double matureWidth, double matureHeight) {
-		super(width, height, x, y, FishPond.GITHUB, container, vx,
-				vy, matureWidth, matureHeight);
+		super(width, height, x, y, FishPond.GITHUB, container, vx, vy,
+				matureWidth, matureHeight);
 	}
 
 	@Override

@@ -14,15 +14,14 @@ public class RectFish extends Fish {
 
 	public RectFish(double width, double height, double x, double y,
 			Container<Entity> container, double vx, double vy) {
-		super(width, height, x, y, FishPond.RED, container,
-				vx, vy);
+		super(width, height, x, y, FishPond.RED, container, vx, vy);
 	}
 
 	public RectFish(double width, double height, double x, double y,
 			Container<Entity> container, double vx, double vy,
 			double matureWidth, double matureHeight) {
-		super(width, height, x, y, FishPond.RED, container,
-				vx, vy, matureWidth, matureHeight);
+		super(width, height, x, y, FishPond.RED, container, vx, vy,
+				matureWidth, matureHeight);
 	}
 
 	@Override

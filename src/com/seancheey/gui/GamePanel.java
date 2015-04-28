@@ -22,8 +22,8 @@ public class GamePanel extends JPanel {
 		super();
 		this.map = map;
 	}
-	
-	public GamePanel(){
+
+	public GamePanel() {
 		this(new MeadowMap(800, 800));
 	}
 

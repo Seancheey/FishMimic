@@ -14,15 +14,14 @@ public class RainbowFish extends Fish {
 
 	public RainbowFish(double width, double height, double x, double y,
 			Container<Entity> container, double vx, double vy) {
-		super(width, height, x, y, FishPond.BROWN,
-				container, vx, vy);
+		super(width, height, x, y, FishPond.BROWN, container, vx, vy);
 	}
 
 	public RainbowFish(double width, double height, double x, double y,
 			Container<Entity> container, double vx, double vy,
 			double matureWidth, double matureHeight) {
-		super(width, height, x, y, FishPond.BROWN,
-				container, vx, vy, matureWidth, matureHeight);
+		super(width, height, x, y, FishPond.BROWN, container, vx, vy,
+				matureWidth, matureHeight);
 	}
 
 	@Override

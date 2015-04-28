@@ -3,5 +3,5 @@ package com.seancheey;
 import javax.swing.JPanel;
 
 public interface GUIContainer {
-	void switchPanel(JPanel oldPanel,JPanel newPanel);
+	void switchPanel(JPanel oldPanel, JPanel newPanel);
 }
