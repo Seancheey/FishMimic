@@ -1,21 +1,22 @@
 package com.seancheey.gui;
 
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import com.seancheey.data.Map;
 import com.seancheey.data.map.MeadowMap;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements ActionListener {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Map map;
-	private BufferedImage bufferImage;
+	private transient BufferedImage bufferImage;
+	private Timer timer = new Timer(20, this);
 
 	public GamePanel() {
 		this(new MeadowMap(800, 800));
@@ -26,6 +27,12 @@ public class GamePanel extends JPanel {
 		this.map = map;
 		bufferImage = new BufferedImage(map.getWidth(), map.getHeight(),
 				BufferedImage.TYPE_3BYTE_BGR);
+		timer.start();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		map.performNext();
 	}
 
 	@Override
