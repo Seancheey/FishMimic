@@ -41,6 +41,30 @@ public abstract class Map implements HasImage, Container<Entity>, Serializable,
 		return entities.iterator();
 	}
 
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public Image getBackground() {
+		return background;
+	}
+
+	public void setBackground(Image background) {
+		this.background = background;
+	}
+
 	@Override
 	public void paint(Graphics g) {
 		g.drawImage(background, 0, 0, width, height, null);

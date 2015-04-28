@@ -15,12 +15,13 @@ public class GamePanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Map map;
-	private BufferedImage bufferImage = new BufferedImage(1000, 1000,
-			BufferedImage.TYPE_3BYTE_BGR);
+	private BufferedImage bufferImage;
 
 	public GamePanel(Map map) {
 		super();
 		this.map = map;
+		bufferImage = new BufferedImage(map.getWidth(), map.getHeight(),
+				BufferedImage.TYPE_3BYTE_BGR);
 	}
 
 	public GamePanel() {
