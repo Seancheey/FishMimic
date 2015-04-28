@@ -2,8 +2,9 @@ package com.seancheey.data.movingEntity.fish;
 
 import com.seancheey.Container;
 import com.seancheey.data.Entity;
-import com.seancheey.data.ImagePond;
 import com.seancheey.data.movingEntity.Fish;
+import com.seancheey.source.FishPond;
+import com.seancheey.source.ImagePond;
 
 public class MaoFish extends Fish {
 
@@ -14,14 +15,14 @@ public class MaoFish extends Fish {
 
 	public MaoFish(double width, double height, double x, double y,
 			Container<Entity> container, double vx, double vy) {
-		super(width, height, x, y, ImagePond.get("fish - cat"), container, vx,
+		super(width, height, x, y, FishPond.GITHUB, container, vx,
 				vy);
 	}
 
 	public MaoFish(double width, double height, double x, double y,
 			Container<Entity> container, double vx, double vy,
 			double matureWidth, double matureHeight) {
-		super(width, height, x, y, ImagePond.get("fish - cat"), container, vx,
+		super(width, height, x, y, FishPond.GITHUB, container, vx,
 				vy, matureWidth, matureHeight);
 	}
 
@@ -33,7 +34,7 @@ public class MaoFish extends Fish {
 
 	@Override
 	public void fetchLostImage() {
-		image = ImagePond.get("fish - cat");
+		image = FishPond.GITHUB;
 	}
 
 	@Override

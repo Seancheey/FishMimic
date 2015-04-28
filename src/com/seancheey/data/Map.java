@@ -18,9 +18,18 @@ import com.seancheey.Performable;
 public abstract class Map implements HasImage, Container<Entity>, Serializable,
 		Performable {
 	private static final long serialVersionUID = 1L;
-	protected transient Image background;
 	protected int width, height;
+	protected transient Image background;
 	private ArrayList<Entity> entities;
+
+	public Map(int width, int height, Image background,
+			ArrayList<Entity> entities) {
+		super();
+		this.width = width;
+		this.height = height;
+		this.background = background;
+		this.entities = entities;
+	}
 
 	@Override
 	public void add(Entity object) {

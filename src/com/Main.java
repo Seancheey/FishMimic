@@ -1,5 +1,6 @@
-package com.seancheey;
+package com;
 
+import com.seancheey.Gui;
 import com.seancheey.gui.Menu;
 
 public class Main {

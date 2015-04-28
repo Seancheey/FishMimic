@@ -2,8 +2,9 @@ package com.seancheey.data.movingEntity.fish;
 
 import com.seancheey.Container;
 import com.seancheey.data.Entity;
-import com.seancheey.data.ImagePond;
 import com.seancheey.data.movingEntity.Fish;
+import com.seancheey.source.FishPond;
+import com.seancheey.source.ImagePond;
 
 public class RainbowFish extends Fish {
 
@@ -14,14 +15,14 @@ public class RainbowFish extends Fish {
 
 	public RainbowFish(double width, double height, double x, double y,
 			Container<Entity> container, double vx, double vy) {
-		super(width, height, x, y, ImagePond.get("fish - brownfish1"),
+		super(width, height, x, y, FishPond.BROWN,
 				container, vx, vy);
 	}
 
 	public RainbowFish(double width, double height, double x, double y,
 			Container<Entity> container, double vx, double vy,
 			double matureWidth, double matureHeight) {
-		super(width, height, x, y, ImagePond.get("fish - brownfish1"),
+		super(width, height, x, y, FishPond.BROWN,
 				container, vx, vy, matureWidth, matureHeight);
 	}
 
@@ -33,7 +34,7 @@ public class RainbowFish extends Fish {
 
 	@Override
 	public void fetchLostImage() {
-		image = ImagePond.get("fish - cat");
+		image = FishPond.BROWN;
 	}
 
 	@Override

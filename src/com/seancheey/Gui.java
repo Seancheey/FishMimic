@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-public class Gui extends JFrame {
+public class Gui extends JFrame implements GUIContainer{
 
 	/**
 	 * 
@@ -22,7 +22,7 @@ public class Gui extends JFrame {
 		setMinimumSize(new Dimension(500, 300));
 		setUndecorated(false);
 	}
-
+	@Override
 	public void switchPanel(JPanel oldPanel, JPanel newPanel) {
 		this.getContentPane().remove(oldPanel);
 		this.getContentPane().add(newPanel);

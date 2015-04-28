@@ -9,8 +9,9 @@ import java.util.Iterator;
 import com.seancheey.Container;
 import com.seancheey.Performable;
 import com.seancheey.data.Entity;
-import com.seancheey.data.ImagePond;
 import com.seancheey.data.movingEntity.Fish;
+import com.seancheey.source.BackgroundPond;
+import com.seancheey.source.ImagePond;
 
 public class Pond extends Entity implements Container<Fish>, Performable {
 	public static final double randV(double range) {
@@ -66,7 +67,7 @@ public class Pond extends Entity implements Container<Fish>, Performable {
 
 	@Override
 	public void fetchLostImage() {
-		setImage(ImagePond.get("background - sea"));
+		setImage(BackgroundPond.SEA);
 	}
 
 	private void flushWaitingFishList() {

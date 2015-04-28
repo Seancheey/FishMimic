@@ -17,9 +17,11 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.seancheey.GUIContainer;
 import com.seancheey.Main;
-import com.seancheey.data.ImagePond;
 import com.seancheey.data.Map;
+import com.seancheey.source.BackgroundPond;
+import com.seancheey.source.ImagePond;
 
 public class Menu extends JPanel implements ActionListener {
 
@@ -31,8 +33,10 @@ public class Menu extends JPanel implements ActionListener {
 	private ArrayList<JComponent> components = new ArrayList<JComponent>();
 	// unified font for all components
 	private static final Font UNIFIED_FONT = new Font("serif", Font.BOLD, 35);
+	private GUIContainer guiContainer;
 
-	public Menu() {
+	public Menu(GUIContainer guiContainer) {
+		this.guiContainer = guiContainer;
 		setFocusable(false);
 		// add all needed components to the container
 		components.add(new JLabel(Main.NAME));
@@ -100,19 +104,18 @@ public class Menu extends JPanel implements ActionListener {
 			JButton b = (JButton) a.getSource();
 			switch (b.getText()) {
 			case "New Game":
-				Main.controlFrame.switchPanel(this, new GamePanel(null));
+				guiContainer.switchPanel(this, new GamePanel(null));
 				break;
 			case "Read Progress":
-				Main.controlFrame.switchPanel(this, new GamePanel(
-						readProgress()));
+				guiContainer.switchPanel(this, new GamePanel(readProgress()));
 				break;
 			case "About us":
-				Main.controlFrame.switchPanel(this, new CreditPanel() {
+				guiContainer.switchPanel(this, new CreditPanel() {
 					private static final long serialVersionUID = 1L;
 
 					@Override
 					public void backAction() {
-						Main.controlFrame.switchPanel(this, new Menu());
+						guiContainer.switchPanel(this, new Menu(guiContainer));
 					}
 				});
 				break;
@@ -122,7 +125,6 @@ public class Menu extends JPanel implements ActionListener {
 
 	@Override
 	protected void paintComponent(java.awt.Graphics g) {
-		g.drawImage(ImagePond.get("background - sea"), 0, 0, getWidth(),
-				getHeight(), this);
+		g.drawImage(BackgroundPond.SEA, 0, 0, getWidth(), getHeight(), this);
 	}
 }
