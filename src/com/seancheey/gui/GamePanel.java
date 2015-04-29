@@ -1,5 +1,6 @@
 package com.seancheey.gui;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,6 +32,11 @@ public class GamePanel extends JPanel implements ActionListener {
 	}
 
 	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(map.getWidth(), map.getHeight());
+	}
+
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		map.performNext();
 	}
@@ -38,7 +44,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	@Override
 	protected void paintComponent(Graphics g) {
 		paintOnBufferedImage();
-		g.drawImage(bufferImage, 0, 0, getWidth(), getHeight(), this);
+		g.drawImage(bufferImage, 0, 0, this);
 		repaint();
 	}
 
