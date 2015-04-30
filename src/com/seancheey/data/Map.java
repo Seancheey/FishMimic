@@ -23,15 +23,18 @@ import com.seancheey.interfaces.Performable;
 public abstract class Map implements HasImage, Container<Entity>, Serializable,
 		Performable, MouseListener, MouseMotionListener {
 	private static final long serialVersionUID = 1L;
-
+	/** the size of the map */
 	protected int width, height;
-
+	/** the background of the map */
 	protected transient Image background;
-
+	/** the player that own the map */
 	protected Player owner;
-
+	/** contains all the entities in the map */
 	private ArrayList<Entity> entities;
+	/** the target entity the mouse is currently dragging */
+	private Entity draggedEntity;
 
+	/** full constructor */
 	public Map(int width, int height, Image background, Player owner,
 			ArrayList<Entity> entities) {
 		super();
@@ -83,11 +86,8 @@ public abstract class Map implements HasImage, Container<Entity>, Serializable,
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		if (e.getModifiers() == 16)
-			for (Entity entity : getEntitiesAt(e.getPoint())) {
-				if (entity instanceof MouseControllable)
-					((MouseControllable) entity).mouseDragged(e);
-			}
+		if (draggedEntity != null && draggedEntity instanceof MouseControllable)
+			((MouseControllable) draggedEntity).mouseDragged(e);
 	}
 
 	@Override
@@ -107,12 +107,18 @@ public abstract class Map implements HasImage, Container<Entity>, Serializable,
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-
+		if (e.getModifiers() == 16)
+			for (Entity entity : getEntitiesAt(e.getPoint())) {
+				if (entity instanceof MouseControllable) {
+					draggedEntity = entity;
+					break;
+				}
+			}
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-
+		draggedEntity = null;
 	}
 
 	@Override

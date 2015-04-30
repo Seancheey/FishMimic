@@ -22,38 +22,39 @@ public class Cowboy extends Person implements MouseControllable {
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
+	public void mouseClicked(MouseEvent e) {
 		vx = 2 * (Math.random() - 0.5);
 		vy = 2 * (Math.random() - 0.5);
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent arg0) {
+	public void mouseDragged(MouseEvent e) {
+		x = e.getX() - width / 2;
+		y = e.getY() - height / 2;
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
 
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
+	public void mouseExited(MouseEvent e) {
 
 	}
 
 	@Override
-	public void mouseExited(MouseEvent arg0) {
+	public void mouseMoved(MouseEvent e) {
 
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent arg0) {
+	public void mousePressed(MouseEvent e) {
 
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
+	public void mouseReleased(MouseEvent e) {
 
 	}
 }
