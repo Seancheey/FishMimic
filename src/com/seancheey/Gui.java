@@ -10,10 +10,6 @@ import javax.swing.WindowConstants;
 import com.seancheey.interfaces.GUIContainer;
 
 public class Gui extends JFrame implements GUIContainer {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public Gui() {
@@ -27,8 +23,8 @@ public class Gui extends JFrame implements GUIContainer {
 
 	@Override
 	public void switchPanel(JPanel oldPanel, JPanel newPanel) {
-		this.getContentPane().remove(oldPanel);
-		this.getContentPane().add(newPanel);
-		this.setVisible(true);
+		getContentPane().remove(oldPanel);
+		getContentPane().add(newPanel);
+		setVisible(true);
 	}
 }
