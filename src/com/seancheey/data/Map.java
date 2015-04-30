@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.seancheey.data.entity.MovingEntity;
 import com.seancheey.interfaces.Container;
 import com.seancheey.interfaces.HasImage;
 import com.seancheey.interfaces.MouseControllable;
@@ -25,6 +26,7 @@ public abstract class Map implements HasImage, Container<Entity>, Serializable,
 	private static final long serialVersionUID = 1L;
 	/** the size of the map */
 	protected int width, height;
+
 	/** the background of the map */
 	protected transient Image background;
 	/** the player that own the map */
@@ -74,6 +76,36 @@ public abstract class Map implements HasImage, Container<Entity>, Serializable,
 	@Override
 	public Iterator<Entity> iterator() {
 		return entities.iterator();
+	}
+
+	@Override
+	public void keepElementsInside() {
+		for (Entity entity : entities) {
+			if (entity.getX() < 0) {
+				if (entity instanceof MovingEntity)
+					((MovingEntity) entity).setVx(-((MovingEntity) entity)
+							.getVx());
+				entity.setX(0);
+			}
+			if (entity.getY() < 0) {
+				if (entity instanceof MovingEntity)
+					((MovingEntity) entity).setVy(-((MovingEntity) entity)
+							.getVy());
+				entity.setY(0);
+			}
+			if (entity.getX() + entity.getWidth() > width) {
+				if (entity instanceof MovingEntity)
+					((MovingEntity) entity).setVx(-((MovingEntity) entity)
+							.getVx());
+				entity.setX(width - entity.getWidth());
+			}
+			if (entity.getY() + entity.getHeight() > height) {
+				if (entity instanceof MovingEntity)
+					((MovingEntity) entity).setVy(-((MovingEntity) entity)
+							.getVy());
+				entity.setY(height - entity.getHeight());
+			}
+		}
 	}
 
 	@Override
@@ -134,6 +166,7 @@ public abstract class Map implements HasImage, Container<Entity>, Serializable,
 		for (Entity entity : this) {
 			entity.performNext();
 		}
+		keepElementsInside();
 	}
 
 	@Override

@@ -8,6 +8,9 @@ public interface Container<T> extends Iterable<T> {
 	/** add an object to the container */
 	void add(T object);
 
+	/** method to keep all elements inside */
+	void keepElementsInside();
+
 	/** remevan object from the container */
 	void remove(T object);
 }

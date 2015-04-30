@@ -101,24 +101,27 @@ public class Pond extends Entity implements Container<Entity>, Performable {
 	}
 
 	/** method to prevent the fish from swimming outside */
-	private void keepInside(Entity entity) {
-		if (entity instanceof Fish) {
-			Fish fish = (Fish) entity;
-			if (fish.getX() < 0) {
-				fish.setVx(-fish.getVx());
-				fish.setX(0);
-			}
-			if (fish.getY() < 0) {
-				fish.setVy(-fish.getVy());
-				fish.setY(0);
-			}
-			if (fish.getX() + fish.getWidth() > width) {
-				fish.setVx(-fish.getVx());
-				fish.setX(width - fish.getWidth());
-			}
-			if (fish.getY() > height) {
-				fish.setVy(-fish.getVy());
-				fish.setY(height - fish.getHeight());
+	@Override
+	public void keepElementsInside() {
+		for (Entity entity : fishes) {
+			if (entity instanceof Fish) {
+				Fish fish = (Fish) entity;
+				if (fish.getX() < 0) {
+					fish.setVx(-fish.getVx());
+					fish.setX(0);
+				}
+				if (fish.getY() < 0) {
+					fish.setVy(-fish.getVy());
+					fish.setY(0);
+				}
+				if (fish.getX() + fish.getWidth() > width) {
+					fish.setVx(-fish.getVx());
+					fish.setX(width - fish.getWidth());
+				}
+				if (fish.getY() > height) {
+					fish.setVy(-fish.getVy());
+					fish.setY(height - fish.getHeight());
+				}
 			}
 		}
 	}
@@ -139,9 +142,9 @@ public class Pond extends Entity implements Container<Entity>, Performable {
 		flushWaitingFishList();
 		// invoke next performance
 		for (Entity fish : this) {
-			keepInside(fish);
 			fish.performNext();
 		}
+		keepElementsInside();
 	}
 
 	/** return random x form 0 to width */
