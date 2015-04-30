@@ -3,6 +3,7 @@ package com.seancheey.data;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
 import java.io.Serializable;
 
 import com.seancheey.interfaces.Container;
@@ -78,6 +79,13 @@ public abstract class Entity implements Serializable, HasImage, Performable {
 
 	public double getYCenter() {
 		return y + height / 2;
+	}
+
+	public boolean includePoint(Point p) {
+		if (p.x > x && p.x < x + width && p.y > y && p.y < y + height)
+			return true;
+		else
+			return false;
 	}
 
 	@Override

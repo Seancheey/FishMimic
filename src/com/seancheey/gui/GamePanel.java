@@ -4,6 +4,9 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
@@ -12,7 +15,8 @@ import javax.swing.Timer;
 import com.seancheey.data.Map;
 import com.seancheey.data.map.MeadowMap;
 
-public class GamePanel extends JPanel implements ActionListener {
+public class GamePanel extends JPanel implements ActionListener,
+		MouseMotionListener, MouseListener {
 
 	private static final long serialVersionUID = 1L;
 	private Map map;
@@ -20,7 +24,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	private Timer timer = new Timer(20, this);
 
 	public GamePanel() {
-		this(new MeadowMap(800, 800));
+		this(new MeadowMap(1500, 900));
 	}
 
 	public GamePanel(Map map) {
@@ -28,7 +32,14 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.map = map;
 		bufferImage = new BufferedImage(map.getWidth(), map.getHeight(),
 				BufferedImage.TYPE_3BYTE_BGR);
+		addMouseMotionListener(this);
+		addMouseListener(this);
 		timer.start();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		map.performNext();
 	}
 
 	@Override
@@ -37,8 +48,45 @@ public class GamePanel extends JPanel implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		map.performNext();
+	public void mouseClicked(MouseEvent e) {
+		map.mouseClicked(e);
+
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		map.mouseDragged(e);
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		map.mouseEntered(e);
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		map.mouseExited(e);
+
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		map.mouseMoved(e);
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		map.mousePressed(e);
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		map.mouseReleased(e);
+
 	}
 
 	@Override

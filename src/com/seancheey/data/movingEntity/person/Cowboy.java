@@ -1,11 +1,14 @@
 package com.seancheey.data.movingEntity.person;
 
+import java.awt.event.MouseEvent;
+
 import com.seancheey.data.Entity;
 import com.seancheey.data.movingEntity.Person;
 import com.seancheey.interfaces.Container;
+import com.seancheey.interfaces.MouseControllable;
 import com.seancheey.source.PersonPond;
 
-public class Cowboy extends Person {
+public class Cowboy extends Person implements MouseControllable {
 	private static final long serialVersionUID = 1L;
 
 	public Cowboy(double width, double height, double x, double y,
@@ -16,5 +19,41 @@ public class Cowboy extends Person {
 	@Override
 	public void fetchLostImage() {
 		image = PersonPond.COWBOY;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		vx = 2 * (Math.random() - 0.5);
+		vy = 2 * (Math.random() - 0.5);
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+
 	}
 }

@@ -2,12 +2,17 @@ package com.seancheey.data;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.seancheey.interfaces.Container;
 import com.seancheey.interfaces.HasImage;
+import com.seancheey.interfaces.MouseControllable;
 import com.seancheey.interfaces.Performable;
 
 /**
@@ -16,11 +21,15 @@ import com.seancheey.interfaces.Performable;
  * the instance of map that will be operated.
  */
 public abstract class Map implements HasImage, Container<Entity>, Serializable,
-		Performable {
+		Performable, MouseListener, MouseMotionListener {
 	private static final long serialVersionUID = 1L;
+
 	protected int width, height;
+
 	protected transient Image background;
+
 	protected Player owner;
+
 	private ArrayList<Entity> entities;
 
 	public Map(int width, int height, Image background, Player owner,
@@ -42,6 +51,15 @@ public abstract class Map implements HasImage, Container<Entity>, Serializable,
 		return background;
 	}
 
+	public ArrayList<Entity> getEntitiesAt(Point p) {
+		ArrayList<Entity> x = new ArrayList<Entity>();
+		for (Entity control : entities) {
+			if (control.includePoint(p))
+				x.add(control);
+		}
+		return x;
+	}
+
 	public int getHeight() {
 		return height;
 	}
@@ -53,6 +71,48 @@ public abstract class Map implements HasImage, Container<Entity>, Serializable,
 	@Override
 	public Iterator<Entity> iterator() {
 		return entities.iterator();
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		for (Entity entity : getEntitiesAt(e.getPoint())) {
+			if (entity instanceof MouseControllable)
+				((MouseControllable) entity).mouseClicked(e);
+		}
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		if (e.getModifiers() == 16)
+			for (Entity entity : getEntitiesAt(e.getPoint())) {
+				if (entity instanceof MouseControllable)
+					((MouseControllable) entity).mouseDragged(e);
+			}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
 	}
 
 	@Override
