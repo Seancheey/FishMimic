@@ -120,10 +120,10 @@ public class Menu extends JPanel {
 	private void toLoadedGamePanel() {
 		Map map = readProgress();
 		if (map != null)
-			guiContainer.switchPanel(this, new GamePanel(map));
+			guiContainer.switchPanel(this, new GamePanel(guiContainer, map));
 	};
 
 	private void toNewGamePanel() {
-		guiContainer.switchPanel(this, new GamePanel());
+		guiContainer.switchPanel(this, new GamePanel(guiContainer));
 	}
 }

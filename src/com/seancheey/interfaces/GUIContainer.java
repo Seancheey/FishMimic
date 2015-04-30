@@ -5,11 +5,11 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 public interface GUIContainer {
-	void switchPanel(JPanel oldPanel, JPanel newPanel);
+	int getHeight();
 
 	Dimension getSize();
 
 	int getWidth();
 
-	int getHeight();
+	void switchPanel(JPanel oldPanel, JPanel newPanel);
 }

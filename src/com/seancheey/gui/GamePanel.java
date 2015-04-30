@@ -14,6 +14,7 @@ import javax.swing.Timer;
 
 import com.seancheey.data.Map;
 import com.seancheey.data.map.MeadowMap;
+import com.seancheey.interfaces.GUIContainer;
 
 public class GamePanel extends JPanel implements ActionListener,
 		MouseMotionListener, MouseListener {
@@ -23,11 +24,11 @@ public class GamePanel extends JPanel implements ActionListener,
 	private transient BufferedImage bufferImage;
 	private Timer timer = new Timer(20, this);
 
-	public GamePanel() {
-		this(new MeadowMap(1500, 900));
+	public GamePanel(GUIContainer guiContainer) {
+		this(guiContainer, new MeadowMap(1500, 900));
 	}
 
-	public GamePanel(Map map) {
+	public GamePanel(GUIContainer guiContainer, Map map) {
 		super();
 		this.map = map;
 		bufferImage = new BufferedImage(map.getWidth(), map.getHeight(),
