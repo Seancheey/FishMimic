@@ -118,7 +118,9 @@ public class Menu extends JPanel {
 	}
 
 	private void toLoadedGamePanel() {
-		guiContainer.switchPanel(this, new GamePanel(readProgress()));
+		Map map = readProgress();
+		if (map != null)
+			guiContainer.switchPanel(this, new GamePanel(map));
 	};
 
 	private void toNewGamePanel() {
