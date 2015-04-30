@@ -11,34 +11,35 @@ import com.seancheey.interfaces.Container;
 import com.seancheey.interfaces.Performable;
 import com.seancheey.source.BackgroundPond;
 
-public class Pond extends Entity implements Container<Fish>, Performable {
+/** the container to contain fish */
+public class Pond extends Entity implements Container<Entity>, Performable {
 	public static final double randV(double range) {
 		return Math.random() * range * 2 - range;
 	}
 
 	private static final long serialVersionUID = 2L;
 	/** fish container */
-	private final ArrayList<Fish> fishes;
+	private final ArrayList<Entity> fishes;
 	/** the list of fish waited to be added */
-	private ArrayList<Fish> added = new ArrayList<Fish>();
+	private ArrayList<Entity> added = new ArrayList<Entity>();
 	/** the list of fish waited to be removed */
-	private ArrayList<Fish> removed = new ArrayList<Fish>();
+	private ArrayList<Entity> removed = new ArrayList<Entity>();
 
 	public Pond(double width, double height, double x, double y, Image image,
 			Container<Entity> container) {
-		this(width, height, x, y, image, container, new ArrayList<Fish>());
+		this(width, height, x, y, image, container, new ArrayList<Entity>());
 	}
 
 	/** original constructor */
 	public Pond(double width, double height, double x, double y, Image image,
-			Container<Entity> container, ArrayList<Fish> fishes) {
+			Container<Entity> container, ArrayList<Entity> fishes) {
 		super(width, height, x, y, image, container);
 		this.fishes = fishes;
 	}
 
 	/** add the fish to the waiting list */
 	@Override
-	public void add(Fish fish) {
+	public void add(Entity fish) {
 		added.add(fish);
 	}
 
@@ -71,7 +72,7 @@ public class Pond extends Entity implements Container<Fish>, Performable {
 	private void flushWaitingFishList() {
 		// add and remove the waiting fish
 		fishes.addAll(added);
-		for (Fish fish : removed) {
+		for (Entity fish : removed) {
 			fishes.remove(fish);
 		}
 		// clear the wait list
@@ -80,8 +81,8 @@ public class Pond extends Entity implements Container<Fish>, Performable {
 	}
 
 	/** return the first fish at the place */
-	public Fish getFishAt(int x, int y) {
-		for (Fish fish : fishes) {
+	public Entity getFishAt(int x, int y) {
+		for (Entity fish : fishes) {
 			if (Math.abs(x - fish.getXCenter()) < fish.getWidth() / 2
 					&& Math.abs(y - fish.getYCenter()) < fish.getHeight() / 2)
 				return fish;
@@ -90,37 +91,40 @@ public class Pond extends Entity implements Container<Fish>, Performable {
 	}
 
 	/** return a random fish exist in the fish array */
-	public Fish getRandomFish() {
+	public Entity getRandomFish() {
 		return fishes.get((int) (Math.random() * fishes.size()));
 	}
 
 	@Override
-	public Iterator<Fish> iterator() {
+	public Iterator<Entity> iterator() {
 		return fishes.iterator();
 	}
 
 	/** method to prevent the fish from swimming outside */
-	private void keepInside(Fish fish) {
-		if (fish.getX() < 0) {
-			fish.setVx(-fish.getVx());
-			fish.setX(0);
-		}
-		if (fish.getY() < 0) {
-			fish.setVy(-fish.getVy());
-			fish.setY(0);
-		}
-		if (fish.getX() + fish.getWidth() > width) {
-			fish.setVx(-fish.getVx());
-			fish.setX(width - fish.getWidth());
-		}
-		if (fish.getY() > height) {
-			fish.setVy(-fish.getVy());
-			fish.setY(height - fish.getHeight());
+	private void keepInside(Entity entity) {
+		if (entity instanceof Fish) {
+			Fish fish = (Fish) entity;
+			if (fish.getX() < 0) {
+				fish.setVx(-fish.getVx());
+				fish.setX(0);
+			}
+			if (fish.getY() < 0) {
+				fish.setVy(-fish.getVy());
+				fish.setY(0);
+			}
+			if (fish.getX() + fish.getWidth() > width) {
+				fish.setVx(-fish.getVx());
+				fish.setX(width - fish.getWidth());
+			}
+			if (fish.getY() > height) {
+				fish.setVy(-fish.getVy());
+				fish.setY(height - fish.getHeight());
+			}
 		}
 	}
 
 	/** return the next fish of the argument in the array */
-	public Fish nextFish(Fish fish) {
+	public Entity nextFish(Entity fish) {
 		int index = fishes.indexOf(fish);
 		if (index + 1 == fishes.size()) {
 			return fishes.get(0);
@@ -134,7 +138,7 @@ public class Pond extends Entity implements Container<Fish>, Performable {
 	public void performNext() {
 		flushWaitingFishList();
 		// invoke next performance
-		for (Fish fish : this) {
+		for (Entity fish : this) {
 			keepInside(fish);
 			fish.performNext();
 		}
@@ -152,17 +156,19 @@ public class Pond extends Entity implements Container<Fish>, Performable {
 
 	/** add the fish to the removal list */
 	@Override
-	public void remove(Fish fish) {
+	public void remove(Entity fish) {
 		removed.add(fish);
 	}
 
 	/** reset all fish's velocity and position */
 	public void resetAll() {
-		for (Fish fish : fishes) {
+		for (Entity fish : fishes) {
 			fish.setX(randX());
 			fish.setY(randY());
-			fish.setVx(randV(5));
-			fish.setVy(randV(5));
+			if (fish instanceof Fish) {
+				((Fish) fish).setVx(randV(5));
+				((Fish) fish).setVy(randV(5));
+			}
 		}
 	}
 
