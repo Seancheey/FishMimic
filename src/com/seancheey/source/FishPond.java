@@ -7,7 +7,7 @@ public class FishPond {
 	public static Image YELLOW, GREEN, BROWN, BLUE, RED, GITHUB;
 
 	static {
-		pond = new ImagePond("/res/fish/");
+		pond = new ImagePond("res/fish/");
 		YELLOW = pond.get("yellow fish.png");
 		BLUE = pond.get("green fish.png");
 		BROWN = pond.get("brown fish 1.png");

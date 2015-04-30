@@ -1,6 +1,7 @@
 package com.seancheey.data.entity;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,7 +20,7 @@ public class Pond extends Entity implements Container<Entity>, Performable {
 
 	private static final long serialVersionUID = 2L;
 	/** fish container */
-	private final ArrayList<Entity> fishes;
+	private final ArrayList<Entity> fishArray;
 	/** the list of fish waited to be added */
 	private ArrayList<Entity> added = new ArrayList<Entity>();
 	/** the list of fish waited to be removed */
@@ -34,7 +35,7 @@ public class Pond extends Entity implements Container<Entity>, Performable {
 	public Pond(double width, double height, double x, double y, Image image,
 			Container<Entity> container, ArrayList<Entity> fishes) {
 		super(width, height, x, y, image, container);
-		this.fishes = fishes;
+		this.fishArray = fishes;
 	}
 
 	/** add the fish to the waiting list */
@@ -52,10 +53,10 @@ public class Pond extends Entity implements Container<Entity>, Performable {
 		if (getClass() != obj.getClass())
 			return false;
 		Pond other = (Pond) obj;
-		if (fishes == null) {
-			if (other.fishes != null)
+		if (fishArray == null) {
+			if (other.fishArray != null)
 				return false;
-		} else if (!fishes.equals(other.fishes))
+		} else if (!fishArray.equals(other.fishArray))
 			return false;
 		if (height != other.height)
 			return false;
@@ -71,9 +72,9 @@ public class Pond extends Entity implements Container<Entity>, Performable {
 
 	private void flushWaitingFishList() {
 		// add and remove the waiting fish
-		fishes.addAll(added);
+		fishArray.addAll(added);
 		for (Entity fish : removed) {
-			fishes.remove(fish);
+			fishArray.remove(fish);
 		}
 		// clear the wait list
 		added.clear();
@@ -82,7 +83,7 @@ public class Pond extends Entity implements Container<Entity>, Performable {
 
 	/** return the first fish at the place */
 	public Entity getFishAt(int x, int y) {
-		for (Entity fish : fishes) {
+		for (Entity fish : fishArray) {
 			if (Math.abs(x - fish.getXCenter()) < fish.getWidth() / 2
 					&& Math.abs(y - fish.getYCenter()) < fish.getHeight() / 2)
 				return fish;
@@ -92,18 +93,18 @@ public class Pond extends Entity implements Container<Entity>, Performable {
 
 	/** return a random fish exist in the fish array */
 	public Entity getRandomFish() {
-		return fishes.get((int) (Math.random() * fishes.size()));
+		return fishArray.get((int) (Math.random() * fishArray.size()));
 	}
 
 	@Override
 	public Iterator<Entity> iterator() {
-		return fishes.iterator();
+		return fishArray.iterator();
 	}
 
 	/** method to prevent the fish from swimming outside */
 	@Override
 	public void keepElementsInside() {
-		for (Entity entity : fishes) {
+		for (Entity entity : fishArray) {
 			if (entity instanceof Fish) {
 				Fish fish = (Fish) entity;
 				if (fish.getX() < 0) {
@@ -118,7 +119,7 @@ public class Pond extends Entity implements Container<Entity>, Performable {
 					fish.setVx(-fish.getVx());
 					fish.setX(width - fish.getWidth());
 				}
-				if (fish.getY() > height) {
+				if (fish.getY() + fish.getHeight() > height) {
 					fish.setVy(-fish.getVy());
 					fish.setY(height - fish.getHeight());
 				}
@@ -128,12 +129,21 @@ public class Pond extends Entity implements Container<Entity>, Performable {
 
 	/** return the next fish of the argument in the array */
 	public Entity nextFish(Entity fish) {
-		int index = fishes.indexOf(fish);
-		if (index + 1 == fishes.size()) {
-			return fishes.get(0);
+		int index = fishArray.indexOf(fish);
+		if (index + 1 == fishArray.size()) {
+			return fishArray.get(0);
 		} else {
-			return fishes.get(index + 1);
+			return fishArray.get(index + 1);
 		}
+	}
+
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		g.translate((int) x, (int) y);
+		for (Entity fish : fishArray)
+			fish.paint(g);
+		g.translate((int) -x, (int) -y);
 	}
 
 	/** invoke next performance */
@@ -165,7 +175,7 @@ public class Pond extends Entity implements Container<Entity>, Performable {
 
 	/** reset all fish's velocity and position */
 	public void resetAll() {
-		for (Entity fish : fishes) {
+		for (Entity fish : fishArray) {
 			fish.setX(randX());
 			fish.setY(randY());
 			if (fish instanceof Fish) {
