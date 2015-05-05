@@ -16,6 +16,7 @@ public abstract class Fish extends MovingEntity {
 	/** the size of mature fish */
 	protected final double matureWidth, matureHeight;
 
+	/**`l*/
 	public Fish(double width, double height, double x, double y, Image image,
 			Container<Entity> container, double vx, double vy) {
 		this(width, height, x, y, image, container, vx, vy, 150, 75);
@@ -44,7 +45,7 @@ public abstract class Fish extends MovingEntity {
 		return (int) ((width + height) / 2);
 	}
 
-	// grow a bit or die if mature
+	/** grow a bit or die if mature */
 	private void grow() {
 		if (width <= matureWidth || height <= matureHeight) {
 			width += Math.random() / 10;
